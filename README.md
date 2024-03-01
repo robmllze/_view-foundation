@@ -4,4 +4,4 @@ The View layer is a component of the [foundation](https://github.com/robmllze/fo
 
 ## Notes
 
-Rename `_view@foundation` to `_view` before using it in your project.
+Rename `_view-foundation` to `_view` before using it in your project.
