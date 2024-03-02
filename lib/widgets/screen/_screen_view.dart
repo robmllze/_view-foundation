@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// X|Y|Z & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -26,7 +26,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  late T3 controller;
+  late T3 c;
+  T3 get screenController => this.c;
 
   //
   //
@@ -44,17 +45,17 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
               ? Debouncer(
                   delay: controllerTimeout,
                   onWaited: () {
-                    this.controller.dispose();
+                    this.c.dispose();
                     _controllerCache.remove(this.widget.key);
                   },
                 )
               : null,
         );
       }
-      this.controller = _controllerCache[key]?.controller as T3;
+      this.c = _controllerCache[key]?.controller as T3;
       _controllerCache[key]?.debouncer?.cancel();
     } else {
-      this.controller = (this.widget.createController(this.widget, this)..initController()) as T3;
+      this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
     }
     super.initState();
   }
