@@ -21,7 +21,18 @@ class MyAppIconProgressIndicator extends StatelessWidget {
   //
   //
 
-  const MyAppIconProgressIndicator({super.key});
+  final String assetName;
+  final String? package;
+
+  //
+  //
+  //
+
+  const MyAppIconProgressIndicator({
+    super.key,
+    this.assetName = "assets/images/app_icon/app_icon.svg",
+    this.package = "_view",
+  });
 
   //
   //
@@ -41,8 +52,8 @@ class MyAppIconProgressIndicator extends StatelessWidget {
             dimension: 50.sc,
             child: ClipOval(
               child: SvgPicture.asset(
-                "assets/images/app_icon/app_icon.svg",
-                package: "_view",
+                this.assetName,
+                package: this.package,
                 colorFilter: ColorFilter.mode(
                   invertedShade,
                   BlendMode.srcIn,
