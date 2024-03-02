@@ -41,7 +41,7 @@ class MyAppIconProgressIndicator extends StatelessWidget {
             dimension: 50.sc,
             child: ClipOval(
               child: SvgPicture.asset(
-                "assets/images/logo.svg",
+                "assets/images/app_icon/app_icon.svg",
                 package: "_view",
                 colorFilter: ColorFilter.mode(
                   invertedShade,
