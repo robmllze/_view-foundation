@@ -10,20 +10,35 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'dart:async';
-export 'dart:collection';
+part of 'screen.dart';
 
-export 'package:flutter/material.dart';
-export 'package:go_router/go_router.dart';
-export 'package:meta/meta.dart';
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-export 'package:xyz_config/xyz_config.dart';
-export 'package:xyz_flutter_plus/xyz_flutter_plus.dart';
-export 'package:xyz_gen_annotations/xyz_gen_annotations.dart';
-export 'package:xyz_pod/xyz_pod.dart';
-export 'package:xyz_utils/xyz_utils.dart';
+class ScreenController<T extends ModelScreenConfiguration> {
+  //
+  //
+  //
 
-export 'package:_data/lib.dart';
-export 'package:_service_interfaces/lib.dart';
+  final Screen superScreen;
+  final ScreenView superState;
 
-export 'src/_all_src.g.dart';
+  //
+  //
+  //
+
+  const ScreenController(this.superScreen, this.superState);
+
+  //
+  //
+  //
+
+  @visibleForOverriding
+  void initController() async {}
+
+  //
+  //
+  //
+
+  @visibleForOverriding
+  void dispose() async {}
+}
