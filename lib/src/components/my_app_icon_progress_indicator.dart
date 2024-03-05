@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// X|Y|Z & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -40,9 +40,7 @@ class MyAppIconProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shade = Theme.of(context).brightness == Brightness.light
-        ? Colors.white
-        : Colors.black;
+    final shade = Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.black;
     final invertedShade = shade.inverted;
     return SizedBox.square(
       dimension: 80.sc,
@@ -55,10 +53,10 @@ class MyAppIconProgressIndicator extends StatelessWidget {
               child: SvgPicture.asset(
                 this.assetName,
                 package: this.package,
-                colorFilter: ColorFilter.mode(
-                  invertedShade,
-                  BlendMode.srcIn,
-                ),
+                // colorFilter: ColorFilter.mode(
+                //   invertedShade,
+                //   BlendMode.srcIn,
+                // ),
               ),
             ),
           ),
