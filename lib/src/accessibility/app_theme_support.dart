@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// X|Y|Z & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -65,7 +65,7 @@ final appThemes = {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 // The app's default/current theme.
-final pAppTheme = Pod<AppTheme>(getAppTheme(ThemeKey.LIGHT));
+final pDefaultAppTheme = Pod<AppTheme>(getAppTheme(ThemeKey.LIGHT));
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -75,7 +75,7 @@ Future<void> setAppThemeToDeviceStorage(ThemeKey themeKey) async {
   if (theme != null) {
     final sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString("app_theme", theme.key.name);
-    await pAppTheme.set(theme);
+    await pDefaultAppTheme.set(theme);
   }
 }
 
@@ -83,11 +83,9 @@ Future<void> setAppThemeToDeviceStorage(ThemeKey themeKey) async {
 Future<void> loadAppThemeFromDeviceStorage() async {
   final sharedPreferences = await SharedPreferences.getInstance();
   final themeKey = sharedPreferences.getString("app_theme");
-  final theme = appThemes
-      .firstWhereOrNull((e) => e.key == nameToThemeKey(themeKey))
-      ?.builder();
+  final theme = appThemes.firstWhereOrNull((e) => e.key == nameToThemeKey(themeKey))?.builder();
   if (theme != null) {
-    await pAppTheme.set(theme);
+    await pDefaultAppTheme.set(theme);
   }
 }
 

@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// X|Y|Z & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -72,7 +72,7 @@ class MyPopupController {
   //
   //
 
-  final AppUnit elevation;
+  final Sc elevation;
   final Duration? duration;
 
   //
@@ -80,7 +80,7 @@ class MyPopupController {
   //
 
   MyPopupController({
-    this.elevation = const AppUnit(4.0),
+    this.elevation = const Sc(4.0),
     this.duration,
   });
 
@@ -103,11 +103,7 @@ class MyPopupController {
     }
     var l = left, t = top, r = right, b = bottom;
     if (relativePosition != null) {
-      final renderBox = this
-          ._myPopup!
-          ._globalKey
-          .currentContext
-          ?.findRenderObject() as RenderBox;
+      final renderBox = this._myPopup!._globalKey.currentContext?.findRenderObject() as RenderBox;
       final offset = renderBox.localToGlobal(relativePosition);
       l = (l ?? 0.0) + offset.dx;
       t = (t ?? 0.0) + offset.dy;

@@ -224,7 +224,7 @@ abstract class _RouteManager {
   void go(ModelScreenConfiguration configuration) {
     final queryParameters = configuration.arguments
             ?.map((k, v) =>
-                MapEntry(k is String ? k : null, v is String ? v : null))
+                MapEntry(k is String ? k : null, v is String ? v : null),)
             .nonNulls
             .nullIfEmpty ??
         {};

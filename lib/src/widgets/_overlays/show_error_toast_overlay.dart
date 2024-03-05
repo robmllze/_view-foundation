@@ -41,7 +41,7 @@ Future<void> showErrorToastOverlay(
                 child: Padding(
                   padding: EdgeInsets.all(12.sc),
                   child: Text(error.toString(),
-                      style: Theme.of(context).textTheme.bodySmall),
+                      style: Theme.of(context).textTheme.bodySmall,),
                 ),
               ),
             ),
