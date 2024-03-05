@@ -52,7 +52,7 @@ Screen? makerErrorScreen(
         ),
       )) {
     return ErrorScreen(
-      key: globalKeyErrorScreen, //ValueKey<String?>(configuration.path),
+      key: ValueKey<String?>(configuration.path),
       configuration: configuration,
     );
   }
@@ -165,7 +165,3 @@ typedef TErrorScreenView
 
 typedef TErrorScreenPageView<T extends ScreenPage>
     = ScreenPageView<T, ErrorScreenConfiguration, ErrorScreenController>;
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-final globalKeyErrorScreen = GlobalKey<_View>();

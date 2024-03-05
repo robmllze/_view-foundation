@@ -52,7 +52,7 @@ Screen? makerEmptyScreen(
         ),
       )) {
     return EmptyScreen(
-      key: globalKeyEmptyScreen, //ValueKey<String?>(configuration.path),
+      key: ValueKey<String?>(configuration.path),
       configuration: configuration,
     );
   }
@@ -165,7 +165,3 @@ typedef TEmptyScreenView
 
 typedef TEmptyScreenPageView<T extends ScreenPage>
     = ScreenPageView<T, EmptyScreenConfiguration, EmptyScreenController>;
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-final globalKeyEmptyScreen = GlobalKey<_View>();
