@@ -53,10 +53,10 @@ class MyAppIconProgressIndicator extends StatelessWidget {
               child: SvgPicture.asset(
                 this.assetName,
                 package: this.package,
-                // colorFilter: ColorFilter.mode(
-                //   invertedShade,
-                //   BlendMode.srcIn,
-                // ),
+                colorFilter: ColorFilter.mode(
+                  invertedShade,
+                  BlendMode.srcIn,
+                ),
               ),
             ),
           ),

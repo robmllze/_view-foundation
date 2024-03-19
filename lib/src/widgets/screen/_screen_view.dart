@@ -1,12 +1,12 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// X|Y|Z & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
@@ -14,9 +14,7 @@ part of 'screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class ScreenView<
-    T1 extends Screen,
-    T2 extends ModelScreenConfiguration,
+abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration,
     T3 extends ScreenController<T2>> extends State<T1> {
   //
   //
@@ -42,8 +40,7 @@ abstract class ScreenView<
     if (key != null) {
       if (_controllerCache[key] == null) {
         _controllerCache[key] = _ControllerCache(
-          (this.widget.createController(this.widget, this)..initController())
-              as T3,
+          (this.widget.createController(this.widget, this)..initController()) as T3,
           controllerTimeout != null
               ? Debouncer(
                   delay: controllerTimeout,
@@ -58,8 +55,7 @@ abstract class ScreenView<
       this.c = _controllerCache[key]?.controller as T3;
       _controllerCache[key]?.debouncer?.cancel();
     } else {
-      this.c = (this.widget.createController(this.widget, this)
-        ..initController()) as T3;
+      this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
     }
     super.initState();
   }
@@ -93,8 +89,7 @@ abstract class ScreenView<
   /// ```
   @mustCallSuper
   Widget layout(Widget body) {
-    final navigationControls =
-        this.widget.configuration?.navigationControlsWidget;
+    final navigationControls = this.widget.configuration?.navigationControlsWidget;
     final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return Column(
       children: [
@@ -130,19 +125,18 @@ abstract class ScreenView<
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final calculator = ScreenCalculator(screenSize.width, screenSize.height);
-    final appLayout = getAppLayoutFromScreenCalculator(calculator);
+    // final screenSize = MediaQuery.of(context).size;
+    // final calculator = ScreenCalculator(screenSize.width, screenSize.height);
+    // final appLayout = AppLayout.fromScreenCalculator(calculator);
     return SafeArea(
       top: false,
       maintainBottomViewPadding: true,
       child: () {
-        switch (appLayout) {
+        switch (AppLayout.currentScreenLayout()) {
           case AppLayout.MOBILE:
             return this.mobileLayout(this.mobileBody(context));
           case AppLayout.MOBILE_HORIZONTAL:
-            return this
-                .horizontalMobileLayout(this.horizontalMobileBody(context));
+            return this.horizontalMobileLayout(this.horizontalMobileBody(context));
           case AppLayout.NARROW:
             return this.narrowLayout(this.narrowBody(context));
           case AppLayout.WIDE:

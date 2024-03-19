@@ -7,9 +7,9 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'accessibility/app_scaling_support.dart';
-export 'accessibility/app_theme_support.dart';
-export 'accessibility/locale_manager.dart';
+export 'accessibility/my_app_locale.dart';
+export 'accessibility/my_app_scale.dart';
+export 'accessibility/my_app_theme.dart';
 export 'components/my_app_icon.dart';
 export 'components/my_app_icon_progress_indicator.dart';
 export 'components/my_dialog_body.dart';
@@ -28,12 +28,13 @@ export 'theme/default_text_theme.dart';
 export 'theme/input_borders.dart';
 export 'theme/input_decorations.dart';
 export 'widgets/_overlays/blurry_overlay.dart';
-export 'widgets/_overlays/show_app_logo_overlay.dart';
+export 'widgets/_overlays/show_app_icon_overlay.dart';
 export 'widgets/_overlays/show_error_toast_overlay.dart';
 export 'widgets/_overlays/show_message_overlay.dart';
 export 'widgets/_overlays/show_message_overlay_with_error_handler.dart';
 export 'widgets/_overlays/show_message_toast_overlay.dart';
 export 'widgets/_overlays/show_overlay.dart';
+export 'widgets/_overlays/show_spinning_app_icon_overlay.dart';
 export 'widgets/_overlays/show_toast_overlay.dart';
 export 'widgets/navigation_controls.dart';
 export 'widgets/screen/screen.dart';
