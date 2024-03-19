@@ -34,5 +34,4 @@ enum MyAppLocale with AppLocaleEnumMixin {
   //
 
   const MyAppLocale(this.localeCode);
-
 }
