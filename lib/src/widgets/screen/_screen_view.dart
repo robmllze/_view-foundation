@@ -125,14 +125,14 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
 
   @override
   Widget build(BuildContext context) {
-    // final screenSize = MediaQuery.of(context).size;
-    // final calculator = ScreenCalculator(screenSize.width, screenSize.height);
-    // final appLayout = AppLayout.fromScreenCalculator(calculator);
+    final screenSize = MediaQuery.of(context).size;
+    final calculator = ScreenCalculator(screenSize.width, screenSize.height);
+    final appLayout = AppLayout.fromScreenCalculator(calculator);
     return SafeArea(
       top: false,
       maintainBottomViewPadding: true,
       child: () {
-        switch (AppLayout.currentScreenLayout()) {
+        switch (appLayout) {
           case AppLayout.MOBILE:
             return this.mobileLayout(this.mobileBody(context));
           case AppLayout.MOBILE_HORIZONTAL:

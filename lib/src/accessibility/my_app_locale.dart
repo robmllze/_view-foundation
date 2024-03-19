@@ -35,17 +35,4 @@ enum MyAppLocale with AppLocaleEnumMixin {
 
   const MyAppLocale(this.localeCode);
 
-  //
-  //
-  //
-
-  @override
-  LocaleRef get localeRef => LocaleRef.fromCode(localeCode);
-
-  //
-  //
-  //
-
-  @override
-  String get localeDescription => "Locales.descriptions.${this.localeRef}".tr();
 }
