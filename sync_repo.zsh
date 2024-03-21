@@ -14,7 +14,7 @@
 cd _view
 git init
 git add .
-git commit -m "upstream"
+git commit -m 'upstream'
 git remote remove upstream
 git remote add upstream https://github.com/robmllze/_view-foundation.git
 git fetch upstream
