@@ -10,7 +10,8 @@
 ## ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 ##.title~
 
-# Sync this folder with https://github.com/robmllze/_view-foundation.
+# Sync this folder with https://github.com/robmllze/_view-foundation. You can
+# change 'main' to another branch if necessary.
 cd _view
 git init
 git add .
