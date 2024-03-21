@@ -26,6 +26,9 @@ enum MyAppLocale with AppLocaleEnumMixin {
   //
   //
 
+  // NB: File names are case sensitive on Linux and Firebase Hosting.
+  // Make sure the locale file names are lowercase, and match the enum names,
+  // e.g. en_us.dart, af_za.dart, etc.
   @override
-  String get localeCode => this.name;
+  String get localeCode => this.name.toLowerCase();
 }
