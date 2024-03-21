@@ -1,16 +1,16 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/_common.dart";
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -42,10 +42,8 @@ class PushRouteObserver extends NavigatorObserver {
   void didPush(Route<dynamic> newRoute, Route<dynamic>? oldRoute) {
     final (newScreen, oldScreen) = this._routesToScreen(newRoute, oldRoute);
     if (newScreen != null) {
-      this
-          .pScreenBreadcrumbs
-          ?.update((e) => _getLast4((e..addLast(newScreen))));
-      Here().debugLog("Pushed: ${newScreen.configuration?.path}");
+      this.pScreenBreadcrumbs?.update((e) => _getLast4((e..addLast(newScreen))));
+      Here().debugLog('Pushed: ${newScreen.configuration?.path}');
     }
     this.onPush?.call(
           newScreen,

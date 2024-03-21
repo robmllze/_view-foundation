@@ -1,28 +1,28 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev 
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
-// 
+//
 // Licensing details can be found in the LICENSE file in the root directory.
-// 
+//
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/_common.dart";
+import '/_common.dart';
 
-part "_screen_controller.dart";
-part "_screen_view.dart";
-part "_screen_makeup.g.dart";
+part '_screen_controller.dart';
+part '_screen_view.dart';
+part '_screen_makeup.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 const SCREEN_PROPERTIES = {
-  "backgroundColor": "Color?",
-  "isTranslucent": "bool?",
-  "titleColor": "Color?",
-  "transitionDuration": "Duration?",
+  'backgroundColor': 'Color?',
+  'isTranslucent': 'bool?',
+  'titleColor': 'Color?',
+  'transitionDuration': 'Duration?',
 };
 
 @GenerateMakeups(properties: SCREEN_PROPERTIES)

@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -10,12 +10,12 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "package:flutter/foundation.dart";
+import 'package:flutter/foundation.dart';
 
-import "/_common.dart";
+import '/_common.dart';
 
 // ignore: avoid_web_libraries_in_flutter
-import "dart:html" if (dart.library.io) "_html_non_web.dart";
+import 'dart:html' if (dart.library.io) '_html_non_web.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -51,7 +51,7 @@ class RouteManager extends _RouteManager {
     initialLocation: super.defaultConfiguration.path,
     routes: [
       GoRoute(
-        path: "/",
+        path: '/',
         pageBuilder: (context, state) {
           return super.commonPageBuilder(context, state, EmptyScreenConfiguration.PATH);
         },

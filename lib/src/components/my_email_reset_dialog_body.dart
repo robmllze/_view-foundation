@@ -1,7 +1,7 @@
 //.title
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //
-// X|Y|Z & Dev
+// 🇽🇾🇿 & Dev
 //
 // Copyright Ⓒ Robert Mollentze, xyzand.dev
 //
@@ -10,7 +10,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import "/_common.dart";
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
@@ -19,7 +19,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
   //
   //
 
-  static const _trPrefix = "screens.ScreenLogin.MyEmailResetDialog";
+  static const _trPrefix = 'screens.ScreenLogin.MyEmailResetDialog';
 
   //
   //
@@ -52,17 +52,17 @@ class MyEmailResetDialogBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Email Password Reset||$_trPrefix.title".tr(),
+            'Email Password Reset||$_trPrefix.title'.tr(),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 12.sc),
           Text(
-            "Enter your email address to reset your password||$_trPrefix.subtitle".tr(),
+            'Enter your email address to reset your password||$_trPrefix.subtitle'.tr(),
           ),
           SizedBox(height: 12.sc),
           TextField(
             decoration: InputDecoration(
-              labelText: "Email||$_trPrefix.email".tr(),
+              labelText: 'Email||$_trPrefix.email'.tr(),
               border: const OutlineInputBorder(),
             ),
             controller: this.emailController,
@@ -73,7 +73,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: this.onCancel,
-                child: Text("Cancel||$_trPrefix.cancel".tr()),
+                child: Text('Cancel||$_trPrefix.cancel'.tr()),
               ),
               FilledButton(
                 onPressed: () async {
@@ -83,8 +83,8 @@ class MyEmailResetDialogBody extends StatelessWidget {
                       showMessageToastOverlay(
                         context,
                         message:
-                            "An email has been sent to your email address <<<email>>>. Follow the link in the email to reset your password||$_trPrefix.confirmation_message"
-                                .tr({"email": emailController.text}),
+                            'An email has been sent to your email address <<<email>>>. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
+                                .tr({'email': emailController.text}),
                       );
                     }
                     this.onCancel();
@@ -92,13 +92,13 @@ class MyEmailResetDialogBody extends StatelessWidget {
                     if (context.mounted) {
                       showErrorToastOverlay(
                         context,
-                        error: "$e",
+                        error: '$e',
                         remover: (r) => Future.delayed(const Duration(seconds: 3), r),
                       );
                     }
                   }
                 },
-                child: Text("Send||$_trPrefix.send".tr()),
+                child: Text('Send||$_trPrefix.send'.tr()),
               ),
             ],
           ),
