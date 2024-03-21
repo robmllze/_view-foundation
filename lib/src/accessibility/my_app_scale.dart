@@ -20,10 +20,10 @@ enum MyAppScale with AppScaleEnumMixin {
   //
 
   DEFAULT(1.0),
-  SMALLEST(0.5),
-  SMALLER(0.75),
-  LARGER(1.5),
-  LARGEST(2.0);
+  SMALLEST(0.75),
+  SMALLER(0.85),
+  LARGER(1.25),
+  LARGEST(1.5);
 
   //
   //

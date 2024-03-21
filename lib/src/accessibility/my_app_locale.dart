@@ -19,19 +19,13 @@ enum MyAppLocale with AppLocaleEnumMixin {
   //
   //
 
-  ENGLISH_US('en_US'),
-  AFRIKAANS_ZA('af_ZA');
+  EN_US,
+  AF_ZA;
 
   //
   //
   //
 
   @override
-  final String localeCode;
-
-  //
-  //
-  //
-
-  const MyAppLocale(this.localeCode);
+  String get localeCode => this.name;
 }
