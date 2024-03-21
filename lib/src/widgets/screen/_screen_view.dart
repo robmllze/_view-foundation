@@ -14,7 +14,9 @@ part of 'screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration,
+abstract class ScreenView<
+    T1 extends Screen,
+    T2 extends ModelScreenConfiguration,
     T3 extends ScreenController<T2>> extends State<T1> {
   //
   //
@@ -40,7 +42,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     if (key != null) {
       if (_controllerCache[key] == null) {
         _controllerCache[key] = _ControllerCache(
-          (this.widget.createController(this.widget, this)..initController()) as T3,
+          (this.widget.createController(this.widget, this)..initController())
+              as T3,
           controllerTimeout != null
               ? Debouncer(
                   delay: controllerTimeout,
@@ -55,7 +58,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
       this.c = _controllerCache[key]?.controller as T3;
       _controllerCache[key]?.debouncer?.cancel();
     } else {
-      this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
+      this.c = (this.widget.createController(this.widget, this)
+        ..initController()) as T3;
     }
     super.initState();
   }
@@ -89,7 +93,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   /// ```
   @mustCallSuper
   Widget layout(Widget body) {
-    final navigationControls = this.widget.configuration?.navigationControlsWidget;
+    final navigationControls =
+        this.widget.configuration?.navigationControlsWidget;
     final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return Column(
       children: [
@@ -136,7 +141,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
           case AppLayout.MOBILE:
             return this.mobileLayout(this.mobileBody(context));
           case AppLayout.MOBILE_HORIZONTAL:
-            return this.horizontalMobileLayout(this.horizontalMobileBody(context));
+            return this
+                .horizontalMobileLayout(this.horizontalMobileBody(context));
           case AppLayout.NARROW:
             return this.narrowLayout(this.narrowBody(context));
           case AppLayout.WIDE:

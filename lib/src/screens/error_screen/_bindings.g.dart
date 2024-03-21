@@ -37,7 +37,8 @@ Screen? makerErrorScreen(
   bool isLoggedIn,
   bool isLoggedOut,
 ) {
-  if ((_IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED && !isLoggedInAndVerified) ||
+  if ((_IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED &&
+          !isLoggedInAndVerified) ||
       (_IS_ACCESSIBLE_ONLY_IF_LOGGED_IN && !isLoggedIn) ||
       (_IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT && !isLoggedOut)) {
     return null;
@@ -65,10 +66,12 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   static const SEGMENT = _SEGMENT;
   static const PATH = _PATH;
   static const TR_KEY = _TR_KEY;
-  static const IS_ACCESSIBLE_ONLY_IF_LOGGED_IN = _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN;
+  static const IS_ACCESSIBLE_ONLY_IF_LOGGED_IN =
+      _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN;
   static const IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED =
       _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED;
-  static const IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT = _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT;
+  static const IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT =
+      _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT;
   static const IS_REDIRECTABLE = _IS_REDIRECTABLE;
   static const NAVIGATION_CONTROLS_WIDGET = null;
   static const TITLE = 'Error||title';
@@ -82,7 +85,8 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
           arguments: {
             ...?$arguments,
           },
-          isAccessibleOnlyIfLoggedInAndVerified: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
+          isAccessibleOnlyIfLoggedInAndVerified:
+              _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
           isAccessibleOnlyIfLoggedIn: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
           isAccessibleOnlyIfLoggedOut: _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
           isRedirectable: _IS_REDIRECTABLE,
@@ -96,7 +100,8 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
       : super(
           path: _PATH,
           arguments: args,
-          isAccessibleOnlyIfLoggedInAndVerified: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
+          isAccessibleOnlyIfLoggedInAndVerified:
+              _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
           isAccessibleOnlyIfLoggedIn: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
           isAccessibleOnlyIfLoggedOut: _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
           isRedirectable: _IS_REDIRECTABLE,
@@ -128,13 +133,16 @@ final generatedErrorScreenRoute = GoRoute(
     final extraConfiguration = letAs<ModelScreenConfiguration>(state.extra);
     final urlConfiguration = urlToScreenConfiguration(
       url: state.uri,
-      isAccessibleOnlyIfLoggedIn: ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
+      isAccessibleOnlyIfLoggedIn:
+          ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
       isAccessibleOnlyIfLoggedInAndVerified:
           ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
-      isAccessibleOnlyIfLoggedOut: ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
+      isAccessibleOnlyIfLoggedOut:
+          ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
       isRedirectable: ErrorScreenConfiguration.IS_REDIRECTABLE,
       makeup: ErrorScreenConfiguration.screenMakeup,
-      navigationControlsWidget: ErrorScreenConfiguration.NAVIGATION_CONTROLS_WIDGET,
+      navigationControlsWidget:
+          ErrorScreenConfiguration.NAVIGATION_CONTROLS_WIDGET,
       title: ErrorScreenConfiguration.TITLE.screenTr(),
     );
     final configuration = extraConfiguration ?? urlConfiguration;
@@ -152,7 +160,8 @@ final generatedErrorScreenRoute = GoRoute(
 
 typedef TErrorScreenController = _ControllerBroker<ErrorScreen, _View>;
 
-typedef TErrorScreenView = ScreenView<ErrorScreen, ErrorScreenConfiguration, ErrorScreenController>;
+typedef TErrorScreenView
+    = ScreenView<ErrorScreen, ErrorScreenConfiguration, ErrorScreenController>;
 
 typedef TErrorScreenPageView<T extends ScreenPage>
     = ScreenPageView<T, ErrorScreenConfiguration, ErrorScreenController>;

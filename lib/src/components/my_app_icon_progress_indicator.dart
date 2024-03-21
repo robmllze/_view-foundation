@@ -40,7 +40,9 @@ class MyAppIconProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final shade = Theme.of(context).brightness == Brightness.light ? Colors.white : Colors.black;
+    final shade = Theme.of(context).brightness == Brightness.light
+        ? Colors.white
+        : Colors.black;
     final invertedShade = shade.inverted;
     return SizedBox.square(
       dimension: 80.sc,

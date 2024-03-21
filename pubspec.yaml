@@ -17,7 +17,7 @@ publish_to: none
 
 environment:
 
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.3.1 <4.0.0'
 
 ## -----------------------------------------------------------------------------
 
@@ -31,10 +31,10 @@ dependencies:
   _service_interfaces:
     path: ../_service_interfaces
 
-  xyz_flutter_plus: ^0.38.0
-  xyz_gen_annotations: ^0.15.0
-  xyz_pod: ^0.23.0
-  xyz_utils: ^0.51.0
+  xyz_flutter_plus: ^0.38.1
+  xyz_gen_annotations: ^0.15.1
+  xyz_pod: ^0.23.1
+  xyz_utils: ^0.51.1
 
   cupertino_icons: any
   equatable: any

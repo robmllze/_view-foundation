@@ -103,7 +103,11 @@ class MyPopupController {
     }
     var l = left, t = top, r = right, b = bottom;
     if (relativePosition != null) {
-      final renderBox = this._myPopup!._globalKey.currentContext?.findRenderObject() as RenderBox;
+      final renderBox = this
+          ._myPopup!
+          ._globalKey
+          .currentContext
+          ?.findRenderObject() as RenderBox;
       final offset = renderBox.localToGlobal(relativePosition);
       l = (l ?? 0.0) + offset.dx;
       t = (t ?? 0.0) + offset.dy;

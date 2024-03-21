@@ -42,7 +42,9 @@ class PushRouteObserver extends NavigatorObserver {
   void didPush(Route<dynamic> newRoute, Route<dynamic>? oldRoute) {
     final (newScreen, oldScreen) = this._routesToScreen(newRoute, oldRoute);
     if (newScreen != null) {
-      this.pScreenBreadcrumbs?.update((e) => _getLast4((e..addLast(newScreen))));
+      this
+          .pScreenBreadcrumbs
+          ?.update((e) => _getLast4((e..addLast(newScreen))));
       Here().debugLog('Pushed: ${newScreen.configuration?.path}');
     }
     this.onPush?.call(

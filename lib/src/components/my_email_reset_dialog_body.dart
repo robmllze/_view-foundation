@@ -53,11 +53,15 @@ class MyEmailResetDialogBody extends StatelessWidget {
         children: [
           Text(
             'Email Password Reset||$_trPrefix.title'.tr(),
-            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .titleMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 12.sc),
           Text(
-            'Enter your email address to reset your password||$_trPrefix.subtitle'.tr(),
+            'Enter your email address to reset your password||$_trPrefix.subtitle'
+                .tr(),
           ),
           SizedBox(height: 12.sc),
           TextField(
@@ -93,7 +97,8 @@ class MyEmailResetDialogBody extends StatelessWidget {
                       showErrorToastOverlay(
                         context,
                         error: '$e',
-                        remover: (r) => Future.delayed(const Duration(seconds: 3), r),
+                        remover: (r) =>
+                            Future.delayed(const Duration(seconds: 3), r),
                       );
                     }
                   }
