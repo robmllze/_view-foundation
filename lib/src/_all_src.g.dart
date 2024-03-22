@@ -22,7 +22,6 @@ export 'routing/push_route_observer.dart';
 export 'routing/route_manager.dart';
 export 'screens/empty_screen/empty_screen.dart';
 export 'screens/error_screen/error_screen.dart';
-export 'screens/screen_access.g.dart';
 export 'theme/color_scheme_mixes_extension.dart';
 export 'theme/default_text_theme.dart';
 export 'theme/input_borders.dart';
