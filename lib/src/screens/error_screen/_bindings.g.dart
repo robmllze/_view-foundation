@@ -7,6 +7,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+// ignore_for_file: prefer_single_quotes
+
 part of 'error_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -25,7 +27,7 @@ const _TR_KEY = 'screens.ErrorScreen';
 
 extension _ScreenTr on String {
   String screenTr([Map<dynamic, dynamic> args = const {}]) {
-    return this.splitByLastOccurrenceOf('||').join('||$_TR_KEY.').tr(args);
+    return ErrorScreenConfiguration.screenTr(this, args);
   }
 }
 
@@ -77,6 +79,9 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   static const TITLE = 'Error||title';
   // ignore: prefer_const_declarations
   static final ScreenMakeup? screenMakeup = null;
+  static String screenTr(String key, [Map<dynamic, dynamic> args = const {}]) {
+    return key.splitByLastOccurrenceOf('||').join('||$_TR_KEY.').tr(args);
+  }
 
   ErrorScreenConfiguration({
     Map<dynamic, dynamic>? $arguments,
