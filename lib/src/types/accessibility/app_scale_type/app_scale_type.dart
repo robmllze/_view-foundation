@@ -22,11 +22,11 @@ enum AppScaleType with AppScaleEnumMixin {
   //
   //
 
-  DEFAULT(1.0),
-  SMALLEST(0.75),
-  SMALLER(0.85),
-  LARGER(1.25),
-  LARGEST(1.5);
+  SCALE_100(1.0),
+  SCALE_75(0.75),
+  SCALE_85(0.85),
+  SCALE_125(1.25),
+  SCALE_150(1.5);
 
   //
   //
@@ -40,4 +40,10 @@ enum AppScaleType with AppScaleEnumMixin {
   //
 
   const AppScaleType(this.scale);
+
+  //
+  //
+  //
+
+  String get percentage => '${(this.scale * 100).toInt()}%';
 }

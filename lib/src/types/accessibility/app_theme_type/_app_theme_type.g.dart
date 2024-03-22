@@ -36,3 +36,4 @@ extension AppThemeTypeUtils on AppThemeType {
         .join(' ');
   }
 }
+
