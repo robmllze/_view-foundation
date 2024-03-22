@@ -45,17 +45,20 @@ Screen? makerErrorScreen(
       (_IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT && !isLoggedOut)) {
     return null;
   }
-  if (configuration is ErrorScreenConfiguration ||
-      RegExp(
-        r'^(' + _PATH + r')([?/].*)?$',
-      ).hasMatch(
-        Uri.decodeComponent(
-          configuration.path ?? '',
-        ),
-      )) {
+  if (configuration is ErrorScreenConfiguration) {
     return ErrorScreen(
       key: ValueKey<String?>(configuration.path),
       configuration: configuration,
+    );
+  }
+  if (RegExp(r'^(' + _PATH + r')([?/].*)?$')
+      .hasMatch(Uri.decodeComponent(configuration.path ?? ''))) {
+    final temp = ErrorScreenConfiguration(
+      $arguments: configuration.arguments,
+    );
+    return ErrorScreen(
+      key: ValueKey<String?>(temp.path),
+      configuration: temp,
     );
   }
   return null;

@@ -46,16 +46,14 @@ class RouteManager extends _RouteManager {
   late final _router = GoRouter(
     observers: [this._pushRouteObserver()],
     errorPageBuilder: (context, state) {
-      return super
-          .commonPageBuilder(context, state, ErrorScreenConfiguration.PATH);
+      return super.commonPageBuilder(context, state, ErrorScreenConfiguration.PATH);
     },
     initialLocation: super.defaultConfiguration.path,
     routes: [
       GoRoute(
         path: '/',
         pageBuilder: (context, state) {
-          return super
-              .commonPageBuilder(context, state, EmptyScreenConfiguration.PATH);
+          return super.commonPageBuilder(context, state, EmptyScreenConfiguration.PATH);
         },
         routes: [
           ...super.generatedScreenRoutes.map(
@@ -107,9 +105,7 @@ class RouteManager extends _RouteManager {
   void goFromFront(int index) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
     buffer.removeRange(index, buffer.length);
-    super
-        .pScreenBreadcrumbs
-        .set(Queue.from(buffer.sublist(0, buffer.length - 1)));
+    super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
     final to = buffer.last.configuration!;
     this.go(to);
   }
@@ -122,9 +118,7 @@ class RouteManager extends _RouteManager {
   void goFromBack(int index) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
     buffer.removeRange(buffer.length - index, buffer.length);
-    super
-        .pScreenBreadcrumbs
-        .set(Queue.from(buffer.sublist(0, buffer.length - 1)));
+    super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
     final to = buffer.last.configuration!;
     this.go(to);
   }
@@ -203,11 +197,9 @@ abstract class _RouteManager {
   //
   //
 
-  ModelScreenConfiguration get defaultConfiguration =>
-      authServiceBroker?.loggedIn == true
-          ? this.defaultOnLoginScreenConfiguration ??
-              this.defaultOnLogoutScreenConfiguration
-          : this.defaultOnLogoutScreenConfiguration;
+  ModelScreenConfiguration get defaultConfiguration => authServiceBroker?.loggedIn == true
+      ? this.defaultOnLoginScreenConfiguration ?? this.defaultOnLogoutScreenConfiguration
+      : this.defaultOnLogoutScreenConfiguration;
 
   //
   //
@@ -223,8 +215,10 @@ abstract class _RouteManager {
   void go(ModelScreenConfiguration configuration) {
     final queryParameters = configuration.arguments
             ?.map(
-              (k, v) =>
-                  MapEntry(k is String ? k : null, v is String ? v : null),
+              (k, v) => MapEntry(
+                k is String ? k : null,
+                v is String ? v : null,
+              ),
             )
             .nonNulls
             .nullIfEmpty ??
@@ -282,8 +276,7 @@ abstract class _RouteManager {
     );
     final requestedScreen = this._getScreenFromPage(requestedPage);
     final requestedConfiguration = requestedScreen?.configuration;
-    if (requestedConfiguration != null &&
-        hasPermissionsToGoTo(requestedConfiguration)) {
+    if (requestedConfiguration != null && hasPermissionsToGoTo(requestedConfiguration)) {
       this._isInitialPage = false;
       final targetScreen = this.findScreen(
         configuration: requestedConfiguration,
@@ -312,8 +305,7 @@ abstract class _RouteManager {
   //
 
   GoRoute? _getRegisteredRouteByPath(String? path) {
-    final route =
-        this.generatedScreenRoutes.firstWhereOrNull((e) => e.path == path);
+    final route = this.generatedScreenRoutes.firstWhereOrNull((e) => e.path == path);
     return route;
   }
 
