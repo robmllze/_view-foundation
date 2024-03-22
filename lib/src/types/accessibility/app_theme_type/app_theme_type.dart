@@ -12,9 +12,12 @@
 
 import '/_common.dart';
 
+part '_app_theme_type.g.dart';
+
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-enum MyAppTheme with AppThemeEnumMixin {
+@GenerateTypeUtils()
+enum AppThemeType with AppThemeEnumMixin {
   //
   //
   //
@@ -28,7 +31,7 @@ enum MyAppTheme with AppThemeEnumMixin {
   @override
   ThemeData get themeData {
     switch (this) {
-      case MyAppTheme.LIGHT:
+      case AppThemeType.LIGHT:
         return ThemeData(
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.light,
@@ -39,7 +42,7 @@ enum MyAppTheme with AppThemeEnumMixin {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: defaultTextTheme(),
         );
-      case MyAppTheme.DARK:
+      case AppThemeType.DARK:
         return ThemeData(
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,

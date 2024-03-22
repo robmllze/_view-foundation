@@ -7,9 +7,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'accessibility/my_app_locale.dart';
-export 'accessibility/my_app_scale.dart';
-export 'accessibility/my_app_theme.dart';
 export 'components/my_app_icon.dart';
 export 'components/my_app_icon_progress_indicator.dart';
 export 'components/my_dialog_body.dart';
@@ -26,6 +23,9 @@ export 'theme/color_scheme_mixes_extension.dart';
 export 'theme/default_text_theme.dart';
 export 'theme/input_borders.dart';
 export 'theme/input_decorations.dart';
+export 'types/accessibility/app_locale_type/app_locale_type.dart';
+export 'types/accessibility/app_scale_type/app_scale_type.dart';
+export 'types/accessibility/app_theme_type/app_theme_type.dart';
 export 'widgets/_overlays/blurry_overlay.dart';
 export 'widgets/_overlays/show_app_icon_overlay.dart';
 export 'widgets/_overlays/show_error_toast_overlay.dart';
