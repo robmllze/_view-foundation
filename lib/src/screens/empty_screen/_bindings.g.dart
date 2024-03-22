@@ -26,8 +26,8 @@ const _TR_KEY = 'screens.EmptyScreen';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension _ScreenTr on String {
-  String screenTr([Map<dynamic, dynamic> args = const {}]) {
-    return EmptyScreenConfiguration.screenTr(this, args);
+  String screenTr({Map<dynamic, dynamic> args = const {}}) {
+    return EmptyScreenConfiguration.screenTr(this, args: args);
   }
 }
 
@@ -82,7 +82,7 @@ class EmptyScreenConfiguration extends ModelScreenConfiguration {
   static const TITLE = 'Empty||title';
   // ignore: prefer_const_declarations
   static final ScreenMakeup? screenMakeup = null;
-  static String screenTr(String key, [Map<dynamic, dynamic> args = const {}]) {
+  static String screenTr(String key, {Map<dynamic, dynamic> args = const {}}) {
     return key.splitByLastOccurrenceOf('||').join('||$_TR_KEY.').tr(args: args);
   }
 

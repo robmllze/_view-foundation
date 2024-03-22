@@ -83,8 +83,8 @@ class MyEmailResetDialogBody extends StatelessWidget {
                       showMessageToastOverlay(
                         context,
                         message:
-                            'An email has been sent to your email address <<<_email>>>. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
-                                .tr(args: {'_email': emailController.text}),
+                            'An email has been sent to your email address {email}. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
+                                .tr(args: {'email': emailController.text}),
                       );
                     }
                     this.onCancel();
