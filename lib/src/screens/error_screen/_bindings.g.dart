@@ -83,7 +83,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   // ignore: prefer_const_declarations
   static final ScreenMakeup? screenMakeup = null;
   static String screenTr(String key, [Map<dynamic, dynamic> args = const {}]) {
-    return key.splitByLastOccurrenceOf('||').join('||$_TR_KEY.').tr(args);
+    return key.splitByLastOccurrenceOf('||').join('||$_TR_KEY.').tr(args: args);
   }
 
   ErrorScreenConfiguration({

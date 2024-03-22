@@ -19,7 +19,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
   //
   //
 
-  static const _trPrefix = 'screens.ScreenLogin.MyEmailResetDialog';
+  static const _trPrefix = 'screens.LoginScreen.MyEmailResetDialog';
 
   //
   //
@@ -53,15 +53,11 @@ class MyEmailResetDialogBody extends StatelessWidget {
         children: [
           Text(
             'Email Password Reset||$_trPrefix.title'.tr(),
-            style: Theme.of(context)
-                .textTheme
-                .titleMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 12.sc),
           Text(
-            'Enter your email address to reset your password||$_trPrefix.subtitle'
-                .tr(),
+            'Enter your email address to reset your password||$_trPrefix.subtitle'.tr(),
           ),
           SizedBox(height: 12.sc),
           TextField(
@@ -87,8 +83,8 @@ class MyEmailResetDialogBody extends StatelessWidget {
                       showMessageToastOverlay(
                         context,
                         message:
-                            'An email has been sent to your email address <<<email>>>. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
-                                .tr({'email': emailController.text}),
+                            'An email has been sent to your email address <<<_email>>>. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
+                                .tr(args: {'_email': emailController.text}),
                       );
                     }
                     this.onCancel();
@@ -97,8 +93,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
                       showErrorToastOverlay(
                         context,
                         error: '$e',
-                        remover: (r) =>
-                            Future.delayed(const Duration(seconds: 3), r),
+                        remover: (r) => Future.delayed(const Duration(seconds: 3), r),
                       );
                     }
                   }

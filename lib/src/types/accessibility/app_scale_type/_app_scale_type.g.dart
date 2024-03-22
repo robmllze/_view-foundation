@@ -23,8 +23,8 @@ extension AppScaleTypeUtils on AppScaleType {
     return AppScaleType.values[index];
   }
 
-  String trFromSection(String section) {
-    return '${this.friendlyName}||$section.${this.name}'.tr();
+  String trFromSection(String section, [Map args = const {}]) {
+    return '${this.friendlyName}||$section.${this.name}'.tr(args: args);
   }
 
   String get friendlyName {
