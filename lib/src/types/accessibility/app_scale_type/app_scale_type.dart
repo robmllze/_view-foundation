@@ -23,10 +23,10 @@ enum AppScaleType with AppScaleEnumMixin {
   //
 
   SCALE_100(1.0),
-  SCALE_75(0.75),
-  SCALE_85(0.85),
   SCALE_125(1.25),
-  SCALE_150(1.5);
+  SCALE_150(1.5),
+  SCALE_85(0.85),
+  SCALE_75(0.75);
 
   //
   //
