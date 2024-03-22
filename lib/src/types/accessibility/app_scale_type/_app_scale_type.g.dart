@@ -18,15 +18,21 @@ extension AppScaleTypeUtils on AppScaleType {
   }
 
   AppScaleType get previous {
-    final index = (this.index - 1 + AppScaleType.values.length) % AppScaleType.values.length;
+    final index = (this.index - 1 + AppScaleType.values.length) %
+        AppScaleType.values.length;
     return AppScaleType.values[index];
   }
 
-  String get translated {
-    return '${this.name}||types.$this'.tr();
+  String trFromSection(String section) {
+    return '${this.friendlyName}||$section.${this.name}'.tr();
   }
 
   String get friendlyName {
-    return this.name.toSnakeCase().split('_').map((e) => e.capitalize()).join(' ');
+    return this
+        .name
+        .toSnakeCase()
+        .split('_')
+        .map((e) => e.capitalize())
+        .join(' ');
   }
 }

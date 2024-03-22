@@ -23,8 +23,8 @@ extension AppThemeTypeUtils on AppThemeType {
     return AppThemeType.values[index];
   }
 
-  String get translated {
-    return '${this.name}||types.$this'.tr();
+  String trFromSection(String section) {
+    return '${this.friendlyName}||$section.${this.name}'.tr();
   }
 
   String get friendlyName {
