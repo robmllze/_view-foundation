@@ -19,16 +19,22 @@ enum MyAppLocale with AppLocaleEnumMixin {
   //
   //
 
-  EN_US,
-  AF_ZA;
+  // NB: File names are case sensitive on most Linux based systems like
+  // Firebase Hosting. Make sure to use the correct case for your file paths.
+  // As a rule of thumb, always use lowercase file paths.
+  EN_US('en_us'),
+  AF_ZA('af_za');
 
   //
   //
   //
 
-  // NB: File names are case sensitive on Linux and Firebase Hosting.
-  // Make sure the locale file names are lowercase, and match the enum names,
-  // e.g. en_us.dart, af_za.dart, etc.
   @override
-  String get localeCode => this.name.toLowerCase();
+  final String localeCode;
+
+  //
+  //
+  //
+
+  const MyAppLocale(this.localeCode);
 }
