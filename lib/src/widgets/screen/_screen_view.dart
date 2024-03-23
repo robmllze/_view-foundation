@@ -81,14 +81,14 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   ///
   /// ```dart
   /// @override
-  /// Widget layout(Widget body) {
+  /// Widget layout(BuildContext context, Widget body) {
   ///   return super.layout(
   ///     YourLayoutWidget(child: body);
   ///   );
   /// }
   /// ```
   @mustCallSuper
-  Widget layout(Widget body) {
+  Widget layout(BuildContext context, Widget body) {
     final navigationControls = this.widget.configuration?.navigationControlsWidget;
     final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return LayoutBuilder(
@@ -117,18 +117,21 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget wideLayout(Widget body) {
-    return Center(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return ConstrainedBox(
-            constraints: BoxConstraints(
-              maxWidth: constraints.maxHeight / MIN_MOBILE_ASPECT_RATIO,
-              maxHeight: double.infinity,
-            ),
-            child: this.layout(body),
-          );
-        },
+  Widget wideLayout(BuildContext context, Widget body) {
+    return Container(
+      color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
+      child: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: constraints.maxHeight / MIN_MOBILE_ASPECT_RATIO,
+                maxHeight: double.infinity,
+              ),
+              child: this.layout(context, body),
+            );
+          },
+        ),
       ),
     );
   }
@@ -137,9 +140,10 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget mobileLayout(Widget body) => this.narrowLayout(body);
-  Widget horizontalMobileLayout(Widget body) => this.wideLayout(body);
-  Widget narrowLayout(Widget body) => this.layout(body);
+  Widget mobileLayout(BuildContext context, Widget body) => this.narrowLayout(context, body);
+  Widget horizontalMobileLayout(BuildContext context, Widget body) =>
+      this.wideLayout(context, body);
+  Widget narrowLayout(BuildContext context, Widget body) => this.layout(context, body);
 
   //
   //
@@ -166,15 +170,15 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
       child: () {
         switch (appLayout) {
           case AppLayout.MOBILE:
-            return this.mobileLayout(this.mobileBody(context));
+            return this.mobileLayout(context, this.mobileBody(context));
           case AppLayout.MOBILE_HORIZONTAL:
-            return this.horizontalMobileLayout(this.horizontalMobileBody(context));
+            return this.horizontalMobileLayout(context, this.horizontalMobileBody(context));
           case AppLayout.NARROW:
-            return this.narrowLayout(this.narrowBody(context));
+            return this.narrowLayout(context, this.narrowBody(context));
           case AppLayout.WIDE:
-            return this.wideLayout(this.wideBody(context));
+            return this.wideLayout(context, this.wideBody(context));
           default:
-            return this.layout(this.body(context));
+            return this.layout(context, this.body(context));
         }
       }(),
     );
