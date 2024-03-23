@@ -119,7 +119,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
 
   Widget wideLayout(BuildContext context, Widget body) {
     return Container(
-      color: Theme.of(context).colorScheme.primary.withOpacity(0.25),
+      color: Theme.of(context).colorScheme.surface.inverted.withOpacity(0.25),
       child: Center(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -128,7 +128,22 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
                 maxWidth: constraints.maxHeight / MIN_MOBILE_ASPECT_RATIO,
                 maxHeight: double.infinity,
               ),
-              child: this.layout(context, body),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.background,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      blurRadius: 4.0,
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: this.layout(context, body),
+                ),
+              ),
             );
           },
         ),
