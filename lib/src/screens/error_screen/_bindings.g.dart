@@ -7,8 +7,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-// ignore_for_file: prefer_single_quotes
-
 part of 'error_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -79,7 +77,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
       _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT;
   static const IS_REDIRECTABLE = _IS_REDIRECTABLE;
   static const NAVIGATION_CONTROLS_WIDGET = null;
-  static const TITLE = 'Error||title';
+  static String get translatedTitle => screenTr('Error||title');
   // ignore: prefer_const_declarations
   static final ScreenMakeup? screenMakeup = null;
   static String screenTr(String key, {Map<dynamic, dynamic> args = const {}}) {
@@ -100,7 +98,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
           isRedirectable: _IS_REDIRECTABLE,
         ) {
     super.navigationControlsWidget = NAVIGATION_CONTROLS_WIDGET;
-    super.title = TITLE.screenTr();
+    super.title = translatedTitle;
     super.makeup = screenMakeup;
   }
 
@@ -115,7 +113,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
           isRedirectable: _IS_REDIRECTABLE,
         ) {
     super.navigationControlsWidget = NAVIGATION_CONTROLS_WIDGET;
-    super.title = TITLE.screenTr();
+    super.title = translatedTitle;
     super.makeup = screenMakeup;
   }
 }
@@ -151,7 +149,7 @@ final generatedErrorScreenRoute = GoRoute(
       makeup: ErrorScreenConfiguration.screenMakeup,
       navigationControlsWidget:
           ErrorScreenConfiguration.NAVIGATION_CONTROLS_WIDGET,
-      title: ErrorScreenConfiguration.TITLE.screenTr(),
+      title: ErrorScreenConfiguration.translatedTitle,
     );
     final configuration = extraConfiguration ?? urlConfiguration;
     return NoTransitionPage(
