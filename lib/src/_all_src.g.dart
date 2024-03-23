@@ -9,7 +9,6 @@
 
 export 'components/my_app_icon.dart';
 export 'components/my_app_icon_progress_indicator.dart';
-export 'components/my_dialog_body.dart';
 export 'components/my_email_reset_dialog_body.dart';
 export 'components/my_header.dart';
 export 'components/my_header_back_button.dart';
@@ -26,6 +25,8 @@ export 'theme/input_decorations.dart';
 export 'types/accessibility/app_locale_type/app_locale_type.dart';
 export 'types/accessibility/app_scale_type/app_scale_type.dart';
 export 'types/accessibility/app_theme_type/app_theme_type.dart';
+export 'widgets/dialogs/dialog_body.dart';
+export 'widgets/navigation_controls.dart';
 export 'widgets/overlays/blurry_overlay.dart';
 export 'widgets/overlays/show_app_icon_overlay.dart';
 export 'widgets/overlays/show_error_toast_overlay.dart';
@@ -35,6 +36,5 @@ export 'widgets/overlays/show_message_toast_overlay.dart';
 export 'widgets/overlays/show_overlay.dart';
 export 'widgets/overlays/show_spinning_app_icon_overlay.dart';
 export 'widgets/overlays/show_toast_overlay.dart';
-export 'widgets/navigation_controls.dart';
 export 'widgets/screen/screen.dart';
 export 'widgets/screen_page/screen_page.dart';

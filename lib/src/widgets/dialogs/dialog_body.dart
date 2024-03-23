@@ -14,7 +14,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyDialogBody extends StatelessWidget {
+class DialogBody extends StatelessWidget {
   //
   //
   //
@@ -25,7 +25,7 @@ class MyDialogBody extends StatelessWidget {
   //
   //
 
-  const MyDialogBody({
+  const DialogBody({
     super.key,
     required this.child,
   });

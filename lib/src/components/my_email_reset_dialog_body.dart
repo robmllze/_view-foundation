@@ -46,7 +46,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyDialogBody(
+    return DialogBody(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
