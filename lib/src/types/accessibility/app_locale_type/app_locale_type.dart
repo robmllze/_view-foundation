@@ -8,6 +8,8 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+import 'package:flutter/services.dart';
+
 import '/_common.dart';
 
 part '_app_locale_type.g.dart';
@@ -37,4 +39,15 @@ enum AppLocaleType with AppLocaleEnumMixin {
   //
 
   const AppLocaleType(this.localeCode);
+
+  //
+  //
+  //
+  @override
+  TranslationFileReader get translationFileReader {
+    return TranslationFileReader(
+      translationsDirPath: ['assets', 'translations'],
+      fileReader: (filePath) => rootBundle.loadString(filePath),
+    );
+  }
 }
