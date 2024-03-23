@@ -24,6 +24,7 @@ const _TR_KEY = 'screens.EmptyScreen';
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension _ScreenTr on String {
+  // ignore: unused_element
   String screenTr({Map<dynamic, dynamic> args = const {}}) {
     return EmptyScreenConfiguration.screenTr(this, args: args);
   }
