@@ -117,7 +117,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
 
   Widget wideLayout(BuildContext context, Widget body) {
     return Container(
-      color: Theme.of(context).colorScheme.surface.inverted.withOpacity(0.25),
+      color: Theme.of(context).colorScheme.background.inverted.withOpacity(0.2),
       child: Center(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -132,8 +132,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
                   borderRadius: BorderRadius.circular(10.0),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.25),
-                      blurRadius: 4.0,
+                      color: Colors.black.withOpacity(0.2),
+                      blurRadius: 5.0,
                     ),
                   ],
                 ),
@@ -153,20 +153,43 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget mobileLayout(BuildContext context, Widget body) => this.narrowLayout(context, body);
-  Widget horizontalMobileLayout(BuildContext context, Widget body) =>
-      this.wideLayout(context, body);
-  Widget narrowLayout(BuildContext context, Widget body) => this.layout(context, body);
+  Widget mobileLayout(BuildContext context, Widget body) {
+    return this.narrowLayout(context, body);
+  }
+
+  Widget horizontalMobileLayout(BuildContext context, Widget body) {
+    return this.wideLayout(context, body);
+  }
+
+  Widget narrowLayout(BuildContext context, Widget body) {
+    return this.layout(context, body);
+  }
 
   //
   //
   //
 
   Widget body(BuildContext context);
-  Widget mobileBody(BuildContext context) => this.narrowBody(context);
-  Widget horizontalMobileBody(BuildContext context) => this.wideBody(context);
-  Widget narrowBody(BuildContext context) => this.body(context);
-  Widget wideBody(BuildContext context) => this.body(context);
+
+  //
+  //
+  //
+
+  Widget mobileBody(BuildContext context) {
+    return this.narrowBody(context);
+  }
+
+  Widget horizontalMobileBody(BuildContext context) {
+    return this.wideBody(context);
+  }
+
+  Widget narrowBody(BuildContext context) {
+    return this.body(context);
+  }
+
+  Widget wideBody(BuildContext context) {
+    return this.body(context);
+  }
 
   //
   //
