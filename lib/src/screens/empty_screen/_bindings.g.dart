@@ -46,7 +46,7 @@ Screen? makerEmptyScreen(
   }
   if (configuration is EmptyScreenConfiguration) {
     return EmptyScreen(
-      key: ValueKey<String?>(configuration.path),
+      key: ValueKey<String?>(configuration.toString()),
       configuration: configuration,
     );
   }
@@ -56,7 +56,7 @@ Screen? makerEmptyScreen(
       $arguments: configuration.arguments,
     );
     return EmptyScreen(
-      key: ValueKey<String?>(temp.path),
+      key: ValueKey<String?>(temp.toString()),
       configuration: temp,
     );
   }

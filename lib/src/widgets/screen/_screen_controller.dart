@@ -30,6 +30,7 @@ class ScreenController<T extends ModelScreenConfiguration> {
   //
   //
 
+  @mustCallSuper
   @visibleForOverriding
   void initController() async {}
 
@@ -37,6 +38,7 @@ class ScreenController<T extends ModelScreenConfiguration> {
   //
   //
 
+  @mustCallSuper
   @visibleForOverriding
   void dispose() async {}
 }
