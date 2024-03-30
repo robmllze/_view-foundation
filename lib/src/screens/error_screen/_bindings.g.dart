@@ -46,7 +46,7 @@ Screen? makerErrorScreen(
   }
   if (configuration is ErrorScreenConfiguration) {
     return ErrorScreen(
-      key: ValueKey<String?>(configuration.toString()),
+      key: ValueKey<String?>(configuration.path),
       configuration: configuration,
     );
   }
@@ -56,7 +56,7 @@ Screen? makerErrorScreen(
       $arguments: configuration.arguments,
     );
     return ErrorScreen(
-      key: ValueKey<String?>(temp.toString()),
+      key: ValueKey<String?>(temp.path),
       configuration: temp,
     );
   }
