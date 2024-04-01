@@ -12,30 +12,30 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyEmailResetDialogBody extends StatelessWidget {
+class MyDeleteConfirmationDialog extends StatelessWidget {
   //
   //
   //
 
-  static const _trPrefix = 'screens.LoginScreen.MyEmailResetDialog';
+  static const _trPrefix = 'screens.SettingsScreen.MyDeleteConfirmationDialog';
 
   //
   //
   //
 
-  final TextEditingController emailController;
+  final TextEditingController passwordController;
   final void Function() onCancel;
-  final Future<void> Function(String email) onSend;
+  final Future<void> Function(String password) onDelete;
 
   //
   //
   //
 
-  const MyEmailResetDialogBody({
+  const MyDeleteConfirmationDialog({
     super.key,
-    required this.emailController,
+    required this.passwordController,
     required this.onCancel,
-    required this.onSend,
+    required this.onDelete,
   });
 
   //
@@ -50,21 +50,22 @@ class MyEmailResetDialogBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Email Password Reset||$_trPrefix.title'.tr(),
+            'Delete Account||$_trPrefix.title'.tr(),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 12.sc),
           Text(
-            'Enter your email address to reset your password||$_trPrefix.subtitle'.tr(),
+            'Enter your password to delete your account||$_trPrefix.subtitle'.tr(),
           ),
           SizedBox(height: 12.sc),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Email||$_trPrefix.email'.tr(),
+              labelText: 'Password||$_trPrefix.email'.tr(),
               border: const OutlineInputBorder(),
             ),
-            controller: this.emailController,
-            onSubmitted: this.onSend,
+            obscureText: true,
+            controller: this.passwordController,
+            onSubmitted: this.onDelete,
           ),
           SizedBox(height: 12.sc),
           Row(
@@ -77,15 +78,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
               FilledButton(
                 onPressed: () async {
                   try {
-                    await this.onSend(emailController.text);
-                    if (context.mounted) {
-                      showMessageToastOverlay(
-                        context,
-                        message:
-                            'An email has been sent to your email address {email}. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
-                                .tr(args: {'email': emailController.text}),
-                      );
-                    }
+                    await this.onDelete(passwordController.text);
                     this.onCancel();
                   } catch (e) {
                     if (context.mounted) {
@@ -97,7 +90,10 @@ class MyEmailResetDialogBody extends StatelessWidget {
                     }
                   }
                 },
-                child: Text('Send||$_trPrefix.send'.tr()),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                ),
+                child: Text('Delete||$_trPrefix.send'.tr()),
               ),
             ],
           ),

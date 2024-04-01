@@ -9,6 +9,7 @@
 
 export 'components/my_app_icon.dart';
 export 'components/my_app_icon_progress_indicator.dart';
+export 'components/my_delete_confirmation_dialog_body.dart';
 export 'components/my_email_reset_dialog_body.dart';
 export 'components/my_header.dart';
 export 'components/my_header_back_button.dart';
