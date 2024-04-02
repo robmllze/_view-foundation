@@ -17,12 +17,6 @@ class MyEmailResetDialogBody extends StatelessWidget {
   //
   //
 
-  static const _trPrefix = 'screens.LoginScreen.MyEmailResetDialog';
-
-  //
-  //
-  //
-
   final TextEditingController emailController;
   final void Function() onCancel;
   final Future<void> Function(String email) onSend;
@@ -50,17 +44,17 @@ class MyEmailResetDialogBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Email Password Reset||$_trPrefix.title'.tr(),
+            'Email Password Reset||todo'.tr(),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 12.sc),
           Text(
-            'Enter your email address to reset your password||$_trPrefix.subtitle'.tr(),
+            'Enter your email address to reset your password||todo'.tr(),
           ),
           SizedBox(height: 12.sc),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Email||$_trPrefix.email'.tr(),
+              labelText: 'Email||todo'.tr(),
               border: const OutlineInputBorder(),
             ),
             controller: this.emailController,
@@ -72,7 +66,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: this.onCancel,
-                child: Text('Cancel||$_trPrefix.cancel'.tr()),
+                child: Text('Cancel||todo'.tr()),
               ),
               FilledButton(
                 onPressed: () async {
@@ -82,7 +76,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
                       showMessageToastOverlay(
                         context,
                         message:
-                            'An email has been sent to your email address {email}. Follow the link in the email to reset your password||$_trPrefix.confirmation_message'
+                            'An email has been sent to your email address {email}. Follow the link in the email to reset your password||todo'
                                 .tr(args: {'email': emailController.text}),
                       );
                     }
@@ -97,7 +91,7 @@ class MyEmailResetDialogBody extends StatelessWidget {
                     }
                   }
                 },
-                child: Text('Send||$_trPrefix.send'.tr()),
+                child: Text('Send||todo'.tr()),
               ),
             ],
           ),

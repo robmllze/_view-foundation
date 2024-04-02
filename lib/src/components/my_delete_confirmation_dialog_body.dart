@@ -17,12 +17,6 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
   //
   //
 
-  static const _trPrefix = 'screens.SettingsScreen.MyDeleteConfirmationDialog';
-
-  //
-  //
-  //
-
   final TextEditingController passwordController;
   final void Function() onCancel;
   final Future<void> Function(String password) onDelete;
@@ -50,17 +44,17 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Delete Account||$_trPrefix.title'.tr(),
+            'Delete Account||todo'.tr(),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 12.sc),
           Text(
-            'Enter your password to delete your account||$_trPrefix.subtitle'.tr(),
+            'Enter your password to delete your account||todo'.tr(),
           ),
           SizedBox(height: 12.sc),
           TextField(
             decoration: InputDecoration(
-              labelText: 'Password||$_trPrefix.email'.tr(),
+              labelText: 'Password||todo'.tr(),
               border: const OutlineInputBorder(),
             ),
             obscureText: true,
@@ -73,7 +67,7 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: this.onCancel,
-                child: Text('Cancel||$_trPrefix.cancel'.tr()),
+                child: Text('Cancel||todo'.tr()),
               ),
               FilledButton(
                 onPressed: () async {
@@ -91,9 +85,11 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
                   }
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                  backgroundColor: MaterialStateProperty.all(
+                    Theme.of(context).colorScheme.error,
+                  ),
                 ),
-                child: Text('Delete||$_trPrefix.send'.tr()),
+                child: Text('Delete||todo'.tr()),
               ),
             ],
           ),
