@@ -14,24 +14,28 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyAppIcon extends StatelessWidget {
+class MySvgAppIcon extends StatelessWidget {
   //
   //
   //
 
-  final String svgAssetName;
+  final String assetName;
   final String? package;
   final double? size;
+  final Color? backgroundColor;
+  final double? innerPadding;
 
   //
   //
   //
 
-  const MyAppIcon({
+  const MySvgAppIcon({
     super.key,
-    this.svgAssetName = 'assets/images/app_icon/app_icon.svg',
-    this.package = '_view',
+    this.assetName = 'assets/images/app_icon/app_icon.svg',
+    this.package,
     this.size,
+    this.backgroundColor = Colors.white,
+    this.innerPadding,
   });
 
   //
@@ -40,12 +44,28 @@ class MyAppIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final defaultSize = size ?? 40.sc;
-    return SvgPicture.asset(
-      this.svgAssetName,
-      package: this.package,
-      width: defaultSize,
-      height: defaultSize,
+    final outterSize = this.size ?? 40.sc;
+    final p = this.innerPadding ?? 4.sc;
+    final innerSize = outterSize - p * 2;
+    return Container(
+      width: outterSize,
+      height: outterSize,
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        shape: BoxShape.circle,
+      ),
+      alignment: Alignment.center,
+      child: SizedBox.square(
+        dimension: innerSize,
+        child: ClipOval(
+          child: SvgPicture.asset(
+            this.assetName,
+            package: this.package,
+            width: innerSize,
+            height: innerSize,
+          ),
+        ),
+      ),
     );
   }
 }

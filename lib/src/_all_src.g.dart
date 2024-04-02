@@ -7,13 +7,13 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'components/my_app_icon.dart';
 export 'components/my_app_icon_progress_indicator.dart';
 export 'components/my_delete_confirmation_dialog_body.dart';
 export 'components/my_email_reset_dialog_body.dart';
 export 'components/my_header.dart';
 export 'components/my_header_back_button.dart';
 export 'components/my_popup.dart';
+export 'components/my_svg_app_icon.dart';
 export 'constants.dart';
 export 'routing/push_route_observer.dart';
 export 'routing/route_manager.dart';
@@ -35,7 +35,6 @@ export 'widgets/overlays/show_message_overlay.dart';
 export 'widgets/overlays/show_message_overlay_with_error_handler.dart';
 export 'widgets/overlays/show_message_toast_overlay.dart';
 export 'widgets/overlays/show_overlay.dart';
-export 'widgets/overlays/show_spinning_app_icon_overlay.dart';
 export 'widgets/overlays/show_toast_overlay.dart';
 export 'widgets/screen/screen.dart';
 export 'widgets/screen_page/screen_page.dart';
