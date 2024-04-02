@@ -33,14 +33,16 @@ Future<void> showMessageToastOverlay(
                 constraints: BoxConstraints(maxWidth: 300.sc),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
+                  color: Theme.of(context).colorScheme.background.inverted.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(12.sc),
                 ),
                 child: Padding(
                   padding: EdgeInsets.all(12.sc),
                   child: Text(
                     message.toString(),
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(context).colorScheme.background,
+                        ),
                   ),
                 ),
               ),

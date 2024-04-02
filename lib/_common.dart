@@ -11,6 +11,7 @@
 export 'dart:async';
 export 'dart:collection';
 
+export 'package:fluentui_system_icons/fluentui_system_icons.dart';
 export 'package:flutter/material.dart';
 export 'package:go_router/go_router.dart';
 export 'package:meta/meta.dart';

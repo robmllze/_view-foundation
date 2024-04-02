@@ -13,6 +13,7 @@ export 'components/my_email_reset_dialog_body.dart';
 export 'components/my_empty_placeholder.dart';
 export 'components/my_header.dart';
 export 'components/my_header_back_button.dart';
+export 'components/my_jumping_dog_icon.dart';
 export 'components/my_popup.dart';
 export 'components/my_svg_app_icon.dart';
 export 'constants.dart';

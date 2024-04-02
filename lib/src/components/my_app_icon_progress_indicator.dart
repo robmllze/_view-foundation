@@ -37,12 +37,12 @@ class MyAppIconProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WSpinner(
-      rpm: 30,
+      rpm: 45,
       child: MySvgAppIcon(
         assetName: this.assetName,
         package: this.package,
-        size: 60.sc,
-        innerPadding: 2.sc,
+        size: 50.sc,
+        innerPadding: 4.sc,
       ),
     );
   }

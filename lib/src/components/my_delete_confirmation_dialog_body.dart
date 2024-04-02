@@ -12,14 +12,14 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyDeleteConfirmationDialog extends StatelessWidget {
+class MyDeleteConfirmationDialog extends StatefulWidget {
   //
   //
   //
 
-  final TextEditingController passwordController;
+  final String initialValue;
   final void Function() onCancel;
-  final Future<void> Function(String password) onDelete;
+  final Future<void> Function(String) onProceed;
 
   //
   //
@@ -27,10 +27,29 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
 
   const MyDeleteConfirmationDialog({
     super.key,
-    required this.passwordController,
+    this.initialValue = '',
     required this.onCancel,
-    required this.onDelete,
+    required this.onProceed,
   });
+
+  //
+  //
+  //
+
+  @override
+  _State createState() => _State();
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class _State extends State<MyDeleteConfirmationDialog> {
+  //
+  //
+  //
+
+  late final _controller = TextEditingController(
+    text: this.widget.initialValue,
+  );
 
   //
   //
@@ -52,38 +71,39 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
             'Enter your password to delete your account||todo'.tr(),
           ),
           SizedBox(height: 12.sc),
-          TextField(
-            decoration: InputDecoration(
-              labelText: 'Password||todo'.tr(),
-              border: const OutlineInputBorder(),
-            ),
-            obscureText: true,
-            controller: this.passwordController,
-            onSubmitted: this.onDelete,
+          PodWidget(
+            initialValue: true,
+            builder: (context, _, pObscureText) {
+              final obscureText = pObscureText.value;
+              return TextField(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  suffixIcon: Padding(
+                    padding: EdgeInsets.only(right: 8.sc),
+                    child: IconButton(
+                      icon: Icon(
+                        obscureText ? FluentIcons.eye_16_filled : FluentIcons.eye_off_16_filled,
+                      ),
+                      onPressed: () => pObscureText.update((v) => !v),
+                    ),
+                  ),
+                ),
+                obscureText: obscureText,
+                controller: this._controller,
+                onSubmitted: (_) => this._proceed(context),
+              );
+            },
           ),
-          SizedBox(height: 12.sc),
+          SizedBox(height: 20.sc),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: this.onCancel,
+                onPressed: this.widget.onCancel,
                 child: Text('Cancel||todo'.tr()),
               ),
               FilledButton(
-                onPressed: () async {
-                  try {
-                    await this.onDelete(passwordController.text);
-                    this.onCancel();
-                  } catch (e) {
-                    if (context.mounted) {
-                      showErrorToastOverlay(
-                        context,
-                        error: '$e',
-                        remover: (r) => Future.delayed(const Duration(seconds: 3), r),
-                      );
-                    }
-                  }
-                },
+                onPressed: () => this._proceed(context),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                     Theme.of(context).colorScheme.error,
@@ -96,5 +116,34 @@ class MyDeleteConfirmationDialog extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  //
+  //
+  //
+
+  Future<void> _proceed(BuildContext context) async {
+    try {
+      await this.widget.onProceed(this._controller.text);
+      this.widget.onCancel();
+    } catch (e) {
+      if (context.mounted) {
+        await showErrorToastOverlay(
+          context,
+          error: e,
+          remover: (r) => Future.delayed(const Duration(seconds: 3), r),
+        );
+      }
+    }
+  }
+
+  //
+  //
+  //
+
+  @override
+  void dispose() {
+    this._controller.dispose();
+    super.dispose();
   }
 }

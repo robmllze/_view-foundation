@@ -12,14 +12,14 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyEmailResetDialogBody extends StatelessWidget {
+class MyEmailResetDialogBody extends StatefulWidget {
   //
   //
   //
 
-  final TextEditingController emailController;
+  final String initialValue;
   final void Function() onCancel;
-  final Future<void> Function(String email) onSend;
+  final Future<void> Function(String) onProceed;
 
   //
   //
@@ -27,10 +27,29 @@ class MyEmailResetDialogBody extends StatelessWidget {
 
   const MyEmailResetDialogBody({
     super.key,
-    required this.emailController,
+    this.initialValue = '',
     required this.onCancel,
-    required this.onSend,
+    required this.onProceed,
   });
+
+  //
+  //
+  //
+
+  @override
+  _State createState() => _State();
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class _State extends State<MyEmailResetDialogBody> {
+  //
+  //
+  //
+
+  late final _controller = TextEditingController(
+    text: this.widget.initialValue,
+  );
 
   //
   //
@@ -57,40 +76,19 @@ class MyEmailResetDialogBody extends StatelessWidget {
               labelText: 'Email||todo'.tr(),
               border: const OutlineInputBorder(),
             ),
-            controller: this.emailController,
-            onSubmitted: this.onSend,
+            controller: this._controller,
+            onSubmitted: (_) => this._proceed(context),
           ),
-          SizedBox(height: 12.sc),
+          SizedBox(height: 20.sc),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: this.onCancel,
+                onPressed: this.widget.onCancel,
                 child: Text('Cancel||todo'.tr()),
               ),
               FilledButton(
-                onPressed: () async {
-                  try {
-                    await this.onSend(emailController.text);
-                    if (context.mounted) {
-                      showMessageToastOverlay(
-                        context,
-                        message:
-                            'An email has been sent to your email address {email}. Follow the link in the email to reset your password||todo'
-                                .tr(args: {'email': emailController.text}),
-                      );
-                    }
-                    this.onCancel();
-                  } catch (e) {
-                    if (context.mounted) {
-                      showErrorToastOverlay(
-                        context,
-                        error: '$e',
-                        remover: (r) => Future.delayed(const Duration(seconds: 3), r),
-                      );
-                    }
-                  }
-                },
+                onPressed: () => this._proceed(context),
                 child: Text('Send||todo'.tr()),
               ),
             ],
@@ -98,5 +96,42 @@ class MyEmailResetDialogBody extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  //
+  //
+  //
+
+  Future<void> _proceed(BuildContext context) async {
+    try {
+      await this.widget.onProceed(this._controller.text);
+      if (context.mounted) {
+        showMessageToastOverlay(
+          context,
+          message:
+              'An email has been sent to your email address {email}. Follow the link in the email to reset your password||todo'
+                  .tr(args: {'email': this._controller.text}),
+        );
+      }
+      this.widget.onCancel();
+    } catch (e) {
+      if (context.mounted) {
+        showErrorToastOverlay(
+          context,
+          error: e,
+          remover: (r) => Future.delayed(const Duration(seconds: 3), r),
+        );
+      }
+    }
+  }
+
+  //
+  //
+  //
+
+  @override
+  void dispose() {
+    this._controller.dispose();
+    super.dispose();
   }
 }

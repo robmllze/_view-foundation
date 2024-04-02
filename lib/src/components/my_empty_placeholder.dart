@@ -8,8 +8,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
-
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -20,6 +18,7 @@ class MyEmptyPlaceholder extends StatelessWidget {
   //
 
   final String message;
+  final bool loading;
   final Widget? trailing;
 
   //
@@ -29,6 +28,7 @@ class MyEmptyPlaceholder extends StatelessWidget {
   const MyEmptyPlaceholder({
     super.key,
     this.message = 'No items found.',
+    this.loading = false,
     this.trailing,
   });
 
@@ -44,9 +44,8 @@ class MyEmptyPlaceholder extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 64.sc),
-            Icon(
-              FluentIcons.animal_dog_24_regular,
-              size: 72.sc,
+            MyJumpingDogIcon(
+              jumping: this.loading,
             ),
             const Divider(),
             Text(
