@@ -42,6 +42,8 @@ class MyEmptyPlaceholder extends StatelessWidget {
       child: SizedBox(
         width: 300.sc,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 64.sc),
             MyJumpingDogIcon(
