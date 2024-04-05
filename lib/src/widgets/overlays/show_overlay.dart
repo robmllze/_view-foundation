@@ -36,7 +36,7 @@ Future<void> showOverlay(
           future: () async {
             return await builder(context, complete);
           }(),
-          builder: (_, snapshot) {
+          builder: (context, snapshot) {
             if (snapshot.hasData) {
               return snapshot.data as Widget;
             }

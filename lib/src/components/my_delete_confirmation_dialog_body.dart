@@ -73,7 +73,7 @@ class _State extends State<MyDeleteConfirmationDialog> {
           SizedBox(height: 12.sc),
           PodWidget(
             initialValue: true,
-            builder: (context, _, pObscureText) {
+            builder: (context, child, pObscureText) {
               final obscureText = pObscureText.value;
               return TextField(
                 decoration: InputDecoration(

@@ -136,7 +136,7 @@ abstract class _ControllerBroker<T1 extends EmptyScreen, T2 extends _View>
 
 final generatedEmptyScreenRoute = GoRoute(
   path: _SEGMENT,
-  pageBuilder: (_, GoRouterState state) {
+  pageBuilder: (context, state) {
     final extraConfiguration = letAs<ModelScreenConfiguration>(state.extra);
     final urlConfiguration = urlToScreenConfiguration(
       url: state.uri,

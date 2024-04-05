@@ -34,7 +34,7 @@ Future<void> showToastOverlay(
                 completer.complete();
               });
             }(),
-            builder: (_, snapshot) {
+            builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return snapshot.data as Widget;
               }
