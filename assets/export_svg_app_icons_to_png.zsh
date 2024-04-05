@@ -1,7 +1,8 @@
+
 #!/bin/bash
 
 # Define an array of output prefixes corresponding to your SVG files
-OUTPUT_PREFIXES=("app_icon" "app_icon_foreground" "app_icon_background" "app_icon_maskable" "app_icon_maskable_background")
+OUTPUT_PREFIXES=("app_icon" "app_icon_foreground" "app_icon_background" "app_icon_maskable" "app_icon_background_maskable")
 
 # Define an array of sizes
 declare -a SIZES=("16" "32" "64" "128" "192" "256" "512" "768" "1024" "2048")

@@ -27,8 +27,8 @@ dependencies:
   _service_interfaces:
     path: ../_service_interfaces
 
-  xyz_flutter_plus: ^0.42.1
-  xyz_gen_annotations: ^0.20.0
+  xyz_flutter_plus: ^0.42.2
+  xyz_gen_annotations: ^0.21.0
   xyz_pod: ^0.24.0
   xyz_utils: ^0.52.0
 
@@ -55,5 +55,10 @@ flutter:
 
   assets:
     - assets/
-    - assets/images/
-    - assets/images/app_icon/
+    - assets/icons/
+    - assets/icons/app_icon_background_maskable/
+    - assets/icons/app_icon_background/
+    - assets/icons/app_icon_foreground/
+    - assets/icons/app_icon_maskable/
+    - assets/icons/app_icon/
+    - assets/svg_icons/
