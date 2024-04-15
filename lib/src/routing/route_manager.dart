@@ -132,8 +132,10 @@ class RouteManager extends _RouteManager {
       final lastConfiguration = screenBreadcrumbs.last.configuration;
       if (lastConfiguration != null) {
         this.go(lastConfiguration);
+        return;
       }
     }
+    this.go(super.defaultConfiguration);
   }
 
   //
