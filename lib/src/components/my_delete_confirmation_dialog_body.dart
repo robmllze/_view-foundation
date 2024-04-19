@@ -131,7 +131,7 @@ class _State extends State<MyDeleteConfirmationDialog> {
         await showErrorToastOverlay(
           context,
           error: e,
-          remover: (r) => Future.delayed(const Duration(seconds: 3), r),
+          remover: removeInSeconds(3),
         );
       }
     }

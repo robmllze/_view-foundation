@@ -78,3 +78,13 @@ Future<void> showMessageOverlay(
     },
   );
 }
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+void Function(void Function())? removeInSeconds(int seconds) {
+  return (r) => Future.delayed(Duration(seconds: seconds), r);
+}
+
+void Function(void Function())? removeInMilliseconds(int milliseconds) {
+  return (r) => Future.delayed(Duration(milliseconds: milliseconds), r);
+}

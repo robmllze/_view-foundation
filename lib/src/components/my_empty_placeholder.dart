@@ -52,7 +52,8 @@ class MyEmptyPlaceholder extends StatelessWidget {
             const Divider(),
             Text(
               this.message,
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: Theme.of(context).textTheme.bodyLarge?.wItalic,
+              textAlign: TextAlign.center,
             ),
             if (this.trailing != null)
               Column(

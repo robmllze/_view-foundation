@@ -119,7 +119,7 @@ class _State extends State<MyEmailResetDialogBody> {
         showErrorToastOverlay(
           context,
           error: e,
-          remover: (r) => Future.delayed(const Duration(seconds: 3), r),
+          remover: removeInSeconds(3),
         );
       }
     }
