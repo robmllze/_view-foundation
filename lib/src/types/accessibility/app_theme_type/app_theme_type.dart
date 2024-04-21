@@ -36,6 +36,7 @@ enum AppThemeType with AppThemeEnumMixin {
             brightness: Brightness.light,
             seedColor: Colors.white,
             primary: Colors.black,
+            error: Colors.red.shade900,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: const TextTheme(
@@ -66,6 +67,7 @@ enum AppThemeType with AppThemeEnumMixin {
             brightness: Brightness.dark,
             seedColor: Colors.white,
             primary: Colors.white,
+            error: Colors.red.shade200,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: const TextTheme(
