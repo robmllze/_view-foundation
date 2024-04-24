@@ -27,6 +27,7 @@ dependencies:
   _service_interfaces:
     path: ../_service_interfaces
 
+  xyz_config: ^0.28.0
   xyz_flutter_plus: ^0.43.3
   xyz_gen_annotations: ^0.21.0
   xyz_pod: ^0.29.0
