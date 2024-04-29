@@ -102,10 +102,13 @@ class RouteManager extends _RouteManager {
   @visibleForTesting
   void goFromFront(int index) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
-    buffer.removeRange(index, buffer.length);
-    super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
-    final to = buffer.last.configuration!;
-    this.go(to);
+    final i = index;
+    if (i >= 0 && i < buffer.length) {
+      buffer.removeRange(i, buffer.length);
+      super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
+      final to = buffer.last.configuration!;
+      this.go(to);
+    }
   }
 
   //
@@ -115,10 +118,13 @@ class RouteManager extends _RouteManager {
   @visibleForTesting
   void goFromBack(int index) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
-    buffer.removeRange(buffer.length - index, buffer.length);
-    super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
-    final to = buffer.last.configuration!;
-    this.go(to);
+    final i = buffer.length - index;
+    if (i >= 0 && i < buffer.length) {
+      buffer.removeRange(i, buffer.length);
+      super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
+      final to = buffer.last.configuration!;
+      this.go(to);
+    }
   }
 
   //
