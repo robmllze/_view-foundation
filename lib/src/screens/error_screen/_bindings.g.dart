@@ -34,7 +34,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
 
   ErrorScreenConfiguration.unsafe({
     Map<dynamic, dynamic>? arguments,
-  }) : super(
+  }) : super.b(
           path: _PATH,
           arguments: arguments ?? {},
           isAccessibleOnlyIfLoggedInAndVerified:

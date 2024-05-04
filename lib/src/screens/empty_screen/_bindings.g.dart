@@ -34,7 +34,7 @@ class EmptyScreenConfiguration extends ModelScreenConfiguration {
 
   EmptyScreenConfiguration.unsafe({
     Map<dynamic, dynamic>? arguments,
-  }) : super(
+  }) : super.b(
           path: _PATH,
           arguments: arguments ?? {},
           isAccessibleOnlyIfLoggedInAndVerified:
