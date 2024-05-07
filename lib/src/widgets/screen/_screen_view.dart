@@ -91,21 +91,24 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return LayoutBuilder(
       builder: (context, constraints) {
+        final bodyContainer = Container(
+          width: constraints.maxWidth,
+          color: makeup?.backgroundColor,
+          child: body,
+        );
         return SizedBox(
           width: constraints.maxWidth,
           height: constraints.maxHeight,
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  width: constraints.maxWidth,
-                  color: makeup?.backgroundColor,
-                  child: body,
+          child: navigationControls == null
+              ? bodyContainer
+              : Column(
+                  children: [
+                    Expanded(
+                      child: bodyContainer,
+                    ),
+                    navigationControls,
+                  ],
                 ),
-              ),
-              if (navigationControls != null) navigationControls,
-            ],
-          ),
         );
       },
     );
