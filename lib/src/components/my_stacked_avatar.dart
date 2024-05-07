@@ -12,19 +12,24 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyHeaderBackButton extends StatelessWidget {
+class MyStackedAvatars extends StatelessWidget {
   //
   //
   //
 
-  final void Function()? onBackButtonPressed;
+  final List<String> urls;
+  final Sc size;
+  final Sc offset;
 
   //
   //
   //
-  const MyHeaderBackButton({
+
+  const MyStackedAvatars({
     super.key,
-    this.onBackButtonPressed,
+    required this.urls,
+    this.size = const Sc(32.0),
+    this.offset = const Sc(12.0),
   });
 
   //
@@ -33,17 +38,32 @@ class MyHeaderBackButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(12.sc),
-      child: Row(
-        children: [
-          IconButton(
-            iconSize: 24.sc,
-            color: Theme.of(context).colorScheme.primary,
-            onPressed: onBackButtonPressed,
-            icon: const Icon(FluentIcons.arrow_left_24_filled),
+    final offset = this.offset.sc;
+    final size = this.size.sc;
+    final children = <Widget>[];
+    final length = min(urls.length, 10);
+    for (var i = 0; i < length; i++) {
+      final margin = i.toDouble() * offset;
+      children.add(
+        Positioned(
+          left: margin,
+          child: Opacity(
+            opacity: 1.0 - i.toDouble() * 0.1,
+            child: CircleAvatar(
+              radius: size / 2.0,
+              backgroundImage: NetworkImage(urls[i]),
+              backgroundColor: Colors.transparent,
+            ),
           ),
-        ],
+        ),
+      );
+    }
+
+    return SizedBox(
+      height: size,
+      width: size + (length - 1) * offset,
+      child: Stack(
+        children: children,
       ),
     );
   }
