@@ -47,13 +47,10 @@ class MyStackedAvatars extends StatelessWidget {
       children.add(
         Positioned(
           left: margin,
-          child: Opacity(
-            opacity: 1.0 - i.toDouble() * 0.1,
-            child: CircleAvatar(
-              radius: size / 2.0,
-              backgroundImage: NetworkImage(urls[i]),
-              backgroundColor: Colors.transparent,
-            ),
+          child: CircleAvatar(
+            radius: size / 2.0,
+            backgroundImage: NetworkImage(urls[i]),
+            backgroundColor: Colors.transparent,
           ),
         ),
       );
