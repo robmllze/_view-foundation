@@ -17,7 +17,7 @@ class MyStackedAvatars extends StatelessWidget {
   //
   //
 
-  final List<String> urls;
+  final Iterable<String>? urls;
   final Sc size;
   final Sc offset;
 
@@ -27,7 +27,7 @@ class MyStackedAvatars extends StatelessWidget {
 
   const MyStackedAvatars({
     super.key,
-    required this.urls,
+    this.urls,
     this.size = const Sc(32.0),
     this.offset = const Sc(12.0),
   });
@@ -38,6 +38,7 @@ class MyStackedAvatars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final urls = this.urls ?? [];
     final offset = this.offset.sc;
     final size = this.size.sc;
     final children = <Widget>[];
@@ -49,7 +50,7 @@ class MyStackedAvatars extends StatelessWidget {
           left: margin,
           child: CircleAvatar(
             radius: size / 2.0,
-            backgroundImage: NetworkImage(urls[i]),
+            backgroundImage: NetworkImage(urls.elementAt(i)),
             backgroundColor: Colors.transparent,
           ),
         ),
