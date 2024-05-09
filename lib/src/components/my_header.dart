@@ -8,7 +8,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -21,6 +20,7 @@ class MyHeader extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final String? description;
+  final double opacity;
   final List<Widget> leadingActions;
   final List<Widget> trailingActions;
   final Widget? breadCrumbBar;
@@ -35,6 +35,7 @@ class MyHeader extends StatelessWidget {
     this.title,
     this.subtitle,
     this.description,
+    this.opacity = 0.2,
     this.leadingActions = const [],
     this.trailingActions = const [],
     this.breadCrumbBar,
@@ -52,7 +53,7 @@ class MyHeader extends StatelessWidget {
         if (this.breadCrumbBar != null) this.breadCrumbBar!,
         Container(
           width: double.infinity,
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+          color: Theme.of(context).colorScheme.primary.withOpacity(this.opacity),
           child: Padding(
             padding: EdgeInsets.symmetric(
               vertical: 24.sc,
