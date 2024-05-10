@@ -7,6 +7,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+export 'constants.dart';
 export 'my_components/my_app_icon_progress_indicator.dart';
 export 'my_components/my_delete_confirmation_dialog_body.dart';
 export 'my_components/my_email_reset_dialog_body.dart';
@@ -15,9 +16,7 @@ export 'my_components/my_header.dart';
 export 'my_components/my_header_back_button.dart';
 export 'my_components/my_jumping_dog_icon.dart';
 export 'my_components/my_popup.dart';
-export 'my_components/my_stacked_avatar.dart';
 export 'my_components/my_svg_app_icon.dart';
-export 'constants.dart';
 export 'routing/push_route_observer.dart';
 export 'routing/route_manager.dart';
 export 'screens/empty_screen/empty_screen.dart';
