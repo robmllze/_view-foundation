@@ -105,7 +105,7 @@ class RouteManager extends _RouteManager {
     final i = index;
     if (i >= 0 && i < buffer.length) {
       buffer.removeRange(i, buffer.length);
-      super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
+      super.pScreenBreadcrumbs.set(Queue.from(buffer));
       final to = buffer.last.configuration!;
       this.go(to);
     }
@@ -121,7 +121,7 @@ class RouteManager extends _RouteManager {
     final i = buffer.length - index;
     if (i >= 0 && i < buffer.length) {
       buffer.removeRange(i, buffer.length);
-      super.pScreenBreadcrumbs.set(Queue.from(buffer.sublist(0, buffer.length - 1)));
+      super.pScreenBreadcrumbs.set(Queue.from(buffer));
       final to = buffer.last.configuration!;
       this.go(to);
     }
