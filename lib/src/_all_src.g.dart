@@ -12,6 +12,7 @@ export 'my_components/my_app_icon_progress_indicator.dart';
 export 'my_components/my_delete_confirmation_dialog_body.dart';
 export 'my_components/my_email_reset_dialog_body.dart';
 export 'my_components/my_empty_placeholder.dart';
+export 'my_components/my_file_gallery.dart';
 export 'my_components/my_header.dart';
 export 'my_components/my_header_back_button.dart';
 export 'my_components/my_jumping_dog_icon.dart';
