@@ -17,14 +17,19 @@ class ScreenController<T extends ModelScreenConfiguration> {
   //
   //
 
-  final Screen superScreen;
-  final ScreenView superState;
+  final Screen? superScreen;
+  final ScreenView? superState;
+  final T? internalConfiguration;
 
   //
   //
   //
 
-  const ScreenController(this.superScreen, this.superState);
+  const ScreenController(
+    this.superScreen,
+    this.superState, [
+    this.internalConfiguration,
+  ]);
 
   //
   //

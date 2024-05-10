@@ -114,11 +114,16 @@ abstract class _ControllerBroker<T1 extends ErrorScreen, T2 extends _View>
   late final state = super.superState as T2;
 
   /// The [ModelScreenConfiguration] that corresponds to `this` controller.
-  late final configuration = ErrorScreenConfiguration.unsafe(
-    arguments: screen.configuration?.arguments,
-  );
+  late final configuration = super.internalConfiguration ??
+      ErrorScreenConfiguration.unsafe(
+        arguments: screen.configuration?.arguments,
+      );
 
-  _ControllerBroker(super.superScreen, super.superState);
+  _ControllerBroker(
+    super.superScreen,
+    super.superState, [
+    super.internalConfiguration,
+  ]);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
