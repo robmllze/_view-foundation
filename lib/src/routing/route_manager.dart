@@ -99,7 +99,6 @@ class RouteManager extends _RouteManager {
   //
   //
 
-  @visibleForTesting
   void goFromFront(int index) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
     final i = index;
@@ -115,7 +114,6 @@ class RouteManager extends _RouteManager {
   //
   //
 
-  @visibleForTesting
   void goFromBack(int index) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
     final i = buffer.length - index;
@@ -148,7 +146,6 @@ class RouteManager extends _RouteManager {
   //
   //
 
-  @visibleForTesting
   void goBackTo(ModelScreenConfiguration untilConfiguration) {
     final buffer = super.pScreenBreadcrumbs.value.toList();
     final screenBreadcrumbs = super.pScreenBreadcrumbs.value.toList().reversed;
