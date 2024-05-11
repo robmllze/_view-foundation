@@ -1,10 +1,54 @@
-import 'package:flutter/material.dart';
+//.title
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//
+// 🇽🇾🇿 & Dev
+//
+// Licencing details are in the LICENSE file in the root directory.
+//
+// ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
+//.title~
+
+import '/_common.dart';
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class MySurface extends StatelessWidget {
-  const MySurface({super.key});
+  //
+  //
+  //
+
+  final Widget? child;
+  final Color? color;
+  final Color? borderColor;
+
+  //
+  //
+  //
+
+  const MySurface({
+    super.key,
+    required this.child,
+    this.color,
+    this.borderColor,
+  });
+
+  //
+  //
+  //
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Container(
+      padding: EdgeInsets.all(8.sc),
+      decoration: BoxDecoration(
+        color: this.color ?? Theme.of(context).colorScheme.surface,
+        border: Border.all(
+          color: this.borderColor ?? Colors.transparent,
+          width: 1.sc,
+        ),
+        borderRadius: BorderRadius.circular(4.sc),
+      ),
+      child: this.child,
+    );
   }
 }

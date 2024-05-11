@@ -20,8 +20,8 @@ class MyHeader extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final String? description;
-  final List<Widget> leadingActions;
-  final List<Widget> trailingActions;
+  final List<Widget> leading;
+  final List<Widget> trailing;
   final MyBreadCrumbBar? breadCrumbBar;
   final void Function()? onBackButtonPressed;
 
@@ -34,8 +34,8 @@ class MyHeader extends StatelessWidget {
     this.title,
     this.subtitle,
     this.description,
-    this.leadingActions = const [],
-    this.trailingActions = const [],
+    this.leading = const [],
+    this.trailing = const [],
     this.breadCrumbBar,
     required this.onBackButtonPressed,
   });
@@ -112,7 +112,7 @@ class MyHeader extends StatelessWidget {
                             ],
                           ],
                         ),
-                        if (this.leadingActions.isNotEmpty) ...this.leadingActions,
+                        if (this.leading.isNotEmpty) ...this.leading,
                       ],
                     ),
                     SizedBox(width: 8.sc),
@@ -123,7 +123,7 @@ class MyHeader extends StatelessWidget {
                         spacing: 4.sc,
                         runSpacing: 4.sc,
                         children: [
-                          if (this.trailingActions.isNotEmpty) ...this.trailingActions,
+                          if (this.trailing.isNotEmpty) ...this.trailing,
                         ],
                       ),
                     ),

@@ -26,7 +26,7 @@ class MyDefaultListTile extends StatelessWidget {
   final Widget? icon;
   final void Function()? onTap;
   final void Function()? onTapIcon;
-  final List<Widget>? trailing;
+  final List<Widget> trailing;
 
   //
   //
@@ -43,7 +43,7 @@ class MyDefaultListTile extends StatelessWidget {
     this.icon,
     this.onTap,
     this.onTapIcon,
-    this.trailing,
+    this.trailing = const [],
   });
 
   //
@@ -62,55 +62,56 @@ class MyDefaultListTile extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           divider: SizedBox(width: 8.sc),
           children: [
-            if (this.leading.isNotEmpty) ...this.leading,
-            WColumn(
-              children: [
-                WRow(
-                  children: [
-                    if (this.title.isNotEmpty)
-                      Text(
-                        this.title,
-                        style: Theme.of(context).textTheme.bodyLarge?.wBold,
-                      ),
-                    if (tags.isNotEmpty) ...[
-                      SizedBox(width: 8.sc),
-                      Wrap(
-                        spacing: 4.sc,
-                        runSpacing: 4.sc,
-                        children: [
-                          ...this.tags.mapi(
-                            (text, i, _) {
-                              var makeup = this.tagMakeups.elementAtOrNull(i);
-                              var n = i - 1;
-                              while (makeup == null || n > 0) {
-                                makeup = this.tagMakeups.elementAtOrNull(n--);
-                              }
-                              return WTag(text: text, makeup: makeup);
-                            },
-                          ),
-                        ],
-                      ),
+            ...this.leading,
+            Expanded(
+              child: WColumn(
+                children: [
+                  Wrap(
+                    children: [
+                      if (this.title.isNotEmpty)
+                        Text(
+                          this.title,
+                          style: Theme.of(context).textTheme.bodyLarge?.wBold,
+                        ),
+                      if (tags.isNotEmpty) ...[
+                        SizedBox(width: 8.sc),
+                        Wrap(
+                          spacing: 4.sc,
+                          runSpacing: 4.sc,
+                          children: [
+                            ...this.tags.mapi(
+                              (text, i, _) {
+                                var makeup = this.tagMakeups.elementAtOrNull(i);
+                                var n = i - 1;
+                                while (makeup == null || n > 0) {
+                                  makeup = this.tagMakeups.elementAtOrNull(n--);
+                                }
+                                return WTag(text: text, makeup: makeup);
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ],
+                  ),
+                  if (this.subtitle.isNotEmpty) ...[
+                    SizedBox(height: 2.sc),
+                    Text(
+                      this.subtitle,
+                      style: Theme.of(context).textTheme.bodyMedium?.wMedium,
+                    ),
                   ],
-                ),
-                if (this.subtitle.isNotEmpty) ...[
-                  SizedBox(height: 2.sc),
-                  Text(
-                    this.subtitle,
-                    style: Theme.of(context).textTheme.bodyMedium?.wMedium,
-                  ),
+                  if (this.description.isNotEmpty) ...[
+                    SizedBox(height: 4.sc),
+                    Text(
+                      this.description,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                  ],
                 ],
-                if (this.description.isNotEmpty) ...[
-                  SizedBox(height: 4.sc),
-                  Text(
-                    this.description,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ],
+              ),
             ),
-            const Spacer(),
-            ...?this.trailing,
+            ...this.trailing,
             if (this.icon != null)
               IconButton(
                 icon: this.icon!,
