@@ -53,7 +53,12 @@ class MyAvatarImage extends StatelessWidget {
               ),
             ),
             child: this._isLikelyUploading
-                ? const MyCircularProgressIndicator()
+                ? SizedBox.square(
+                    dimension: this.size,
+                    child: const Center(
+                      child: MyCircularProgressIndicator(),
+                    ),
+                  )
                 : Stack(
                     alignment: Alignment.center,
                     children: [
@@ -67,7 +72,7 @@ class MyAvatarImage extends StatelessWidget {
                         backgroundColor: Theme.of(context).colorScheme.background,
                         child: this._downloadUrl == null
                             ? Icon(
-                                FluentIcons.person_24_regular,
+                                FluentIcons.line_24_regular,
                                 color: Theme.of(context).colorScheme.onBackground,
                                 size: 0.75 * diameter,
                               )

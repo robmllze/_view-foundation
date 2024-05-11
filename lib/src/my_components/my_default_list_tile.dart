@@ -17,16 +17,18 @@ class MyDefaultListTile extends StatelessWidget {
   //
   //
 
-  final List<Widget> leading;
   final String title;
   final String subtitle;
   final String description;
   final Iterable<String> tags;
   final Iterable<WTagMakeup> tagMakeups;
-  final Widget? icon;
   final void Function()? onTap;
-  final void Function()? onTapIcon;
+  final List<Widget> leading;
+  final Widget? leadingIcon;
+  final void Function()? onTapLeadingIcon;
   final List<Widget> trailing;
+  final Widget? trailingIcon;
+  final void Function()? onTapTrailingIcon;
 
   //
   //
@@ -34,16 +36,18 @@ class MyDefaultListTile extends StatelessWidget {
 
   const MyDefaultListTile({
     super.key,
-    this.leading = const [],
     this.title = '',
     this.subtitle = '',
     this.description = '',
     this.tags = const [],
     this.tagMakeups = const [],
-    this.icon,
     this.onTap,
-    this.onTapIcon,
+    this.leading = const [],
+    this.leadingIcon,
+    this.onTapLeadingIcon,
     this.trailing = const [],
+    this.trailingIcon,
+    this.onTapTrailingIcon,
   });
 
   //
@@ -55,70 +59,81 @@ class MyDefaultListTile extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(8.sc),
       onTap: this.onTap,
-      child: Padding(
-        padding: EdgeInsets.all(8.sc),
-        child: WRow(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          divider: SizedBox(width: 8.sc),
-          children: [
-            ...this.leading,
-            Expanded(
-              child: WColumn(
-                children: [
-                  Wrap(
+      // SizedBod needed for InkWell splash effect.
+      child: SizedBox(
+        child: Padding(
+          padding: EdgeInsets.all(4.sc),
+          child: SizedBox(
+            child: WRow(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              divider: SizedBox(width: 8.sc),
+              children: [
+                if (this.leadingIcon != null)
+                  IconButton(
+                    icon: this.leadingIcon!,
+                    iconSize: 24.sc,
+                    onPressed: this.onTapLeadingIcon ?? this.onTap,
+                  ),
+                ...this.leading,
+                Expanded(
+                  child: WColumn(
                     children: [
-                      if (this.title.isNotEmpty)
-                        Text(
-                          this.title,
-                          style: Theme.of(context).textTheme.bodyLarge?.wBold,
-                        ),
-                      if (tags.isNotEmpty) ...[
-                        SizedBox(width: 8.sc),
-                        Wrap(
-                          spacing: 4.sc,
-                          runSpacing: 4.sc,
-                          children: [
-                            ...this.tags.mapi(
-                              (text, i, _) {
-                                var makeup = this.tagMakeups.elementAtOrNull(i);
-                                var n = i - 1;
-                                while (makeup == null || n > 0) {
-                                  makeup = this.tagMakeups.elementAtOrNull(n--);
-                                }
-                                return WTag(text: text, makeup: makeup);
-                              },
+                      Wrap(
+                        children: [
+                          if (this.title.isNotEmpty)
+                            Text(
+                              this.title,
+                              style: Theme.of(context).textTheme.bodyLarge?.wBold,
+                            ),
+                          if (tags.isNotEmpty) ...[
+                            SizedBox(width: 8.sc),
+                            Wrap(
+                              spacing: 8.sc,
+                              runSpacing: 8.sc,
+                              children: [
+                                ...this.tags.mapi(
+                                  (text, i, _) {
+                                    var makeup = this.tagMakeups.elementAtOrNull(i);
+                                    var n = i - 1;
+                                    while (makeup == null || n > 0) {
+                                      makeup = this.tagMakeups.elementAtOrNull(n--);
+                                    }
+                                    return WTag(text: text, makeup: makeup);
+                                  },
+                                ),
+                              ],
                             ),
                           ],
+                        ],
+                      ),
+                      if (this.subtitle.isNotEmpty) ...[
+                        SizedBox(height: 2.sc),
+                        Text(
+                          this.subtitle,
+                          style: Theme.of(context).textTheme.bodyMedium?.wMedium,
+                        ),
+                      ],
+                      if (this.description.isNotEmpty) ...[
+                        SizedBox(height: 4.sc),
+                        Text(
+                          this.description,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ],
                     ],
                   ),
-                  if (this.subtitle.isNotEmpty) ...[
-                    SizedBox(height: 2.sc),
-                    Text(
-                      this.subtitle,
-                      style: Theme.of(context).textTheme.bodyMedium?.wMedium,
-                    ),
-                  ],
-                  if (this.description.isNotEmpty) ...[
-                    SizedBox(height: 4.sc),
-                    Text(
-                      this.description,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ],
-              ),
+                ),
+                if (this.trailingIcon != null)
+                  IconButton(
+                    icon: this.trailingIcon!,
+                    iconSize: 24.sc,
+                    onPressed: this.onTapTrailingIcon ?? this.onTap,
+                  ),
+                ...this.trailing,
+              ],
             ),
-            ...this.trailing,
-            if (this.icon != null)
-              IconButton(
-                icon: this.icon!,
-                iconSize: 24.sc,
-                onPressed: this.onTapIcon ?? this.onTap,
-              ),
-          ],
+          ),
         ),
       ),
     );

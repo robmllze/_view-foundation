@@ -88,6 +88,7 @@ class _State extends State<MyFileGallery> {
         final spacing = 8.sc;
         final itemSize = 0.5 * (minDimension - spacing);
         return Wrap(
+          crossAxisAlignment: WrapCrossAlignment.start,
           spacing: spacing,
           runSpacing: spacing,
           children: List.generate(this._orderedFiles.length, (index) {

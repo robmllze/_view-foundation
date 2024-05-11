@@ -50,7 +50,7 @@ class MyPlaceholder extends StatelessWidget {
               bounce: this.loading,
               icon: Icon(
                 FluentIcons.animal_dog_24_regular,
-                size: 64.sc,
+                size: 32.sc,
               ),
             ),
             const Divider(),

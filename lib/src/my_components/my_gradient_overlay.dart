@@ -17,7 +17,7 @@ class MyGradientOverlay extends StatelessWidget {
   //
   //
 
-  final MyGradientOverlayPosition position;
+  final Widget child;
 
   //
   //
@@ -25,7 +25,33 @@ class MyGradientOverlay extends StatelessWidget {
 
   const MyGradientOverlay({
     super.key,
-    required this.position,
+    required this.child,
+  });
+
+  //
+  //
+  //
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        this.child,
+        const MyGradientOverlayLayer(),
+      ],
+    );
+  }
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class MyGradientOverlayLayer extends StatelessWidget {
+  //
+  //
+  //
+
+  const MyGradientOverlayLayer({
+    super.key,
   });
 
   //
@@ -35,37 +61,27 @@ class MyGradientOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: this.position == MyGradientOverlayPosition.TOP
-          ? Alignment.topCenter
-          : Alignment.bottomCenter,
+      alignment: Alignment.topCenter,
       child: Column(
         children: [
           Container(
-            height: 60.sc,
+            height: 48.sc,
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                begin: this.position == MyGradientOverlayPosition.TOP
-                    ? Alignment.topCenter
-                    : Alignment.bottomCenter,
-                end: this.position == MyGradientOverlayPosition.TOP
-                    ? Alignment.bottomCenter
-                    : Alignment.topCenter,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
                 colors: [
-                  Theme.of(context).colorScheme.background.withOpacity(
-                        this.position == MyGradientOverlayPosition.TOP ? 1.0 : 0.0,
-                      ),
-                  Theme.of(context).colorScheme.background.withOpacity(
-                        this.position == MyGradientOverlayPosition.TOP ? 0.0 : 1.0,
-                      ),
+                  Theme.of(context).colorScheme.background.withOpacity(1.0),
+                  Theme.of(context).colorScheme.background.withOpacity(0.0),
                 ],
               ),
             ),
           ),
           const Spacer(),
           Container(
-            height: 20.sc,
+            height: 16.sc,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(

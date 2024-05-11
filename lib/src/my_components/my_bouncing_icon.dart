@@ -60,7 +60,7 @@ class _State extends State<MyBouncingIcon> with SingleTickerProviderStateMixin {
       vsync: this,
     );
 
-    this._animation = Tween<double>(begin: 0.0, end: -30.sc).animate(
+    this._animation = Tween<double>(begin: 0.0, end: -24.sc).animate(
       CurvedAnimation(parent: this._controller, curve: Curves.easeOutQuad),
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
