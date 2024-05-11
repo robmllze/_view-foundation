@@ -12,20 +12,22 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyJumpingDogIcon extends StatefulWidget {
+class MyBouncingIcon extends StatefulWidget {
   //
   //
   //
 
-  final bool jumping;
+  final Widget icon;
+  final bool bounce;
 
   //
   //
   //
 
-  const MyJumpingDogIcon({
+  const MyBouncingIcon({
     super.key,
-    required this.jumping,
+    this.bounce = true,
+    required this.icon,
   });
 
   //
@@ -38,7 +40,7 @@ class MyJumpingDogIcon extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<MyJumpingDogIcon> with SingleTickerProviderStateMixin {
+class _State extends State<MyBouncingIcon> with SingleTickerProviderStateMixin {
   //
   //
   //
@@ -64,13 +66,13 @@ class _State extends State<MyJumpingDogIcon> with SingleTickerProviderStateMixin
         if (status == AnimationStatus.completed) {
           this._controller.reverse();
         } else if (status == AnimationStatus.dismissed) {
-          if (this.widget.jumping) {
+          if (this.widget.bounce) {
             this._controller.forward();
           }
         }
       });
 
-    if (this.widget.jumping) {
+    if (this.widget.bounce) {
       this._controller.forward();
     }
   }
@@ -80,10 +82,10 @@ class _State extends State<MyJumpingDogIcon> with SingleTickerProviderStateMixin
   //
 
   @override
-  void didUpdateWidget(MyJumpingDogIcon oldWidget) {
+  void didUpdateWidget(MyBouncingIcon oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (this.widget.jumping != oldWidget.jumping) {
-      if (this.widget.jumping) {
+    if (this.widget.bounce != oldWidget.bounce) {
+      if (this.widget.bounce) {
         this._controller.forward();
       } else {
         this._controller.stop();
@@ -104,10 +106,7 @@ class _State extends State<MyJumpingDogIcon> with SingleTickerProviderStateMixin
         offset: Offset(0, this._animation.value),
         child: child,
       ),
-      child: Icon(
-        FluentIcons.animal_dog_24_regular,
-        size: 64.sc,
-      ),
+      child: this.widget.icon,
     );
   }
 

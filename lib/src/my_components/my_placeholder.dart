@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyEmptyPlaceholder extends StatelessWidget {
+class MyPlaceholder extends StatelessWidget {
   //
   //
   //
@@ -25,7 +25,7 @@ class MyEmptyPlaceholder extends StatelessWidget {
   //
   //
 
-  const MyEmptyPlaceholder({
+  const MyPlaceholder({
     super.key,
     this.message = 'No items found.',
     this.loading = false,
@@ -46,8 +46,12 @@ class MyEmptyPlaceholder extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 64.sc),
-            MyJumpingDogIcon(
-              jumping: this.loading,
+            MyBouncingIcon(
+              bounce: this.loading,
+              icon: Icon(
+                FluentIcons.animal_dog_24_regular,
+                size: 64.sc,
+              ),
             ),
             const Divider(),
             Text(

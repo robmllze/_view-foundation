@@ -20,10 +20,9 @@ class MyHeader extends StatelessWidget {
   final String? title;
   final String? subtitle;
   final String? description;
-  final MyHeaderOpacity opacity;
   final List<Widget> leadingActions;
   final List<Widget> trailingActions;
-  final Widget? breadCrumbBar;
+  final MyBreadCrumbBar? breadCrumbBar;
   final void Function()? onBackButtonPressed;
 
   //
@@ -35,7 +34,6 @@ class MyHeader extends StatelessWidget {
     this.title,
     this.subtitle,
     this.description,
-    this.opacity = MyHeaderOpacity.O_05,
     this.leadingActions = const [],
     this.trailingActions = const [],
     this.breadCrumbBar,
@@ -48,112 +46,96 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        if (this.breadCrumbBar != null) this.breadCrumbBar!,
-        Container(
-          width: double.infinity,
-          color: Theme.of(context).colorScheme.primary.withOpacity(this.opacity.opacity),
-          constraints: BoxConstraints(
-            minHeight: 80.sc,
-          ),
-          padding: EdgeInsets.all(16.sc),
-          child: PodWidget(
-            builder: (context, child, pod) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Wrap(
-                    crossAxisAlignment: WrapCrossAlignment.center,
-                    alignment: WrapAlignment.start,
-                    spacing: 4.sc,
-                    runSpacing: 4.sc,
-                    children: [
-                      if (this.onBackButtonPressed != null)
-                        SizedBox(
-                          width: 40.sc,
-                          child: IconButton(
-                            onPressed: onBackButtonPressed,
-                            icon: Icon(
-                              FluentIcons.arrow_left_24_filled,
-                              color: Theme.of(context).colorScheme.primary,
-                              size: 24.sc,
-                            ),
-                          ),
-                        ),
-                      SizedBox(width: 4.sc),
-                      WColumn(
-                        children: [
-                          if (this.title != null && this.title!.isNotEmpty)
-                            Text(
-                              this.title!,
-                              style: Theme.of(context).textTheme.titleMedium?.wBold,
-                            ),
-                          if (this.subtitle != null && this.subtitle!.isNotEmpty) ...[
-                            SizedBox(height: 2.sc),
-                            Text(
-                              this.subtitle!,
-                              style: Theme.of(context).textTheme.bodyMedium?.wMedium,
-                            ),
-                          ],
-                          if (this.description != null && this.description!.isNotEmpty) ...[
-                            SizedBox(height: 6.sc),
-                            Text(
-                              this.description!,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                          ],
-                        ],
-                      ),
-                      if (this.leadingActions.isNotEmpty) ...this.leadingActions,
-                    ],
-                  ),
-                  SizedBox(width: 8.sc),
-                  Flexible(
-                    child: Wrap(
+        Padding(
+          padding: this.breadCrumbBar != null
+              ? EdgeInsets.only(
+                  top: this.breadCrumbBar!.height - this.breadCrumbBar!.borderRadius,
+                )
+              : EdgeInsets.zero,
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surface,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(16.sc),
+                bottomRight: Radius.circular(16.sc),
+              ),
+            ),
+            constraints: BoxConstraints(minHeight: 80.sc),
+            padding: EdgeInsets.all(16.sc),
+            child: PodWidget(
+              builder: (context, child, pod) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
-                      alignment: WrapAlignment.end,
+                      alignment: WrapAlignment.start,
                       spacing: 4.sc,
                       runSpacing: 4.sc,
                       children: [
-                        if (this.trailingActions.isNotEmpty) ...this.trailingActions,
+                        if (this.onBackButtonPressed != null)
+                          SizedBox(
+                            width: 40.sc,
+                            child: IconButton(
+                              onPressed: onBackButtonPressed,
+                              icon: Icon(
+                                FluentIcons.arrow_left_24_filled,
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 24.sc,
+                              ),
+                            ),
+                          ),
+                        SizedBox(width: 4.sc),
+                        WColumn(
+                          children: [
+                            if (this.title != null && this.title!.isNotEmpty)
+                              Text(
+                                this.title!,
+                                style: Theme.of(context).textTheme.titleMedium?.wBold,
+                              ),
+                            if (this.subtitle != null && this.subtitle!.isNotEmpty) ...[
+                              SizedBox(height: 2.sc),
+                              Text(
+                                this.subtitle!,
+                                style: Theme.of(context).textTheme.bodyMedium?.wMedium,
+                              ),
+                            ],
+                            if (this.description != null && this.description!.isNotEmpty) ...[
+                              SizedBox(height: 6.sc),
+                              Text(
+                                this.description!,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ],
+                          ],
+                        ),
+                        if (this.leadingActions.isNotEmpty) ...this.leadingActions,
                       ],
                     ),
-                  ),
-                ],
-              );
-            },
-            initialValue: 0.0,
+                    SizedBox(width: 8.sc),
+                    Flexible(
+                      child: Wrap(
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        alignment: WrapAlignment.end,
+                        spacing: 4.sc,
+                        runSpacing: 4.sc,
+                        children: [
+                          if (this.trailingActions.isNotEmpty) ...this.trailingActions,
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+              initialValue: 0.0,
+            ),
           ),
         ),
+        if (this.breadCrumbBar != null) this.breadCrumbBar!,
       ],
     );
   }
-}
-
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-
-enum MyHeaderOpacity {
-  //
-  //
-  //
-
-  NONE(0.0),
-  O_75(0.75),
-  O_50(0.5),
-  O_20(0.2),
-  O_10(0.1),
-  O_05(0.05);
-
-  //
-  //
-  //
-
-  final double opacity;
-
-  //
-  //
-  //
-
-  const MyHeaderOpacity(this.opacity);
 }

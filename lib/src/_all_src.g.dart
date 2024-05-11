@@ -9,15 +9,24 @@
 
 export 'constants.dart';
 export 'my_components/my_app_icon_progress_indicator.dart';
+export 'my_components/my_avatar_image.dart';
+export 'my_components/my_bottom_navigation_controls_item.dart';
+export 'my_components/my_bouncing_icon.dart';
+export 'my_components/my_bread_crumb_bar.dart';
+export 'my_components/my_circular_progress_indicator.dart';
+export 'my_components/my_clipped_container.dart';
+export 'my_components/my_count_indicator.dart';
+export 'my_components/my_default_list_tile.dart';
 export 'my_components/my_delete_confirmation_dialog_body.dart';
 export 'my_components/my_email_reset_dialog_body.dart';
-export 'my_components/my_empty_placeholder.dart';
-export 'my_components/my_file_gallery.dart';
+export 'my_components/my_file_gallery/my_file_gallery.dart';
 export 'my_components/my_header.dart';
 export 'my_components/my_header_back_button.dart';
-export 'my_components/my_jumping_dog_icon.dart';
+export 'my_components/my_placeholder.dart';
 export 'my_components/my_popup.dart';
+export 'my_components/my_surface.dart';
 export 'my_components/my_svg_app_icon.dart';
+export 'my_components/my_text_list_editor.dart';
 export 'routing/push_route_observer.dart';
 export 'routing/route_manager.dart';
 export 'screens/empty_screen/empty_screen.dart';
