@@ -105,7 +105,7 @@ class _State extends State<MyDeleteConfirmationDialog> {
               FilledButton(
                 onPressed: () => this._proceed(context),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(
+                  backgroundColor: WidgetStateProperty.all(
                     Theme.of(context).colorScheme.error,
                   ),
                 ),

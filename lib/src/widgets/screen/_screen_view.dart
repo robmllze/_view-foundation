@@ -120,7 +120,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
 
   Widget wideLayout(BuildContext context, Widget body) {
     return Container(
-      color: Theme.of(context).colorScheme.background.inverted.withOpacity(0.2),
+      color: Theme.of(context).colorScheme.surface.inverted.withOpacity(0.2),
       child: Center(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -131,7 +131,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
               ),
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
+                  color: Theme.of(context).colorScheme.surface,
                   borderRadius: BorderRadius.circular(10.0),
                   boxShadow: [
                     BoxShadow(

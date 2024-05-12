@@ -38,7 +38,7 @@ Future<void> showMessageOverlay(
                 maxWidth: 400.sc,
               ),
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.background,
+                color: Theme.of(context).colorScheme.surface,
                 borderRadius: BorderRadius.circular(8.sc),
               ),
               child: Padding(

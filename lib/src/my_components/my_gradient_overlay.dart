@@ -65,7 +65,7 @@ class MyGradientOverlayLayer extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 48.sc,
+            height: 40.sc,
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
@@ -73,23 +73,23 @@ class MyGradientOverlayLayer extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Theme.of(context).colorScheme.background.withOpacity(1.0),
-                  Theme.of(context).colorScheme.background.withOpacity(0.0),
+                  Theme.of(context).colorScheme.surface.withOpacity(1.0),
+                  Theme.of(context).colorScheme.surface.withOpacity(0.0),
                 ],
               ),
             ),
           ),
           const Spacer(),
           Container(
-            height: 16.sc,
+            height: 12.sc,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Theme.of(context).colorScheme.background.withOpacity(0.0),
-                  Theme.of(context).colorScheme.background.withOpacity(1.0),
+                  Theme.of(context).colorScheme.surface.withOpacity(0.0),
+                  Theme.of(context).colorScheme.surface.withOpacity(1.0),
                 ],
               ),
             ),

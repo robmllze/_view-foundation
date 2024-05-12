@@ -19,7 +19,7 @@ extension ColorSchemeMixesExtension on ColorScheme {
 
   Color get backdropColorMix {
     return LerpBlender(
-      color1: this.background,
+      color1: this.surface,
       color2: this.shadow,
       blendWeight: 0.75,
     ).blend().withOpacity(0.5);

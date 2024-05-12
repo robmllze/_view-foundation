@@ -33,7 +33,7 @@ Future<void> showMessageToastOverlay(
                 constraints: BoxConstraints(maxWidth: 300.sc),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background.inverted.withOpacity(0.9),
+                  color: Theme.of(context).colorScheme.surface.inverted.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(12.sc),
                 ),
                 child: Padding(
@@ -41,7 +41,7 @@ Future<void> showMessageToastOverlay(
                   child: Text(
                     message.toString(),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                         ),
                   ),
                 ),

@@ -46,7 +46,7 @@ class MyFileGalleryFileAction extends StatelessWidget {
         icon: Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.background.withOpacity(0.5),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.5),
           ),
           padding: EdgeInsets.all(8.sc),
           child: Icon(

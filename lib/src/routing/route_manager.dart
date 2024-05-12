@@ -12,9 +12,6 @@ import 'package:flutter/foundation.dart';
 
 import '/_common.dart';
 
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' if (dart.library.io) '_html_non_web.dart';
-
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 class RouteManager extends _RouteManager {
@@ -352,9 +349,7 @@ abstract class _RouteManager {
   //
 
   void _setHtmlTitle(String newTitle) {
-    if (kIsWeb) {
-      document.title = newTitle;
-    }
+    if (kIsWeb) {}
   }
 
   //

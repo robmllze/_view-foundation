@@ -33,10 +33,8 @@ enum AppThemeType with AppThemeEnumMixin {
         return ThemeData(
           brightness: Brightness.light,
           colorScheme: ColorScheme.fromSeed(
-            background: Colors.white,
             brightness: Brightness.light,
             error: Colors.red.shade900,
-            onBackground: Colors.black,
             primary: Colors.black,
             seedColor: Colors.white,
             surface: Colors.grey.shade200,
@@ -69,9 +67,7 @@ enum AppThemeType with AppThemeEnumMixin {
           brightness: Brightness.dark,
           colorScheme: ColorScheme.fromSeed(
             brightness: Brightness.dark,
-            background: Colors.black,
             error: Colors.red.shade200,
-            onBackground: Colors.white,
             onSurface: Colors.white,
             primary: Colors.white,
             seedColor: Colors.white,

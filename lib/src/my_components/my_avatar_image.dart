@@ -49,7 +49,7 @@ class MyAvatarImage extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(
                 width: 2.sc,
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             child: this._isLikelyUploading
@@ -69,11 +69,11 @@ class MyAvatarImage extends StatelessWidget {
                                 this._downloadUrl!,
                               )
                             : null,
-                        backgroundColor: Theme.of(context).colorScheme.background,
+                        backgroundColor: Theme.of(context).colorScheme.surface,
                         child: this._downloadUrl == null
                             ? Icon(
                                 FluentIcons.line_24_regular,
-                                color: Theme.of(context).colorScheme.onBackground,
+                                color: Theme.of(context).colorScheme.onSurface,
                                 size: 0.75 * diameter,
                               )
                             : null,
@@ -83,10 +83,9 @@ class MyAvatarImage extends StatelessWidget {
                           text: this.label!,
                           makeup: WTagMakeup(
                             backgroundColor:
-                                Theme.of(context).colorScheme.background.withOpacity(0.25),
+                                Theme.of(context).colorScheme.surface.withOpacity(0.25),
                             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color:
-                                      Theme.of(context).colorScheme.onBackground.withOpacity(0.25),
+                                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.25),
                                 ),
                           ),
                         ),
