@@ -90,41 +90,36 @@ class MyPopupController {
     required BuildContext context,
     AlignmentGeometry alignment = Alignment.topLeft,
     Offset? relativePosition,
-    double? left,
-    double? top,
-    double? right,
-    double? bottom,
+    double left = 0.0,
+    double top = 0.0,
+    double right = 0.0,
+    double bottom = 0.0,
   }) {
     assert(this._myPopup != null);
     if (this._myPopup == null || this._overlayEntry != null) {
       return;
     }
-    var l = left, t = top, r = right, b = bottom;
+    var l = max(0.0, left), t = max(0.0, top), r = max(0.0, right), b = max(0.0, bottom);
     if (relativePosition != null) {
       final renderBox = this._myPopup!._globalKey.currentContext?.findRenderObject() as RenderBox;
-      final offset = renderBox.localToGlobal(relativePosition);
-      l = (l ?? 0.0) + offset.dx;
-      t = (t ?? 0.0) + offset.dy;
+      final offset = renderBox.globalToLocal(relativePosition);
+      l = max(0.0, l + offset.dx);
+      t = max(0.0, t + offset.dy);
     }
     this._overlayEntry = OverlayEntry(
       builder: (context) {
         return BlurryOverlay(
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
-            onTap: () {
-              this.hidePopup();
-            },
+            onTap: this.hidePopup,
             child: Padding(
               padding: EdgeInsets.only(
-                top: t ?? 0.0,
-                left: l ?? 0.0,
-                right: r ?? 0.0,
-                bottom: b ?? 0.0,
+                top: t,
+                left: l,
+                right: r,
+                bottom: b,
               ),
-              child: Align(
-                alignment: alignment,
-                child: this._myPopup!.popupBuilder(context, this.hidePopup),
-              ),
+              child: this._myPopup!.popupBuilder(context, this.hidePopup),
             ),
           ),
         );

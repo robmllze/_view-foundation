@@ -17,7 +17,7 @@ export 'my_components/my_circular_progress_indicator.dart';
 export 'my_components/my_clipped_container.dart';
 export 'my_components/my_count_indicator.dart';
 export 'my_components/my_default_list_tile.dart';
-export 'my_components/my_delete_confirmation_dialog_body.dart';
+export 'my_components/my_dialogs/my_delete_account_confirmation_dialog.dart';
 export 'my_components/my_divider.dart';
 export 'my_components/my_email_reset_dialog_body.dart';
 export 'my_components/my_file_gallery/my_file_gallery.dart';
