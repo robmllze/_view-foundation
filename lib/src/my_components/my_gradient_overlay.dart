@@ -81,7 +81,7 @@ class MyGradientOverlayLayer extends StatelessWidget {
           ),
           const Spacer(),
           Container(
-            height: 12.sc,
+            height: 40.sc,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(

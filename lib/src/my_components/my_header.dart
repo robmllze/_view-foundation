@@ -57,7 +57,7 @@ class MyHeader extends StatelessWidget {
           child: Container(
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(16.sc),
                 bottomRight: Radius.circular(16.sc),

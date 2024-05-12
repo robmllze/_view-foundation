@@ -41,7 +41,7 @@ class MySurface extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(8.sc),
       decoration: BoxDecoration(
-        color: this.color ?? Theme.of(context).colorScheme.surface,
+        color: this.color ?? Theme.of(context).colorScheme.surfaceContainer,
         border: Border.all(
           color: this.borderColor ?? Colors.transparent,
           width: 1.sc,
