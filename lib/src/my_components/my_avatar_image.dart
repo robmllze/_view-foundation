@@ -9,6 +9,7 @@ class MyAvatarImage extends StatelessWidget {
   final String? label;
   final void Function()? onPressed;
   final double? size;
+  final Color? color;
 
   //
   //
@@ -20,6 +21,7 @@ class MyAvatarImage extends StatelessWidget {
     this.label,
     this.onPressed,
     this.size,
+    this.color,
   });
 
   //
@@ -35,6 +37,7 @@ class MyAvatarImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final defaultColor = color ?? Theme.of(context).colorScheme.surface;
     return LayoutBuilder(
       builder: (context, constraints) {
         final diameter = this.size ??
@@ -48,8 +51,11 @@ class MyAvatarImage extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                width: 1.sc,
-                color: Theme.of(context).colorScheme.onSurface,
+                width: 2.sc,
+                color: defaultColor.contrast(
+                  Theme.of(context).brightness,
+                  0.25,
+                ),
               ),
             ),
             child: this._isLikelyUploading
@@ -69,7 +75,7 @@ class MyAvatarImage extends StatelessWidget {
                                 this._downloadUrl!,
                               )
                             : null,
-                        backgroundColor: Theme.of(context).colorScheme.surface,
+                        backgroundColor: defaultColor,
                         child: this._downloadUrl == null
                             ? Icon(
                                 FluentIcons.line_24_regular,
@@ -82,10 +88,9 @@ class MyAvatarImage extends StatelessWidget {
                         WTag(
                           text: this.label!,
                           makeup: WTagMakeup(
-                            backgroundColor:
-                                Theme.of(context).colorScheme.surface.withOpacity(0.25),
+                            backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.5),
                             textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.25),
+                                  color: Theme.of(context).colorScheme.onSurface,
                                 ),
                           ),
                         ),
