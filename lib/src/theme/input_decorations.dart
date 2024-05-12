@@ -16,7 +16,6 @@ class MessageBoxInputDecoration extends InputDecoration {
   MessageBoxInputDecoration()
       : super(
           contentPadding: EdgeInsets.symmetric(vertical: 12.sc),
-          hintText: 'Message',
           focusedBorder: const NoOutlineInputBorder(),
           enabledBorder: const NoOutlineInputBorder(),
         );

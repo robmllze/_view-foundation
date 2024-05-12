@@ -28,8 +28,24 @@ enum AppThemeType with AppThemeEnumMixin {
 
   @override
   ThemeData get themeData {
+    final buttonStyle = ButtonStyle(
+      textStyle: WidgetStateProperty.all(TextStyle(fontSize: 16.sc)),
+      minimumSize: WidgetStateProperty.all(Size(40.sc, 40.sc)),
+      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 16.sc, vertical: 8.sc)),
+      iconSize: WidgetStateProperty.all(24.sc),
+    );
+    final iconButtonStyle = buttonStyle.copyWith(
+      padding: WidgetStateProperty.all(EdgeInsets.all(8.sc)),
+    );
     switch (this) {
       case AppThemeType.LIGHT:
+        final border = OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey.shade400,
+            width: 1.sc,
+          ),
+          borderRadius: BorderRadius.circular(4.sc),
+        );
         return ThemeData(
           brightness: Brightness.light,
           colorScheme: ColorScheme(
@@ -44,29 +60,30 @@ enum AppThemeType with AppThemeEnumMixin {
             onSurface: Colors.black,
             surfaceContainer: Colors.grey.shade200,
           ),
+          elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
+          filledButtonTheme: FilledButtonThemeData(style: buttonStyle),
+          iconButtonTheme: IconButtonThemeData(style: iconButtonStyle),
+          outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
+          segmentedButtonTheme: SegmentedButtonThemeData(style: buttonStyle),
+          textButtonTheme: TextButtonThemeData(style: buttonStyle),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: const TextTheme(
-            bodyLarge: TextStyle(fontSize: 16.0, height: 1.2),
-            bodyMedium: TextStyle(fontSize: 13.0, height: 1.2),
-            bodySmall: TextStyle(fontSize: 10.0, height: 1.2),
-          ),
+          textTheme: defaultTextTheme(),
           inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
+            border: border,
+            enabledBorder: border,
+            focusedBorder: border,
+            errorBorder: border,
             filled: true,
           ),
         );
       case AppThemeType.DARK:
+        final border = OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey.shade600,
+            width: 1.sc,
+          ),
+          borderRadius: BorderRadius.circular(4.sc),
+        );
         return ThemeData(
           brightness: Brightness.dark,
           colorScheme: ColorScheme(
@@ -81,25 +98,19 @@ enum AppThemeType with AppThemeEnumMixin {
             onSurface: Colors.white,
             surfaceContainer: Colors.grey.shade900,
           ),
+          elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
+          filledButtonTheme: FilledButtonThemeData(style: buttonStyle),
+          iconButtonTheme: IconButtonThemeData(style: iconButtonStyle),
+          outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
+          segmentedButtonTheme: SegmentedButtonThemeData(style: buttonStyle),
+          textButtonTheme: TextButtonThemeData(style: buttonStyle),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: const TextTheme(
-            bodyLarge: TextStyle(fontSize: 16.0, height: 1.2),
-            bodyMedium: TextStyle(fontSize: 13.0, height: 1.2),
-            bodySmall: TextStyle(fontSize: 10.0, height: 1.2),
-          ),
+          textTheme: defaultTextTheme(),
           inputDecorationTheme: InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
+            border: border,
+            enabledBorder: border,
+            focusedBorder: border,
+            errorBorder: border,
             filled: true,
           ),
         );
