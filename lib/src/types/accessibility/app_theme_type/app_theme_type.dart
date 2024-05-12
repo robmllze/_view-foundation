@@ -38,7 +38,7 @@ enum AppThemeType with AppThemeEnumMixin {
             primary: Colors.black,
             seedColor: Colors.white,
             surface: Colors.white,
-            surfaceContainer: Colors.grey.shade100,
+            surfaceContainer: Colors.grey.shade200,
             onSurface: Colors.black,
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
