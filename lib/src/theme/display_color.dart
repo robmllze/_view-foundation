@@ -12,13 +12,13 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension DefaultDistinctiveColorOnPublicBaseModelExtension on PublicBaseModel {
+extension DefaultDisplayColorOnPublicBaseModelExtension on PublicBaseModel {
   //
   //
   //
 
-  Color get defaultDistinctiveColor {
-    return this.distinctiveColor ??
+  Color get defaultDisplayColor {
+    return this.displayColor ??
         (this.id != null ? mapTextToColor(this.displayNameSearchable!) : Colors.white);
   }
 
@@ -26,9 +26,9 @@ extension DefaultDistinctiveColorOnPublicBaseModelExtension on PublicBaseModel {
   //
   //
 
-  Color defaultDistincticeColorBlendedWithTheme(ThemeData themeData) {
-    return blendDistincticeColorWithTheme(
-      this.defaultDistinctiveColor,
+  Color defaultDisplayColorBlendedWithTheme(ThemeData themeData) {
+    return blendDisplayColorWithTheme(
+      this.defaultDisplayColor,
       themeData,
     );
   }
@@ -36,7 +36,7 @@ extension DefaultDistinctiveColorOnPublicBaseModelExtension on PublicBaseModel {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Color generateNewDistinctiveColor() {
+Color generateNewDisplayColor() {
   final seed = IdUtils.newUuidV4();
   final color = mapTextToColor(
     seed,
@@ -45,7 +45,7 @@ Color generateNewDistinctiveColor() {
   return color;
 }
 
-Color blendDistincticeColorWithTheme(Color color, ThemeData themeData) {
+Color blendDisplayColorWithTheme(Color color, ThemeData themeData) {
   return LerpBlender(
     color1: color,
     color2: themeData.colorScheme.surface,

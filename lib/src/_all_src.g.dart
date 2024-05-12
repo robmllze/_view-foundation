@@ -35,7 +35,7 @@ export 'screens/empty_screen/empty_screen.dart';
 export 'screens/error_screen/error_screen.dart';
 export 'theme/color_scheme_mixes_extension.dart';
 export 'theme/default_text_theme.dart';
-export 'theme/distinctice_color.dart';
+export 'theme/display_color.dart';
 export 'theme/input_borders.dart';
 export 'theme/input_decorations.dart';
 export 'types/accessibility/app_locale_type/app_locale_type.dart';

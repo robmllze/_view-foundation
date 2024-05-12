@@ -39,7 +39,7 @@ class MyDivider extends StatelessWidget {
     return Divider(
       height: this.height,
       thickness: (0.5).sc,
-      color: Theme.of(context).colorScheme.surface.darken(0.25),
+      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.35),
     );
   }
 }
