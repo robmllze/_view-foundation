@@ -124,13 +124,13 @@ class MyDefaultListTile extends StatelessWidget {
                     ],
                   ),
                 ),
+                ...this.trailing,
                 if (this.trailingIcon != null)
                   IconButton(
                     icon: this.trailingIcon!,
                     iconSize: 24.sc,
                     onPressed: this.onTapTrailingIcon ?? this.onTap,
                   ),
-                ...this.trailing,
               ],
             ),
           ),

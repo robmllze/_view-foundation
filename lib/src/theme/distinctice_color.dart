@@ -26,12 +26,11 @@ extension DefaultDistinctiveColorOnPublicBaseModelExtension on PublicBaseModel {
   //
   //
 
-  Color defaultDistincticeThemeColor(ThemeData themeData) {
-    return LerpBlender(
-      color1: this.defaultDistinctiveColor,
-      color2: themeData.colorScheme.surface,
-      blendWeight: 0.5,
-    ).blend();
+  Color defaultDistincticeColorBlendedWithTheme(ThemeData themeData) {
+    return blendDistincticeColorWithTheme(
+      this.defaultDistinctiveColor,
+      themeData,
+    );
   }
 }
 
@@ -44,4 +43,12 @@ Color generateNewDistinctiveColor() {
     blendWeight: 0.5,
   );
   return color;
+}
+
+Color blendDistincticeColorWithTheme(Color color, ThemeData themeData) {
+  return LerpBlender(
+    color1: color,
+    color2: themeData.colorScheme.surface,
+    blendWeight: 0.5,
+  ).blend();
 }

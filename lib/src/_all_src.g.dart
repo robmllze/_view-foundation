@@ -18,6 +18,7 @@ export 'my_components/my_clipped_container.dart';
 export 'my_components/my_count_indicator.dart';
 export 'my_components/my_default_list_tile.dart';
 export 'my_components/my_delete_confirmation_dialog_body.dart';
+export 'my_components/my_divider.dart';
 export 'my_components/my_email_reset_dialog_body.dart';
 export 'my_components/my_file_gallery/my_file_gallery.dart';
 export 'my_components/my_gradient_overlay.dart';

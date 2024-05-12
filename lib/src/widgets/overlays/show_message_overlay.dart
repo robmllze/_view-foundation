@@ -59,7 +59,7 @@ Future<void> showMessageOverlay(
                           ],
                         ],
                       ),
-                      const Divider(),
+                      const MyDivider(),
                     ],
                     if (leading != null) leading,
                     if (message != null)
