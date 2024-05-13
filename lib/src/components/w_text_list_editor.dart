@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyTextListEditor extends StatefulWidget {
+class WTextListEditor extends StatefulWidget {
   //
   //
   //
@@ -27,7 +27,7 @@ class MyTextListEditor extends StatefulWidget {
   //
   //
 
-  const MyTextListEditor({
+  const WTextListEditor({
     super.key,
     this.labelText = '',
     this.initialItems = const [],
@@ -46,7 +46,7 @@ class MyTextListEditor extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<MyTextListEditor> {
+class _State extends State<WTextListEditor> {
   //
   //
   //

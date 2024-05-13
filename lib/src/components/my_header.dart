@@ -46,37 +46,32 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Padding(
-          padding: this.breadCrumbBar != null
-              ? EdgeInsets.only(
-                  top: this.breadCrumbBar!.height - this.breadCrumbBar!.borderRadius,
-                )
-              : EdgeInsets.zero,
-          child: Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.surfaceContainer,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(16.sc),
-                bottomRight: Radius.circular(16.sc),
-              ),
-            ),
-            constraints: BoxConstraints(minHeight: 80.sc),
-            padding: EdgeInsets.all(16.sc),
-            child: PodWidget(
-              builder: (context, child, pod) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return WBlurryContainer(
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(16.sc),
+        bottomRight: Radius.circular(16.sc),
+      ),
+      height: 100.sc,
+      expandWidth: true,
+      child: Column(
+        children: [
+          if (this.breadCrumbBar != null) this.breadCrumbBar!,
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(8.sc),
+              child: SizedBox(
+                width: double.infinity,
+                child: Wrap(
+                  runAlignment: WrapAlignment.center,
+                  alignment: WrapAlignment.spaceBetween,
+                  crossAxisAlignment: WrapCrossAlignment.center,
                   children: [
                     Wrap(
                       crossAxisAlignment: WrapCrossAlignment.center,
-                      alignment: WrapAlignment.start,
                       spacing: 4.sc,
                       runSpacing: 4.sc,
                       children: [
-                        if (this.onBackButtonPressed != null)
+                        if (this.onBackButtonPressed != null) ...[
                           SizedBox(
                             width: 40.sc,
                             child: IconButton(
@@ -88,7 +83,7 @@ class MyHeader extends StatelessWidget {
                               ),
                             ),
                           ),
-                        SizedBox(width: 4.sc),
+                        ],
                         WColumn(
                           children: [
                             if (this.title != null && this.title!.isNotEmpty)
@@ -115,27 +110,20 @@ class MyHeader extends StatelessWidget {
                         if (this.leading.isNotEmpty) ...this.leading,
                       ],
                     ),
-                    SizedBox(width: 8.sc),
-                    Flexible(
-                      child: Wrap(
+                    if (this.trailing.isNotEmpty)
+                      Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
-                        alignment: WrapAlignment.end,
-                        spacing: 4.sc,
-                        runSpacing: 4.sc,
                         children: [
-                          if (this.trailing.isNotEmpty) ...this.trailing,
+                          ...this.trailing,
                         ],
                       ),
-                    ),
                   ],
-                );
-              },
-              initialValue: 0.0,
+                ),
+              ),
             ),
           ),
-        ),
-        if (this.breadCrumbBar != null) this.breadCrumbBar!,
-      ],
+        ],
+      ),
     );
   }
 }

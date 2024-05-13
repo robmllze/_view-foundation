@@ -12,20 +12,24 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyCountIndicator extends StatelessWidget {
+class WSurface extends StatelessWidget {
   //
   //
   //
 
-  final int count;
+  final Widget? child;
+  final Color? color;
+  final Color? borderColor;
 
   //
   //
   //
 
-  const MyCountIndicator({
+  const WSurface({
     super.key,
-    required this.count,
+    required this.child,
+    this.color,
+    this.borderColor,
   });
 
   //
@@ -34,29 +38,17 @@ class MyCountIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (count > 0) {
-      final size = 20.sc;
-      return IgnorePointer(
-        child: Container(
-          height: size,
-          alignment: Alignment.center,
-          padding: EdgeInsets.symmetric(horizontal: 0.35 * size),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
-            borderRadius: BorderRadius.circular(0.5 * size),
-          ),
-          child: Text(
-            count.toString(),
-            style: TextStyle(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              fontSize: 0.5 * size,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+    return Container(
+      padding: EdgeInsets.all(8.sc),
+      decoration: BoxDecoration(
+        color: this.color ?? Theme.of(context).colorScheme.surfaceContainer,
+        border: Border.all(
+          color: this.borderColor ?? Colors.transparent,
+          width: 1.sc,
         ),
-      );
-    } else {
-      return const SizedBox.shrink();
-    }
+        borderRadius: BorderRadius.circular(4.sc),
+      ),
+      child: this.child,
+    );
   }
 }

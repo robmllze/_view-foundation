@@ -87,30 +87,76 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   /// ```
   @mustCallSuper
   Widget layout(BuildContext context, Widget body) {
-    final navigationControls = this.widget.configuration?.navigationControlsWidget;
     final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return LayoutBuilder(
       builder: (context, constraints) {
-        final bodyContainer = Container(
-          width: constraints.maxWidth,
-          color: makeup?.backgroundColor ?? Theme.of(context).colorScheme.surface,
-          child: body,
-        );
+        final maxWidth = constraints.maxWidth;
+        final maxHeight = constraints.maxHeight;
+        final header = this.header(context);
+        final navigationControls = this.widget.configuration?.navigationControlsWidget;
+        final footer = this.footer(context) ?? navigationControls;
         return SizedBox(
-          width: constraints.maxWidth,
-          height: constraints.maxHeight,
-          child: navigationControls == null
-              ? bodyContainer
-              : Column(
-                  children: [
-                    Expanded(
-                      child: bodyContainer,
-                    ),
-                    navigationControls,
-                  ],
+          width: maxWidth,
+          height: maxHeight,
+          child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: maxWidth,
+                  color: makeup?.backgroundColor ?? Theme.of(context).colorScheme.surface,
+                  child: this.bodyScroll(
+                        context,
+                        body,
+                        header: header,
+                        footer: footer,
+                        headerSpace: this.headerSpace,
+                        footerSpace: this.footerSpace,
+                      ) ??
+                      body,
                 ),
+              ),
+              if (header != null)
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: header,
+                ),
+              if (footer != null)
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: footer,
+                ),
+            ],
+          ),
         );
       },
+    );
+  }
+
+  //
+  //
+  //
+
+  Widget? bodyScroll(
+    BuildContext context,
+    Widget body, {
+    required Widget? header,
+    required Widget? footer,
+    required double headerSpace,
+    required double footerSpace,
+  }) {
+    return SingleChildScrollView(
+      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+      physics: const BouncingScrollPhysics(),
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: 20.sc,
+          right: 20.sc,
+          top: header != null ? headerSpace : 0.0,
+          bottom: footer != null ? footerSpace : 0.0,
+        ),
+        child: body,
+      ),
     );
   }
 
@@ -193,6 +239,16 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   Widget wideBody(BuildContext context) {
     return this.body(context);
   }
+
+  //
+  //
+  //
+
+  Widget? header(BuildContext context) => null;
+  Widget? footer(BuildContext context) => null;
+
+  double get headerSpace => 120.sc;
+  double get footerSpace => 120.sc;
 
   //
   //

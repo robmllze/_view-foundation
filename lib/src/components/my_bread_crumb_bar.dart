@@ -43,7 +43,7 @@ class MyBreadCrumbBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surfaceContainer.darken(0.1),
+        color: Theme.of(context).colorScheme.surfaceContainer.darken(0.25).withOpacity(0.25),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(this.borderRadius),
           bottomRight: Radius.circular(this.borderRadius),

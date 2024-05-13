@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyPopup extends StatelessWidget {
+class WPopup extends StatelessWidget {
   //
   //
   //
@@ -28,13 +28,13 @@ class MyPopup extends StatelessWidget {
     BuildContext context,
     VoidCallback close,
   ) popupBuilder;
-  final MyPopupController controller;
+  final WPopupController controller;
 
   //
   //
   //
 
-  MyPopup({
+  WPopup({
     super.key,
     required this.button,
     required this.popupBuilder,
@@ -58,13 +58,13 @@ class MyPopup extends StatelessWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyPopupController {
+class WPopupController {
   //
   //
   //
 
   OverlayEntry? _overlayEntry;
-  MyPopup? _myPopup;
+  WPopup? _myPopup;
 
   //
   //
@@ -77,7 +77,7 @@ class MyPopupController {
   //
   //
 
-  MyPopupController({
+  WPopupController({
     this.elevation = const Sc(4.0),
     this.duration,
   });
@@ -90,36 +90,41 @@ class MyPopupController {
     required BuildContext context,
     AlignmentGeometry alignment = Alignment.topLeft,
     Offset? relativePosition,
-    double left = 0.0,
-    double top = 0.0,
-    double right = 0.0,
-    double bottom = 0.0,
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
   }) {
     assert(this._myPopup != null);
     if (this._myPopup == null || this._overlayEntry != null) {
       return;
     }
-    var l = max(0.0, left), t = max(0.0, top), r = max(0.0, right), b = max(0.0, bottom);
+    var l = left, t = top, r = right, b = bottom;
     if (relativePosition != null) {
       final renderBox = this._myPopup!._globalKey.currentContext?.findRenderObject() as RenderBox;
-      final offset = renderBox.globalToLocal(relativePosition);
-      l = max(0.0, l + offset.dx);
-      t = max(0.0, t + offset.dy);
+      final offset = renderBox.localToGlobal(relativePosition);
+      l = (l ?? 0.0) + offset.dx;
+      t = (t ?? 0.0) + offset.dy;
     }
     this._overlayEntry = OverlayEntry(
       builder: (context) {
         return BlurryOverlay(
           child: GestureDetector(
             behavior: HitTestBehavior.translucent,
-            onTap: this.hidePopup,
+            onTap: () {
+              this.hidePopup();
+            },
             child: Padding(
               padding: EdgeInsets.only(
-                top: t,
-                left: l,
-                right: r,
-                bottom: b,
+                top: t ?? 0.0,
+                left: l ?? 0.0,
+                right: r ?? 0.0,
+                bottom: b ?? 0.0,
               ),
-              child: this._myPopup!.popupBuilder(context, this.hidePopup),
+              child: Align(
+                alignment: alignment,
+                child: this._myPopup!.popupBuilder(context, this.hidePopup),
+              ),
             ),
           ),
         );
