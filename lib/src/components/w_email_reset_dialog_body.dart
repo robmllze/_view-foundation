@@ -72,6 +72,8 @@ class _State extends State<MyEmailResetDialogBody> {
           ),
           SizedBox(height: 12.sc),
           TextField(
+            autofillHints: const [AutofillHints.email],
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               labelText: 'Email||todo'.tr(),
               border: const OutlineInputBorder(),

@@ -12,24 +12,23 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WBackgroundGrid extends StatelessWidget {
+class DiagonalStripesPainter extends CustomPainter {
   //
   //
   //
 
-  final Widget? icon;
-  final double? gridSize;
-  final Widget? child;
+  final double lineThickness;
+  final Color color;
+  final double spacing;
 
   //
   //
   //
 
-  const WBackgroundGrid({
-    super.key,
-    this.icon,
-    this.child,
-    this.gridSize,
+  DiagonalStripesPainter({
+    this.lineThickness = 2.0,
+    this.color = Colors.black,
+    this.spacing = 10.0,
   });
 
   //
@@ -37,27 +36,26 @@ class WBackgroundGrid extends StatelessWidget {
   //
 
   @override
-  Widget build(BuildContext context) {
-    final g = this.gridSize ?? 40.sc;
-    final crossAxisCount = (MediaQuery.of(context).size.width / g).ceil();
-    return Stack(
-      children: [
-        GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-          ),
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return SizedBox.square(
-              dimension: g,
-              child: Center(
-                child: this.icon,
-              ),
-            );
-          },
-        ),
-        if (this.child != null) this.child!,
-      ],
-    );
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = lineThickness;
+
+    var start = -size.height;
+    while (start < size.width) {
+      // Draw each line from bottom-left to top-right
+      final p1 = Offset(start, size.height);
+      final p2 = Offset(start + size.height, 0);
+      canvas.drawLine(p1, p2, paint);
+      start += spacing;
+    }
   }
+
+  //
+  //
+  //
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

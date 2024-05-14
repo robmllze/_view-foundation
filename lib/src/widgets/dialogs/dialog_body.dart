@@ -43,8 +43,8 @@ class DialogBody extends StatelessWidget {
           child: Container(
             constraints: BoxConstraints(maxWidth: 600.sc),
             decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainer,
               borderRadius: BorderRadius.circular(8.sc),
-              color: Theme.of(context).colorScheme.surface,
             ),
             child: Padding(
               padding: EdgeInsets.only(

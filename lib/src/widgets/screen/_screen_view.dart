@@ -104,16 +104,23 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
                 alignment: Alignment.topCenter,
                 child: Container(
                   width: maxWidth,
+                  height: double.infinity,
                   color: makeup?.backgroundColor ?? Theme.of(context).colorScheme.surface,
-                  child: this.bodyScroll(
-                        context,
-                        body,
-                        header: header,
-                        footer: footer,
-                        headerSpace: this.headerSpace,
-                        footerSpace: this.footerSpace,
-                      ) ??
-                      body,
+                  child: this.background(
+                    context,
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: this.scroll(
+                            context,
+                            body,
+                            header: header,
+                            footer: footer,
+                            headerSpace: this.headerSpace,
+                            footerSpace: this.footerSpace,
+                          ) ??
+                          body,
+                    ),
+                  ),
                 ),
               ),
               if (header != null)
@@ -137,7 +144,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget? bodyScroll(
+  Widget? scroll(
     BuildContext context,
     Widget body, {
     required Widget? header,
@@ -159,6 +166,12 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
       ),
     );
   }
+
+  //
+  //
+  //
+
+  Widget background(BuildContext context, Widget scroll) => scroll;
 
   //
   //

@@ -38,11 +38,16 @@ class MyAppIconProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return WSpinner(
       rpm: 45,
-      child: MySvgAppIcon(
-        assetName: this.assetName,
-        package: this.package,
-        size: 50.sc,
-        innerPadding: 4.sc,
+      child: Container(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+        ),
+        child: MySvgAppIcon(
+          assetName: this.assetName,
+          package: this.package,
+          size: 40.sc,
+        ),
       ),
     );
   }

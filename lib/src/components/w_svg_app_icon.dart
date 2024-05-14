@@ -34,7 +34,7 @@ class MySvgAppIcon extends StatelessWidget {
     this.assetName = 'assets/images/app_icon/app_icon.svg',
     this.package,
     this.size,
-    this.backgroundColor = Colors.white,
+    this.backgroundColor,
     this.innerPadding,
   });
 

@@ -12,24 +12,22 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WBackgroundGrid extends StatelessWidget {
+class WidgetSizeObserver extends StatefulWidget {
   //
   //
   //
 
-  final Widget? icon;
-  final double? gridSize;
-  final Widget? child;
+  final Widget child;
+  final Function(Size size) onChange;
 
   //
   //
   //
 
-  const WBackgroundGrid({
+  const WidgetSizeObserver({
     super.key,
-    this.icon,
-    this.child,
-    this.gridSize,
+    required this.child,
+    required this.onChange,
   });
 
   //
@@ -37,27 +35,46 @@ class WBackgroundGrid extends StatelessWidget {
   //
 
   @override
+  _State createState() => _State();
+}
+
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+
+class _State extends State<WidgetSizeObserver> {
+  //
+  //
+  //
+
+  final _key = GlobalKey();
+
+  //
+  //
+  //
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(this._afterLayout);
+  }
+
+  //
+  //
+  //
+
+  void _afterLayout(_) {
+    final renderBox = this._key.currentContext?.findRenderObject() as RenderBox;
+    this.widget.onChange(renderBox.size);
+  }
+
+  //
+  //
+  //
+
+  @override
   Widget build(BuildContext context) {
-    final g = this.gridSize ?? 40.sc;
-    final crossAxisCount = (MediaQuery.of(context).size.width / g).ceil();
-    return Stack(
-      children: [
-        GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: crossAxisCount,
-          ),
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return SizedBox.square(
-              dimension: g,
-              child: Center(
-                child: this.icon,
-              ),
-            );
-          },
-        ),
-        if (this.child != null) this.child!,
-      ],
+    return SizedBox(
+      key: this._key,
+      child: this.widget.child,
     );
   }
 }
