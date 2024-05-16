@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyDivider extends StatelessWidget {
+class WDivider extends StatelessWidget {
   //
   //
   //
@@ -24,7 +24,7 @@ class MyDivider extends StatelessWidget {
   //
   //
 
-  const MyDivider({
+  const WDivider({
     super.key,
     this.height,
     this.thickness,

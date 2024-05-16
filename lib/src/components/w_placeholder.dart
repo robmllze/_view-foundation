@@ -53,7 +53,7 @@ class MyPlaceholder extends StatelessWidget {
                 size: 32.sc,
               ),
             ),
-            const MyDivider(),
+            const WDivider(),
             Text(
               this.message,
               style: Theme.of(context).textTheme.bodyLarge?.wItalic,
