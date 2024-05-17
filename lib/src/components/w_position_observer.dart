@@ -12,22 +12,22 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WSizeReporter extends StatefulWidget {
+class WPositionObserver extends StatefulWidget {
   //
   //
   //
 
-  final Widget child;
-  final Function(BuildContext context, Widget child, Size size) builder;
+  final Widget? child;
+  final void Function(Offset position)? onChanged;
 
   //
   //
   //
 
-  const WSizeReporter({
+  const WPositionObserver({
     super.key,
-    required this.child,
-    required this.builder,
+    this.child,
+    this.onChanged,
   });
 
   //
@@ -40,13 +40,12 @@ class WSizeReporter extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<WSizeReporter> {
+class _State extends State<WPositionObserver> {
   //
   //
   //
 
   final _key = GlobalKey();
-  Size? _childSize;
 
   //
   //
@@ -55,7 +54,7 @@ class _State extends State<WSizeReporter> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(this._onPostFrame);
+    WidgetsBinding.instance.addPostFrameCallback((_) => this._onPostFrame());
   }
 
   //
@@ -64,21 +63,9 @@ class _State extends State<WSizeReporter> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (this._childSize != null) {
-          return this.widget.builder(
-                context,
-                this.widget.child,
-                this._childSize!,
-              );
-        }
-        return WSizeObserver(
-          key: this._key,
-          onChange: this._onChangeSize,
-          child: this.widget.child,
-        );
-      },
+    return SizedBox(
+      key: this._key,
+      child: this.widget.child,
     );
   }
 
@@ -86,21 +73,13 @@ class _State extends State<WSizeReporter> {
   //
   //
 
-  void _onPostFrame(_) {
-    final renderBox = _key.currentContext?.findRenderObject() as RenderBox;
-    final size = renderBox.size;
-    this._onChangeSize(size);
-  }
-
-  //
-  //
-  //
-
-  void _onChangeSize(Size size) {
-    if (this._childSize != size) {
-      this.setState(() {
-        this._childSize = size;
-      });
+  void _onPostFrame() {
+    if (this._key.currentContext != null) {
+      final renderObject = _key.currentContext?.findRenderObject();
+      if (renderObject is RenderBox) {
+        final position = renderObject.localToGlobal(Offset.zero);
+        this.widget.onChanged?.call(position);
+      }
     }
   }
 }

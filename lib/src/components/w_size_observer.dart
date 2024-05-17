@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WidgetSizeObserver extends StatefulWidget {
+class WSizeObserver extends StatefulWidget {
   //
   //
   //
@@ -24,7 +24,7 @@ class WidgetSizeObserver extends StatefulWidget {
   //
   //
 
-  const WidgetSizeObserver({
+  const WSizeObserver({
     super.key,
     required this.child,
     required this.onChange,
@@ -40,7 +40,7 @@ class WidgetSizeObserver extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<WidgetSizeObserver> {
+class _State extends State<WSizeObserver> {
   //
   //
   //
@@ -54,16 +54,7 @@ class _State extends State<WidgetSizeObserver> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(this._afterLayout);
-  }
-
-  //
-  //
-  //
-
-  void _afterLayout(_) {
-    final renderBox = this._key.currentContext?.findRenderObject() as RenderBox;
-    this.widget.onChange(renderBox.size);
+    WidgetsBinding.instance.addPostFrameCallback(this._onPostFrame);
   }
 
   //
@@ -76,5 +67,14 @@ class _State extends State<WidgetSizeObserver> {
       key: this._key,
       child: this.widget.child,
     );
+  }
+
+  //
+  //
+  //
+
+  void _onPostFrame(_) {
+    final renderBox = this._key.currentContext?.findRenderObject() as RenderBox;
+    this.widget.onChange(renderBox.size);
   }
 }
