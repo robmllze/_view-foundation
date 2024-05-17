@@ -46,7 +46,7 @@ class WSurface extends StatelessWidget {
           color: this.borderColor ?? Colors.transparent,
           width: 1.sc,
         ),
-        borderRadius: BorderRadius.circular(4.sc),
+        borderRadius: BorderRadius.circular(8.sc),
       ),
       child: this.child,
     );

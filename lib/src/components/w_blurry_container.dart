@@ -21,6 +21,7 @@ class WBlurryContainer extends StatelessWidget {
 
   final Widget? child;
   final double? sigma;
+  final double opacity;
   final BorderRadius? borderRadius;
   final BoxDecoration decoration;
   final EdgeInsets? padding;
@@ -38,6 +39,7 @@ class WBlurryContainer extends StatelessWidget {
     super.key,
     this.child,
     this.sigma = 8.0,
+    this.opacity = 0.75,
     this.borderRadius,
     this.decoration = const BoxDecoration(),
     this.padding,
@@ -85,7 +87,7 @@ class WBlurryContainer extends StatelessWidget {
                       width: double.infinity,
                       decoration: this.decoration.copyWith(
                             color: (this.color ?? Theme.of(context).colorScheme.surfaceContainer)
-                                .withOpacity(0.75),
+                                .withOpacity(opacity),
                             borderRadius: borderRadius,
                           ),
                     ),

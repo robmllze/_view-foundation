@@ -65,7 +65,9 @@ class _State extends State<WOverlay> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    this._scrollable = Scrollable.of(context);
+    try {
+      this._scrollable = Scrollable.of(context);
+    } catch (_) {}
     if (this._scrollable != null) {
       this._scrollPosition = this._scrollable!.position;
       this._scrollPosition!.isScrollingNotifier.addListener(this._scrollListener);
@@ -99,6 +101,7 @@ class _State extends State<WOverlay> {
   //
 
   void _positionOverlay(Size childSize, Offset position) {
+    printRed(childSize);
     final screenSize = MediaQuery.of(context).size;
     var x = position.dx;
     var y = position.dy;
