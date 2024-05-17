@@ -101,7 +101,6 @@ class _State extends State<WOverlay> {
   //
 
   void _positionOverlay(Size childSize, Offset position) {
-    printRed(childSize);
     final screenSize = MediaQuery.of(context).size;
     var x = position.dx;
     var y = position.dy;
