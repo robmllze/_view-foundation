@@ -17,8 +17,9 @@ class WOverlayPopup extends StatelessWidget {
   //
   //
 
-  final Widget Function(BuildContext context, VoidCallback open)? buttonBuilder;
-  final Widget Function(BuildContext context, VoidCallback close)? itemBuilder;
+  final Widget Function(BuildContext context, VoidCallback open, VoidCallback close)? buttonBuilder;
+  final Widget Function(BuildContext context, VoidCallback open, VoidCallback close)? itemBuilder;
+  final Color? backgroundColor;
 
   //
   //
@@ -28,6 +29,7 @@ class WOverlayPopup extends StatelessWidget {
     super.key,
     this.buttonBuilder,
     this.itemBuilder,
+    this.backgroundColor,
   });
 
   //
@@ -40,7 +42,8 @@ class WOverlayPopup extends StatelessWidget {
       initialValue: null,
       builder: (context, child, pPosition) {
         final position = pPosition.value;
-        final button = buttonBuilder?.call(context, () => pPosition.set(Offset.zero));
+        final button = buttonBuilder?.call(
+            context, () => pPosition.set(Offset.zero), () => pPosition.set(null));
         return Stack(
           children: [
             if (button != null) button,
@@ -50,7 +53,11 @@ class WOverlayPopup extends StatelessWidget {
                   final overlay = WOverlay(
                     child: WPositionObserver(
                       onChanged: (position) => pPosition.set(position),
-                      child: itemBuilder?.call(context, () => pPosition.set(null)) ??
+                      child: itemBuilder?.call(
+                            context,
+                            () => pPosition.set(Offset.zero),
+                            () => pPosition.set(null),
+                          ) ??
                           const SizedBox.shrink(),
                     ),
                   );
@@ -71,12 +78,11 @@ class WOverlayPopup extends StatelessWidget {
                           pPosition.set(null);
                         },
                         child: WBlurryContainer(
-                          borderRadius: BorderRadius.zero,
+                          color: this.backgroundColor ?? Theme.of(context).colorScheme.shadow,
                           sigma: 3.0,
+                          opacity: 0.25,
                           expandHeight: true,
                           expandWidth: true,
-                          color: Theme.of(context).colorScheme.surface.inverted,
-                          opacity: 0.25,
                         ),
                       ),
                       child: overlay,

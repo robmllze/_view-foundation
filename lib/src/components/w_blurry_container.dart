@@ -68,6 +68,7 @@ class WBlurryContainer extends StatelessWidget {
         final height = this.height?.isInfinite == true || this.expandHeight
             ? constraints.maxHeight
             : this.height;
+        final c = this.color ?? Theme.of(context).colorScheme.surfaceContainer;
         return IntrinsicHeight(
           child: IntrinsicWidth(
             child: Stack(
@@ -86,8 +87,7 @@ class WBlurryContainer extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       decoration: this.decoration.copyWith(
-                            color: (this.color ?? Theme.of(context).colorScheme.surfaceContainer)
-                                .withOpacity(opacity),
+                            color: c.withOpacity(c.opacity * opacity),
                             borderRadius: borderRadius,
                           ),
                     ),

@@ -20,6 +20,7 @@ class WSurface extends StatelessWidget {
   final Widget? child;
   final Color? color;
   final Color? borderColor;
+  final double? cornerRadius;
 
   //
   //
@@ -30,6 +31,7 @@ class WSurface extends StatelessWidget {
     required this.child,
     this.color,
     this.borderColor,
+    this.cornerRadius,
   });
 
   //
@@ -46,7 +48,7 @@ class WSurface extends StatelessWidget {
           color: this.borderColor ?? Colors.transparent,
           width: 1.sc,
         ),
-        borderRadius: BorderRadius.circular(8.sc),
+        borderRadius: BorderRadius.circular(this.cornerRadius ?? 8.sc),
       ),
       child: this.child,
     );
