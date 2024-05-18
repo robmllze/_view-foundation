@@ -22,7 +22,7 @@ class MyHeaderBackButton extends StatelessWidget {
   //
   //
   //
-  const MyHeaderBackButton({
+  const MyHeaderBackButton.WHeaderBackButton({
     super.key,
     this.onBackButtonPressed,
   });

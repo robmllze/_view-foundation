@@ -28,10 +28,13 @@ dependencies:
     path: ../_service_interfaces
 
   xyz_config: ^0.28.1
-  xyz_flutter_plus: ^0.48.0
   xyz_gen_annotations: ^0.32.0
   xyz_pod: ^0.29.0
   xyz_utils: ^0.53.0
+
+  xyz_flutter_plus:
+    git:
+      url: https://github.com/robmllze/xyz_flutter_plus
 
   cupertino_icons: any
   equatable: any

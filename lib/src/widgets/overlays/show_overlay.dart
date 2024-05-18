@@ -30,7 +30,7 @@ Future<void> showOverlay(
 
   overlayEntry = OverlayEntry(
     builder: (context) {
-      return BlurryOverlay(
+      return WBlurryOverlay(
         onTapBackground: tapBackgroundToDismiss ? complete : null,
         child: FutureBuilder(
           future: () async {

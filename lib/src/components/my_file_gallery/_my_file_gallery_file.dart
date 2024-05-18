@@ -81,7 +81,7 @@ class MyFileGalleryFile extends StatelessWidget {
                     );
                   }
                 } else {
-                  return const MyCircularProgressIndicator();
+                  return const WCircularProgressIndicator();
                 }
               }
               if (this.child != null) {

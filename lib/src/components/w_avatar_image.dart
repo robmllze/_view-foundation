@@ -70,7 +70,7 @@ class MyAvatarImage extends StatelessWidget {
             ? SizedBox.square(
                 dimension: this.size,
                 child: const Center(
-                  child: MyCircularProgressIndicator(),
+                  child: WCircularProgressIndicator(),
                 ),
               )
             : Stack(
