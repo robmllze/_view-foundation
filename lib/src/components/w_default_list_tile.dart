@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyDefaultListTile extends StatelessWidget {
+class WDefaultListTile extends StatelessWidget {
   //
   //
   //
@@ -34,7 +34,7 @@ class MyDefaultListTile extends StatelessWidget {
   //
   //
 
-  const MyDefaultListTile({
+  const WDefaultListTile({
     super.key,
     this.title = '',
     this.subtitle = '',

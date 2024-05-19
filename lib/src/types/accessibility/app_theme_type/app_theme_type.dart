@@ -74,6 +74,8 @@ enum AppThemeType with AppThemeEnumMixin {
             focusedBorder: border,
             errorBorder: border,
             filled: true,
+            isDense: true,
+            contentPadding: EdgeInsets.all(16.sc),
           ),
         );
       case AppThemeType.DARK:

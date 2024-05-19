@@ -26,8 +26,17 @@ TextTheme defaultTextTheme() {
     bodyLarge: TextStyle(fontSize: 16.sc),
     bodyMedium: TextStyle(fontSize: 14.sc),
     bodySmall: TextStyle(fontSize: 12.sc),
-    labelLarge: TextStyle(fontSize: 14.sc),
-    labelMedium: TextStyle(fontSize: 12.sc),
-    labelSmall: TextStyle(fontSize: 11.sc),
+    labelLarge: TextStyle(
+      fontSize: 14.sc,
+      fontWeight: FONT_WEIGHT_MEDIUM,
+    ),
+    labelMedium: TextStyle(
+      fontSize: 12.sc,
+      fontWeight: FONT_WEIGHT_MEDIUM,
+    ),
+    labelSmall: TextStyle(
+      fontSize: 11.sc,
+      fontWeight: FONT_WEIGHT_MEDIUM,
+    ),
   );
 }
