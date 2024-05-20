@@ -48,12 +48,12 @@ class WTextListFormField extends WFormFieldStatefulWidget<String> {
   //
 
   @override
-  _State createState() => _State();
+  WTextListFormFieldState createState() => WTextListFormFieldState();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends WFormFieldStatefulWidgetState<String, WTextListFormField> {
+class WTextListFormFieldState extends WFormFieldStatefulWidgetState<String, WTextListFormField> {
   //
   //
   //
@@ -129,7 +129,7 @@ class _State extends WFormFieldStatefulWidgetState<String, WTextListFormField> {
   //
 
   @override
-  String? getSnapshot() => this._textFormFieldKey.currentState?.getSnapshot();
+  String getSnapshot() => this._textFormFieldKey.currentState!.getSnapshot();
 
   //
   //
@@ -137,7 +137,7 @@ class _State extends WFormFieldStatefulWidgetState<String, WTextListFormField> {
 
   void _addItem() async {
     final value = this.getSnapshot();
-    if (value != null && value.isNotEmpty) {
+    if (value.isNotEmpty) {
       final valid = this.widget.validator?.call(value) == null;
       if (valid) {
         this.setState(() {
@@ -145,8 +145,8 @@ class _State extends WFormFieldStatefulWidgetState<String, WTextListFormField> {
         });
         await this.widget.onAddItem?.call(this._items, value, this._items.length - 1);
         this._textFormFieldKey.currentState
-          ?..xController.clear()
-          ..xFocusNode.requestFocus();
+          ?..controllerOrDefault.clear()
+          ..focusNodeOrDefault.requestFocus();
       }
     }
   }

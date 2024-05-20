@@ -34,7 +34,9 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
   //
 
   const WTextFormField({
+    // Super.
     super.key,
+    super.defaultValue,
     super.title,
     super.readOnly,
     super.enabled,
@@ -42,6 +44,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     super.autovalidateMode = AutovalidateMode.disabled,
     super.onAutoSave,
     super.autosaveDelay,
+    // This.
     this.controller,
     this.decoration,
     this.focusNode,
@@ -60,6 +63,17 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
   //
 
   WTextFormField copyWith({
+    // Super.
+    Key? key,
+    String? defaultValue,
+    String? title,
+    bool? readOnly,
+    bool? enabled,
+    String? Function(String?)? validator,
+    AutovalidateMode? autovalidateMode,
+    Future<void> Function(String)? onAutoSave,
+    Duration? autosaveDelay,
+    // This.
     TextEditingController? controller,
     InputDecoration? decoration,
     FocusNode? focusNode,
@@ -68,18 +82,14 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     int? minLines,
     int? maxLines,
     bool? obscureText,
-    String? title,
-    bool? readOnly,
-    bool? enabled,
-    String? Function(String?)? validator,
-    AutovalidateMode? autovalidateMode,
-    final void Function(String? text)? onAutoSave,
-    Duration? autosaveDelay,
     TextInputAction? textInputAction,
+    bool? autocomplete,
     void Function(String text)? onFieldSubmitted,
   }) {
     return WTextFormField(
-      key: key,
+      // Super.
+      key: key ?? this.key,
+      defaultValue: defaultValue ?? this.defaultValue,
       title: title ?? this.title,
       readOnly: readOnly ?? this.readOnly,
       enabled: enabled ?? this.enabled,
@@ -87,6 +97,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
       onAutoSave: onAutoSave ?? this.onAutoSave,
       autosaveDelay: autosaveDelay ?? this.autosaveDelay,
+      // This.
       controller: controller ?? this.controller,
       decoration: decoration ?? this.decoration,
       focusNode: focusNode ?? this.focusNode,
@@ -96,6 +107,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
       maxLines: maxLines ?? this.maxLines,
       obscureText: obscureText ?? this.obscureText,
       textInputAction: textInputAction ?? this.textInputAction,
+      autocomplete: autocomplete ?? this.autocomplete,
       onFieldSubmitted: onFieldSubmitted ?? this.onFieldSubmitted,
     );
   }
@@ -115,17 +127,23 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
   //
   //
 
+  final formFieldStateKey = GlobalKey<FormFieldState>();
   late final _didProvideController = this.widget.controller != null;
-  late final xController = this.widget.controller ?? TextEditingController();
+  late final controllerOrDefault = this.widget.controller ?? TextEditingController();
   late final _didProvideFocusNode = this.widget.focusNode != null;
-  late final xFocusNode = this.widget.focusNode ?? FocusNode();
+  late final focusNodeOrDefault = this.widget.focusNode ?? FocusNode();
 
   //
   //
   //
 
   @override
-  String? getSnapshot() => this.xController.text;
+  void initState() {
+    if (this.widget.defaultValue != null) {
+      this.controllerOrDefault.text = this.widget.defaultValue!;
+    }
+    super.initState();
+  }
 
   //
   //
@@ -145,22 +163,27 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
           SizedBox(height: 6.sc),
         ],
         TextFormField(
-          autofocus: true,
-          autovalidateMode: this.widget.autovalidateMode,
-          controller: this.xController,
-          decoration: this.widget.decoration,
-          enabled: this.widget.enabled,
-          focusNode: this.xFocusNode,
-          keyboardType: this.widget.keyboardType,
-          onChanged: (_) => this.autosaveDebouncer(),
+          // Super.
+          key: this.formFieldStateKey,
           readOnly: this.widget.readOnly ?? false,
-          validator: this.validatorWithDefault,
+          enabled: this.widget.enabled ?? true,
+          validator: this.validatorOrDefault,
+          autovalidateMode: this.widget.autovalidateMode,
+          onSaved: (e) => this.autosaveDebouncer(),
+          // This.
+          controller: this.controllerOrDefault,
+          decoration: this._defaultOrReadOnlyDecoration(),
+          focusNode: this.focusNodeOrDefault,
+          keyboardType: this.widget.keyboardType,
+          autofillHints: this.widget.autofillHints,
           minLines: this.widget.minLines,
           maxLines: this.widget.maxLines,
-          autofillHints: this.widget.autofillHints,
           obscureText: this.widget.obscureText ?? false,
           textInputAction: this.widget.textInputAction,
           onFieldSubmitted: this.widget.onFieldSubmitted,
+          // Other.
+          autofocus: true,
+          onChanged: (_) => this.autosaveDebouncer(),
           cursorWidth: 2.sc,
           scrollPadding: EdgeInsets.all(20.sc),
         ),
@@ -173,25 +196,54 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
   //
 
   @override
+  String getSnapshot() => this.controllerOrDefault.text;
+
+  //
+  //
+  //
+
+  @override
+  bool? validate() => this.formFieldStateKey.currentState?.validate();
+
+  //
+  //
+  //
+
+  InputDecoration? _defaultOrReadOnlyDecoration() {
+    if (this.widget.readOnly != null && this.widget.readOnly!) {
+      return (this.widget.decoration ?? const InputDecoration()).copyWith(
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.surfaceContainer,
+      );
+    } else {
+      return this.widget.decoration;
+    }
+  }
+
+  //
+  //
+  //
+
+  @override
   void dispose() {
     super.dispose();
     if (!this._didProvideController) {
-      this.xController.dispose();
+      this.controllerOrDefault.dispose();
     }
     if (!this._didProvideFocusNode) {
-      this.xFocusNode.dispose();
+      this.focusNodeOrDefault.dispose();
     }
   }
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension WTextFormFieldExtension on WTextFormField {
+extension WTextFormFieldVariationsExtension on WTextFormField {
   //
   //
   //
 
-  WTextFormField toNameField({String errorText = '***'}) {
+  WTextFormField withNameProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.name,
       autofillHints: const [AutofillHints.name],
@@ -205,14 +257,13 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  //
-  //
-  //
-
-  WTextFormField toEmailField({String errorText = '***'}) {
+  WTextFormField withEmailProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.emailAddress,
-      autofillHints: const [AutofillHints.email],
+      autofillHints: const [
+        AutofillHints.email,
+        AutofillHints.username,
+      ],
       validator: (e) {
         return e != null
             ? RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(e)
@@ -223,11 +274,16 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  //
-  //
-  //
+  WTextFormField withNewEmailProps({String errorText = '***'}) {
+    return this.withEmailProps(errorText: errorText).copyWith(
+      autofillHints: const [
+        AutofillHints.email,
+        AutofillHints.newUsername,
+      ],
+    );
+  }
 
-  WTextFormField toPasswordField({String errorText = '***'}) {
+  WTextFormField withPasswordProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.visiblePassword,
       autofillHints: const [AutofillHints.password],
@@ -242,29 +298,55 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  WTextFormField toNewPasswordField({String errorText = '***'}) {
-    return this.toPasswordField(errorText: errorText).copyWith(
+  WTextFormField withNewPasswordProps({String errorText = '***'}) {
+    return this.withPasswordProps(errorText: errorText).copyWith(
       autofillHints: const [AutofillHints.newPassword],
     );
   }
 
-  //
-  //
-  //
-
-  WTextFormField toMultiline3To5Field() {
-    return this.copyWith(
-      keyboardType: TextInputType.multiline,
-      minLines: 3,
-      maxLines: 5,
+  Widget withObscurityToggle() {
+    return PodWidget(
+      initialValue: true,
+      builder: (context, child, pObscureText) {
+        final obscureText = pObscureText.value;
+        return this.copyWith(
+          obscureText: obscureText,
+          decoration: (this.decoration ?? const InputDecoration()).copyWith(
+            suffixIcon: Padding(
+              padding: EdgeInsets.only(right: 8.sc),
+              child: IconButton(
+                icon: Icon(
+                  obscureText ? FluentIcons.eye_16_filled : FluentIcons.eye_off_16_filled,
+                ),
+                onPressed: () => pObscureText.update((v) => !v),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
-  //
-  //
-  //
+  WTextFormField withMultilineProps({
+    int? minLines = 3,
+    int? maxLines = 5,
+    String errorText = '***',
+  }) {
+    return this.copyWith(
+      keyboardType: TextInputType.multiline,
+      minLines: minLines,
+      maxLines: maxLines,
+      validator: (e) {
+        return e != null
+            ? e.isNotEmpty
+                ? null
+                : errorText
+            : null;
+      },
+    );
+  }
 
-  WTextFormField toPhoneNumberField({String errorText = '***'}) {
+  WTextFormField withPhoneNumberProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.phone,
       autofillHints: const [AutofillHints.telephoneNumber],
@@ -278,11 +360,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  //
-  //
-  //
-
-  WTextFormField asNumber({String errorText = '***'}) {
+  WTextFormField withNumberProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.number,
       validator: (e) {
@@ -295,11 +373,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  //
-  //
-  //
-
-  WTextFormField toBirthdayField({String errorText = '***'}) {
+  WTextFormField withBirthdayProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.datetime,
       autofillHints: const [AutofillHints.birthday],
@@ -313,11 +387,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  //
-  //
-  //
-
-  WTextFormField toAddressLine1Field({String errorText = '***'}) {
+  WTextFormField withAddressLine1Props({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.streetAddress,
       autofillHints: const [AutofillHints.streetAddressLine1],
@@ -331,7 +401,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  WTextFormField toAddressLine2Field({String errorText = '***'}) {
+  WTextFormField withAddressLine2Props({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.streetAddress,
       autofillHints: const [AutofillHints.streetAddressLine2],
@@ -345,7 +415,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  WTextFormField toAddressCityField({String errorText = '***'}) {
+  WTextFormField withAddressCityProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.text,
       autofillHints: const [AutofillHints.addressCity],
@@ -359,7 +429,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  WTextFormField toAddressStateField({String errorText = '***'}) {
+  WTextFormField withAddressStateProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.text,
       autofillHints: const [AutofillHints.addressState],
@@ -373,7 +443,7 @@ extension WTextFormFieldExtension on WTextFormField {
     );
   }
 
-  WTextFormField toAddressPostalCodeField({String errorText = '***'}) {
+  WTextFormField withAddressPostalCodeProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.number,
       autofillHints: const [AutofillHints.postalCode],

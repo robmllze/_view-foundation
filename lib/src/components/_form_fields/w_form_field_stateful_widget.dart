@@ -17,12 +17,13 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
   //
   //
 
+  final T? defaultValue;
   final String? title;
   final bool? readOnly;
   final bool? enabled;
   final String? Function(T? data)? validator;
   final AutovalidateMode? autovalidateMode;
-  final void Function(T? data)? onAutoSave;
+  final Future<void> Function(T data)? onAutoSave;
   final Duration? autosaveDelay;
 
   //
@@ -31,6 +32,7 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
 
   const WFormFieldStatefulWidget({
     super.key,
+    this.defaultValue,
     this.title,
     this.readOnly,
     this.enabled,
@@ -56,12 +58,23 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
   //
   //
 
+  final pIsAutosaving = Pod<bool>(false);
+
+  //
+  //
+  //
+
   late final autosaveDebouncer = Debouncer(
-    delay: this.widget.autosaveDelay ?? const Duration(seconds: 5),
-    onWaited: () {
-      final shapshot = this.getSnapshot();
-      final valid = validatorWithDefault(shapshot) == null;
-      this.widget.onAutoSave?.call(valid ? shapshot : null);
+    delay: this.widget.autosaveDelay ?? const Duration(milliseconds: 3500),
+    onCall: () async {
+      await this.pIsAutosaving.set(true);
+    },
+    onWaited: () async {
+      final valid = this.validate();
+      if (valid == null || valid) {
+        await this.widget.onAutoSave?.call(this.getSnapshot());
+      }
+      await this.pIsAutosaving.set(false);
     },
   );
 
@@ -69,18 +82,27 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
   //
   //
 
-  T? getSnapshot();
+  T getSnapshot();
 
   //
   //
   //
 
-  String? validatorWithDefault(T? snapshot) {
+  String? validatorOrDefault(T? snapshot) {
     if (this.widget.validator != null) {
       return this.widget.validator?.call(snapshot);
     } else {
-      return snapshot == null || snapshot.toString().isEmpty ? '***' : null;
+      return snapshot.toString().isEmpty ? '***' : null;
     }
+  }
+
+  //
+  //
+  //
+
+  @visibleForOverriding
+  bool? validate() {
+    return this.validatorOrDefault(this.getSnapshot()) == null;
   }
 
   //
@@ -89,7 +111,10 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
 
   @override
   void dispose() {
-    this.autosaveDebouncer.finalize();
+    () async {
+      await this.autosaveDebouncer.finalize();
+      this.pIsAutosaving.dispose();
+    }();
     super.dispose();
   }
 }

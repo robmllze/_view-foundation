@@ -159,8 +159,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
         padding: EdgeInsets.only(
           left: 20.sc,
           right: 20.sc,
-          top: header != null ? headerSpace : 0.0,
-          bottom: footer != null ? footerSpace : 0.0,
+          top: headerSpace,
+          bottom: footerSpace,
         ),
         child: body,
       ),

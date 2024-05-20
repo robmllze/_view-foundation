@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyPlaceholder extends StatelessWidget {
+class WPlaceholder extends StatelessWidget {
   //
   //
   //
@@ -25,7 +25,7 @@ class MyPlaceholder extends StatelessWidget {
   //
   //
 
-  const MyPlaceholder({
+  const WPlaceholder({
     super.key,
     this.message = 'No items found.',
     this.loading = false,

@@ -71,29 +71,10 @@ class _State extends State<MyDeleteConfirmationDialog> {
             'Enter your password to delete your account||todo'.tr(),
           ),
           SizedBox(height: 12.sc),
-          PodWidget(
-            initialValue: true,
-            builder: (context, child, pObscureText) {
-              final obscureText = pObscureText.value;
-              return TextField(
-                decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  suffixIcon: Padding(
-                    padding: EdgeInsets.only(right: 8.sc),
-                    child: IconButton(
-                      icon: Icon(
-                        obscureText ? FluentIcons.eye_16_filled : FluentIcons.eye_off_16_filled,
-                      ),
-                      onPressed: () => pObscureText.update((v) => !v),
-                    ),
-                  ),
-                ),
-                obscureText: obscureText,
-                controller: this._controller,
-                onSubmitted: (_) => this._proceed(context),
-              );
-            },
-          ),
+          WTextFormField(
+            controller: this._controller,
+            onFieldSubmitted: (_) => this._proceed(context),
+          ).withPasswordProps().withObscurityToggle(),
           SizedBox(height: 20.sc),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
