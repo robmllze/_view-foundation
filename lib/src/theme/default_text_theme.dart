@@ -27,15 +27,15 @@ TextTheme defaultTextTheme() {
     bodyMedium: TextStyle(fontSize: 14.sc),
     bodySmall: TextStyle(fontSize: 12.sc),
     labelLarge: TextStyle(
-      fontSize: 14.sc,
+      fontSize: 15.sc,
       fontWeight: FONT_WEIGHT_MEDIUM,
     ),
     labelMedium: TextStyle(
-      fontSize: 12.sc,
+      fontSize: 13.sc,
       fontWeight: FONT_WEIGHT_MEDIUM,
     ),
     labelSmall: TextStyle(
-      fontSize: 11.sc,
+      fontSize: 12.sc,
       fontWeight: FONT_WEIGHT_MEDIUM,
     ),
   );

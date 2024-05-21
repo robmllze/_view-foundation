@@ -12,8 +12,9 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-Future<void> showToastOverlay(
+Future<void> showOverlay(
   BuildContext context, {
+  bool tapBackgroundToDismiss = true,
   required FutureOr<Widget> Function(
     BuildContext context,
     void Function() remove,
@@ -21,26 +22,26 @@ Future<void> showToastOverlay(
 }) {
   final completer = Completer();
   late final OverlayEntry overlayEntry;
+
+  void complete() {
+    overlayEntry.remove();
+    completer.complete();
+  }
+
   overlayEntry = OverlayEntry(
     builder: (context) {
-      return Align(
-        alignment: Alignment.bottomCenter,
-        child: Material(
-          color: Colors.transparent,
-          child: FutureBuilder(
-            future: () async {
-              return await builder(context, () {
-                overlayEntry.remove();
-                completer.complete();
-              });
-            }(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return snapshot.data as Widget;
-              }
-              return const SizedBox();
-            },
-          ),
+      return WBlurryOverlay(
+        onTapBackground: tapBackgroundToDismiss ? complete : null,
+        child: FutureBuilder(
+          future: () async {
+            return await builder(context, complete);
+          }(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return snapshot.data as Widget;
+            }
+            return const SizedBox.shrink();
+          },
         ),
       );
     },

@@ -28,8 +28,9 @@ enum AppThemeType with AppThemeEnumMixin {
 
   @override
   ThemeData get themeData {
+    final textTheme = defaultTextTheme();
     final buttonStyle = ButtonStyle(
-      textStyle: WidgetStateProperty.all(TextStyle(fontSize: 16.sc)),
+      textStyle: WidgetStateProperty.all(textTheme.bodyMedium),
       minimumSize: WidgetStateProperty.all(Size(40.sc, 40.sc)),
       padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 16.sc, vertical: 8.sc)),
       iconSize: WidgetStateProperty.all(24.sc),
@@ -67,8 +68,12 @@ enum AppThemeType with AppThemeEnumMixin {
           segmentedButtonTheme: SegmentedButtonThemeData(style: buttonStyle),
           textButtonTheme: TextButtonThemeData(style: buttonStyle),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: defaultTextTheme(),
+          textTheme: textTheme,
           inputDecorationTheme: InputDecorationTheme(
+            floatingLabelStyle: textTheme.labelMedium,
+            labelStyle: textTheme.labelMedium,
+            errorStyle: textTheme.labelMedium?.copyWith(color: Colors.red.shade900),
+            hintStyle: textTheme.labelMedium?.copyWith(color: Colors.grey.shade500),
             border: border,
             enabledBorder: border,
             focusedBorder: border,
@@ -107,8 +112,12 @@ enum AppThemeType with AppThemeEnumMixin {
           segmentedButtonTheme: SegmentedButtonThemeData(style: buttonStyle),
           textButtonTheme: TextButtonThemeData(style: buttonStyle),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: defaultTextTheme(),
+          textTheme: textTheme,
           inputDecorationTheme: InputDecorationTheme(
+            floatingLabelStyle: textTheme.labelMedium,
+            labelStyle: textTheme.labelMedium,
+            errorStyle: textTheme.labelMedium?.copyWith(color: Colors.red.shade200),
+            hintStyle: textTheme.labelLarge?.copyWith(color: Colors.grey.shade600),
             border: border,
             enabledBorder: border,
             focusedBorder: border,

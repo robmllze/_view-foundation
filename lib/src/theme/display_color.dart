@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension DefaultDisplayColorOnPublicBaseModelExtension on PublicBaseModel {
+extension DefaultDisplayColorOnPublicModelExtension on PublicModel {
   //
   //
   //

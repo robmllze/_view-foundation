@@ -83,7 +83,7 @@ class WTextListFormFieldState extends WFormFieldStatefulWidgetState<String, WTex
                     if (snapshot.hasData) {
                       return snapshot.data ?? Text(item);
                     }
-                    return const SizedBox();
+                    return const SizedBox.shrink();
                   },
                 ),
               ],

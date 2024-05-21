@@ -15,6 +15,6 @@ part of 'error_screen.dart';
 class _View extends TErrorScreenView {
   @override
   Widget body(BuildContext context) {
-    return const SizedBox();
+    return const SizedBox.shrink();
   }
 }
