@@ -32,15 +32,7 @@ Future<void> showMessageOverlay(
         mainAxisSize: MainAxisSize.min,
         children: [
           IntrinsicWidth(
-            child: Container(
-              constraints: BoxConstraints(
-                minWidth: 300.sc,
-                maxWidth: 400.sc,
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surface,
-                borderRadius: BorderRadius.circular(8.sc),
-              ),
+            child: WSurface(
               child: Padding(
                 padding: EdgeInsets.all(32.sc),
                 child: WColumn(

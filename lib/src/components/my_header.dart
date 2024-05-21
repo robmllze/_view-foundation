@@ -52,7 +52,6 @@ class MyHeader extends StatelessWidget {
         bottomRight: Radius.circular(16.sc),
       ),
       height: 100.sc,
-      expandWidth: true,
       child: Column(
         children: [
           if (this.breadCrumbBar != null) this.breadCrumbBar!,

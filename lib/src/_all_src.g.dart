@@ -7,7 +7,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'components/_dialogs/w_delete_account_confirmation_dialog.dart';
 export 'components/_form_fields/w_form_field_stateful_widget.dart';
 export 'components/_form_fields/w_text_form_field.dart';
 export 'components/_form_fields/w_text_list_form_field.dart';
@@ -18,6 +17,8 @@ export 'components/my_header.dart';
 export 'components/w_app_icon_progress_indicator.dart';
 export 'components/w_avatar_image.dart';
 export 'components/w_bouncing_icon.dart';
+export 'components/w_confirmation_dialog.dart';
+export 'components/w_default_dialog_body.dart';
 export 'components/w_default_list_tile.dart';
 export 'components/w_divider.dart';
 export 'components/w_email_reset_dialog_body.dart';
@@ -37,14 +38,11 @@ export 'theme/input_decorations.dart';
 export 'types/accessibility/app_locale_type/app_locale_type.dart';
 export 'types/accessibility/app_scale_type/app_scale_type.dart';
 export 'types/accessibility/app_theme_type/app_theme_type.dart';
-export 'screens/error_screen/widgets/dialogs/dialog_body.dart';
-export 'screens/error_screen/widgets/navigation_controls.dart';
-export 'screens/error_screen/widgets/overlays/show_app_icon_overlay.dart';
-export 'screens/error_screen/widgets/overlays/show_error_toast_overlay.dart';
-export 'screens/error_screen/widgets/overlays/show_message_overlay.dart';
-export 'screens/error_screen/widgets/overlays/show_message_overlay_with_error_handler.dart';
-export 'screens/error_screen/widgets/overlays/show_message_toast_overlay.dart';
-export 'screens/error_screen/widgets/overlays/show_overlay.dart';
-export 'screens/error_screen/widgets/overlays/show_toast_overlay.dart';
-export 'screens/error_screen/widgets/screen/screen.dart';
-export 'screens/error_screen/widgets/screen_page/screen_page.dart';
+export 'widgets/navigation_controls.dart';
+export 'widgets/overlays/show_app_icon_overlay.dart';
+export 'widgets/overlays/show_message_overlay.dart';
+export 'widgets/overlays/show_message_toast_overlay.dart';
+export 'widgets/overlays/show_overlay.dart';
+export 'widgets/overlays/show_toast_overlay.dart';
+export 'widgets/screen/screen.dart';
+export 'widgets/screen_page/screen_page.dart';

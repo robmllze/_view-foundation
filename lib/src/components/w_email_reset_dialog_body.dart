@@ -57,7 +57,7 @@ class _State extends State<MyEmailResetDialogBody> {
 
   @override
   Widget build(BuildContext context) {
-    return DialogBody(
+    return WDefaultDialogBody(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,10 +118,10 @@ class _State extends State<MyEmailResetDialogBody> {
       this.widget.onCancel();
     } catch (e) {
       if (context.mounted) {
-        showErrorToastOverlay(
+        showMessageToastOverlay(
           context,
-          error: e,
-          remover: removeInSeconds(3),
+          message: e,
+          backgroundColor: Theme.of(context).colorScheme.errorContainer,
         );
       }
     }
