@@ -95,49 +95,52 @@ class _State extends State<WConfirmationDialog> {
         alignment: Alignment.topRight,
         children: [
           WDefaultDialogBody(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (this.widget.title != null) ...[
-                  Text(
-                    this.widget.title!,
-                    style: Theme.of(context).textTheme.titleMedium?.wBold,
+            child: IntrinsicWidth(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (this.widget.title != null) ...[
+                    Text(
+                      this.widget.title!,
+                      style: Theme.of(context).textTheme.titleMedium?.wBold,
+                    ),
+                    const WDivider(),
+                    SizedBox(height: 12.sc),
+                  ],
+                  if (this.widget.body != null) ...[
+                    Text(
+                      this.widget.body!,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    SizedBox(height: 12.sc),
+                  ],
+                  if (this.widget.child != null) ...[
+                    this.widget.child!,
+                    SizedBox(height: 12.sc),
+                  ],
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.sc),
+                    child: WRow(
+                      divider: SizedBox(width: 12.sc),
+                      children: [
+                        if (this.widget.onConfirm != null && this.widget.confirmText != null)
+                          FilledButton(
+                            onPressed: this.widget.onConfirm,
+                            style: this.widget.confirmButtonStyle,
+                            child: Text(this.widget.confirmText!),
+                          ),
+                        if (this.widget.onDeny != null && this.widget.denyText != null)
+                          OutlinedButton(
+                            onPressed: this.widget.onDeny,
+                            style: this.widget.denyButtonStyle,
+                            child: Text(this.widget.denyText!),
+                          ),
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 12.sc),
                 ],
-                if (this.widget.body != null) ...[
-                  Text(
-                    this.widget.body!,
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  SizedBox(height: 12.sc),
-                ],
-                if (this.widget.child != null) ...[
-                  this.widget.child!,
-                  SizedBox(height: 12.sc),
-                ],
-                Padding(
-                  padding: EdgeInsets.only(top: 12.sc),
-                  child: WRow(
-                    divider: SizedBox(width: 12.sc),
-                    children: [
-                      if (this.widget.onConfirm != null && this.widget.confirmText != null)
-                        FilledButton(
-                          onPressed: this.widget.onConfirm,
-                          style: this.widget.confirmButtonStyle,
-                          child: Text(this.widget.confirmText!),
-                        ),
-                      if (this.widget.onDeny != null && this.widget.denyText != null)
-                        TextButton(
-                          onPressed: this.widget.onDeny,
-                          style: this.widget.denyButtonStyle,
-                          child: Text(this.widget.denyText!),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
           if (this.widget.onDeny != null && this.widget.denyText == null)
@@ -166,14 +169,14 @@ extension ShowDialogOnWConfirmationDialogExtension on WConfirmationDialog {
 
   Future<void> showDialog({
     required BuildContext context,
-    Future<void> Function()? onConfrm,
+    Future<void> Function()? onConfirm,
   }) async {
     await showOverlay(
       context,
-      builder: (tempContext, remove) {
+      builder: (_, remove) {
         return this.copyWith(
           onDeny: remove,
-          onConfirm: onConfrm,
+          onConfirm: onConfirm,
         );
       },
     );
@@ -190,7 +193,7 @@ extension ShowDialogOnWConfirmationDialogExtension on WConfirmationDialog {
     final controller = TextEditingController();
     await showOverlay(
       context,
-      builder: (tempContext, r1) {
+      builder: (_, r1) {
         Future<void> onConfirm() async {
           r1();
           late void Function() r2;

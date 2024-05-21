@@ -35,13 +35,9 @@ class WDefaultDialogBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WSurface(
+      borderRadius: BorderRadius.circular(16.sc),
       child: Padding(
-        padding: EdgeInsets.only(
-          left: 20.sc,
-          right: 20.sc,
-          top: 28.sc,
-          bottom: 24.sc,
-        ),
+        padding: EdgeInsets.all(24.sc),
         child: this.child,
       ),
     );
