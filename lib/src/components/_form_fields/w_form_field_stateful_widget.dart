@@ -65,7 +65,7 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
   //
 
   late final autosaveDebouncer = Debouncer(
-    delay: this.widget.autosaveDelay ?? const Duration(milliseconds: 3500),
+    delay: this.widget.autosaveDelay ?? const Duration(milliseconds: 1500),
     onCall: () async {
       await this.pIsAutosaving.set(true);
     },

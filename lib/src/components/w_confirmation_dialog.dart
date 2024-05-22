@@ -18,13 +18,14 @@ class WConfirmationDialog extends StatefulWidget {
   //
 
   final String? title;
-  final String? body;
+  final String? message;
   final String? confirmText;
   final String? denyText;
-  final void Function()? onConfirm;
+  final FutureOr<void> Function(String text)? onConfirm;
   final void Function()? onDeny;
   final ButtonStyle? confirmButtonStyle;
   final ButtonStyle? denyButtonStyle;
+  final WTextFormField? textField;
   final Widget? child;
 
   //
@@ -34,13 +35,14 @@ class WConfirmationDialog extends StatefulWidget {
   const WConfirmationDialog({
     super.key,
     this.title,
-    this.body,
+    this.message,
     this.confirmText,
     this.denyText,
     this.onConfirm,
     this.onDeny,
     this.confirmButtonStyle,
     this.denyButtonStyle,
+    this.textField,
     this.child,
   });
 
@@ -53,21 +55,23 @@ class WConfirmationDialog extends StatefulWidget {
     String? body,
     String? confirmText,
     String? denyText,
-    void Function()? onConfirm,
+    void Function(String text)? onConfirm,
     void Function()? onDeny,
     ButtonStyle? confirmButtonStyle,
     ButtonStyle? denyButtonStyle,
+    WTextFormField? textField,
     Widget? child,
   }) {
     return WConfirmationDialog(
       title: title ?? this.title,
-      body: body ?? this.body,
+      message: body ?? this.message,
       confirmText: confirmText ?? this.confirmText,
       denyText: denyText ?? this.denyText,
       onConfirm: onConfirm ?? this.onConfirm,
       onDeny: onDeny ?? this.onDeny,
       confirmButtonStyle: confirmButtonStyle ?? this.confirmButtonStyle,
       denyButtonStyle: denyButtonStyle ?? this.denyButtonStyle,
+      textField: textField ?? this.textField,
       child: child ?? this.child,
     );
   }
@@ -77,12 +81,56 @@ class WConfirmationDialog extends StatefulWidget {
   //
 
   @override
-  _State createState() => _State();
+  WConfirmationDialogState createState() => WConfirmationDialogState();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<WConfirmationDialog> {
+class WConfirmationDialogState extends State<WConfirmationDialog> {
+  //
+  //
+  //
+
+  late final GlobalKey<WTextFormFieldState> textFieldGlobalKey;
+  late final WTextFormField? _textField;
+  late final Pod<bool> pCanConfirm;
+
+  //
+  //
+  //
+
+  @override
+  void initState() {
+    final temp = this.widget.textField;
+    this.textFieldGlobalKey =
+        letAs<GlobalKey<WTextFormFieldState>>(temp?.key) ?? GlobalKey<WTextFormFieldState>();
+    this._textField = temp?.copyWith(
+      key: this.textFieldGlobalKey,
+      onFieldSubmitted: (text) {
+        temp.onFieldSubmitted?.call(text);
+        this.widget.onConfirm?.call(text);
+      },
+      onUpdated: (text, errorText) {
+        temp.onUpdated?.call(text, errorText);
+        this.pCanConfirm.set(errorText == null);
+      },
+      autovalidateMode: temp.autovalidateMode ?? AutovalidateMode.always,
+    );
+    this.pCanConfirm = Pod(this._isTextFieldInitiallyValid() ?? true);
+    super.initState();
+  }
+
+  String _getBestTextFieldValue() {
+    return this.textFieldGlobalKey.currentState?.controllerOrDefault.text ??
+        this._textField?.controller?.text.nullIfEmpty ??
+        this._textField?.defaultValue ??
+        '';
+  }
+
+  bool? _isTextFieldInitiallyValid() {
+    return this._textField?.validator?.call(this._getBestTextFieldValue()) == null;
+  }
+
   //
   //
   //
@@ -96,7 +144,8 @@ class _State extends State<WConfirmationDialog> {
         children: [
           WDefaultDialogBody(
             child: IntrinsicWidth(
-              child: Column(
+              child: WColumn(
+                divider: SizedBox(height: 12.sc),
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -106,29 +155,31 @@ class _State extends State<WConfirmationDialog> {
                       style: Theme.of(context).textTheme.titleMedium?.wBold,
                     ),
                     const WDivider(),
-                    SizedBox(height: 12.sc),
                   ],
-                  if (this.widget.body != null) ...[
+                  if (this.widget.message != null)
                     Text(
-                      this.widget.body!,
+                      this.widget.message!,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    SizedBox(height: 12.sc),
-                  ],
-                  if (this.widget.child != null) ...[
-                    this.widget.child!,
-                    SizedBox(height: 12.sc),
-                  ],
+                  if (this._textField != null) this._textField,
+                  if (this.widget.child != null) this.widget.child!,
                   Padding(
                     padding: EdgeInsets.only(top: 8.sc),
                     child: WRow(
                       divider: SizedBox(width: 12.sc),
                       children: [
                         if (this.widget.onConfirm != null && this.widget.confirmText != null)
-                          FilledButton(
-                            onPressed: this.widget.onConfirm,
-                            style: this.widget.confirmButtonStyle,
-                            child: Text(this.widget.confirmText!),
+                          PodBuilder(
+                            pod: this.pCanConfirm,
+                            builder: (context, child, canConfirm) {
+                              return FilledButton(
+                                onPressed: canConfirm == true
+                                    ? () => this.widget.onConfirm!(this._getBestTextFieldValue())
+                                    : null,
+                                style: this.widget.confirmButtonStyle,
+                                child: Text(this.widget.confirmText!),
+                              );
+                            },
                           ),
                         if (this.widget.onDeny != null && this.widget.denyText != null)
                           OutlinedButton(
@@ -162,66 +213,44 @@ class _State extends State<WConfirmationDialog> {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension ShowDialogOnWConfirmationDialogExtension on WConfirmationDialog {
-  //
-  //
-  //
-
-  Future<void> showDialog({
-    required BuildContext context,
-    Future<void> Function()? onConfirm,
-  }) async {
-    await showOverlay(
-      context,
-      builder: (_, remove) {
-        return this.copyWith(
-          onDeny: remove,
-          onConfirm: onConfirm,
-        );
-      },
-    );
-  }
-
-  //
-  //
-  //
-
-  Future<void> showDialogWithTextField({
-    required BuildContext context,
-    required Future<void> Function(String password) onDelete,
-  }) async {
-    final controller = TextEditingController();
-    await showOverlay(
-      context,
-      builder: (_, r1) {
-        Future<void> onConfirm() async {
-          r1();
-          late void Function() r2;
-
-          showAppIconOverlay(context, remover: (r) => r2 = r);
-          try {
-            await onDelete(controller.text);
-            r2();
-          } catch (e) {
-            r2();
-            showMessageToastOverlay(
+Future<void> showConfirmationDialog({
+  required BuildContext context,
+  required WConfirmationDialog dialog,
+  void Function()? onSuccess,
+  void Function(Object? e)? onError,
+}) async {
+  await showOverlay(
+    context,
+    builder: (_, r1) {
+      Future<void> $onConfirm(String text) async {
+        late void Function() r2;
+        showAppIconOverlay(context, remover: (r) => r2 = r);
+        try {
+          await dialog.onConfirm!(text);
+          r2();
+          onSuccess?.call();
+        } catch (e) {
+          r2();
+          if (onError != null) {
+            onError(e);
+          } else {
+            showErrorToastOverlay(
               context,
               message: e,
-              backgroundColor: Theme.of(context).colorScheme.errorContainer,
             );
           }
         }
+      }
 
-        return this.copyWith(
-          onDeny: r1,
-          onConfirm: onConfirm,
-          child: WTextFormField(
-            controller: controller,
-            onFieldSubmitted: (_) => onConfirm(),
-          ).withPasswordProps().withObscurityToggle(),
-        );
-      },
-    );
-    controller.dispose();
-  }
+      return dialog.copyWith(
+        onDeny: r1,
+        onConfirm: (text) {
+          r1();
+          if (dialog.onConfirm != null) {
+            $onConfirm(text);
+          }
+        },
+      );
+    },
+  );
 }

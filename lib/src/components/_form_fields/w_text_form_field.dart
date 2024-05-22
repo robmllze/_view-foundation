@@ -28,6 +28,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
   final TextInputAction? textInputAction;
   final bool? autocomplete;
   final void Function(String text)? onFieldSubmitted;
+  final void Function(TextEditingController controller, String? errorText)? onUpdated;
 
   //
   //
@@ -56,6 +57,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     this.textInputAction,
     this.autocomplete,
     this.onFieldSubmitted,
+    this.onUpdated,
   });
 
   //
@@ -85,6 +87,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     TextInputAction? textInputAction,
     bool? autocomplete,
     void Function(String text)? onFieldSubmitted,
+    final void Function(TextEditingController controller, String? errorText)? onUpdated,
   }) {
     return WTextFormField(
       // Super.
@@ -109,6 +112,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
       textInputAction: textInputAction ?? this.textInputAction,
       autocomplete: autocomplete ?? this.autocomplete,
       onFieldSubmitted: onFieldSubmitted ?? this.onFieldSubmitted,
+      onUpdated: onUpdated ?? this.onUpdated,
     );
   }
 
@@ -133,16 +137,32 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
   late final _didProvideFocusNode = this.widget.focusNode != null;
   late final focusNodeOrDefault = this.widget.focusNode ?? FocusNode();
 
+  late final pInputDecoration =
+      Pod<InputDecoration>(this.widget.decoration ?? const InputDecoration());
+  late final pObscureText = Pod<bool?>(this.widget.obscureText);
+  late final pReadOnly = Pod<bool>(this.widget.readOnly ?? false);
+
   //
   //
   //
 
   @override
   void initState() {
-    if (this.widget.defaultValue != null) {
+    if (this.widget.defaultValue != null && this.controllerOrDefault.text.isEmpty) {
       this.controllerOrDefault.text = this.widget.defaultValue!;
     }
+    this._didUpdate();
     super.initState();
+  }
+
+  //
+  //
+  //
+
+  void _didUpdate() {
+    final text = this.controllerOrDefault.text;
+    final errorText = this.widget.validator?.call(text);
+    this.widget.onUpdated?.call(this.controllerOrDefault, errorText);
   }
 
   //
@@ -162,30 +182,60 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
           ),
           SizedBox(height: 6.sc),
         ],
-        TextFormField(
-          // Super.
-          key: this.formFieldStateKey,
-          readOnly: this.widget.readOnly ?? false,
-          enabled: this.widget.enabled ?? true,
-          validator: this.validatorOrDefault,
-          autovalidateMode: this.widget.autovalidateMode,
-          onSaved: (e) => this.autosaveDebouncer(),
-          // This.
-          controller: this.controllerOrDefault,
-          decoration: this._defaultOrReadOnlyDecoration(),
-          focusNode: this.focusNodeOrDefault,
-          keyboardType: this.widget.keyboardType,
-          autofillHints: this.widget.autofillHints,
-          minLines: this.widget.minLines,
-          maxLines: this.widget.maxLines,
-          obscureText: this.widget.obscureText ?? false,
-          textInputAction: this.widget.textInputAction,
-          onFieldSubmitted: this.widget.onFieldSubmitted,
-          // Other.
-          autofocus: true,
-          onChanged: (_) => this.autosaveDebouncer(),
-          cursorWidth: 2.sc,
-          scrollPadding: EdgeInsets.all(20.sc),
+        PodListBuilder(
+          podList: [
+            this.pInputDecoration,
+            this.pObscureText,
+            this.pReadOnly,
+          ],
+          builder: (context, child, values) {
+            return TextFormField(
+              // Super.
+              key: this.formFieldStateKey,
+              readOnly: this.pReadOnly.value,
+              enabled: this.widget.enabled ?? true,
+              validator: this.validatorOrDefault,
+              autovalidateMode: this.widget.autovalidateMode,
+              onSaved: (e) => this.autosaveDebouncer(),
+              // This.
+              controller: this.controllerOrDefault,
+              decoration: this.pInputDecoration.value.copyWith(
+                    filled: true,
+                    fillColor: this.pReadOnly.value
+                        ? Theme.of(context).colorScheme.surfaceContainer
+                        : Theme.of(context).colorScheme.surface,
+                    suffixIcon: this.widget.obscureText != null
+                        ? IconButton(
+                            icon: Icon(
+                              this.pObscureText.value == true
+                                  ? FluentIcons.eye_16_filled
+                                  : FluentIcons.eye_off_16_filled,
+                              size: 16.sc,
+                            ),
+                            onPressed: () {
+                              this.pObscureText.update((e) => !(e ?? false));
+                            },
+                          )
+                        : null,
+                  ),
+              focusNode: this.focusNodeOrDefault,
+              keyboardType: this.widget.keyboardType,
+              autofillHints: this.widget.autofillHints,
+              minLines: this.widget.minLines,
+              maxLines: this.widget.maxLines,
+              obscureText: pObscureText.value ?? false,
+              textInputAction: this.widget.textInputAction,
+              onFieldSubmitted: this.widget.onFieldSubmitted,
+              // Other.
+              autofocus: true,
+              onChanged: (text) {
+                this.autosaveDebouncer();
+                this._didUpdate();
+              },
+              cursorWidth: 2.sc,
+              scrollPadding: EdgeInsets.all(20.sc),
+            );
+          },
         ),
       ],
     );
@@ -204,21 +254,6 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
 
   @override
   bool? validate() => this.formFieldStateKey.currentState?.validate();
-
-  //
-  //
-  //
-
-  InputDecoration? _defaultOrReadOnlyDecoration() {
-    if (this.widget.readOnly != null && this.widget.readOnly!) {
-      return (this.widget.decoration ?? const InputDecoration()).copyWith(
-        filled: true,
-        fillColor: Theme.of(context).colorScheme.surfaceContainer,
-      );
-    } else {
-      return this.widget.decoration;
-    }
-  }
 
   //
   //
@@ -304,27 +339,8 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  Widget withObscurityToggle() {
-    return PodWidget(
-      initialValue: true,
-      builder: (context, child, pObscureText) {
-        final obscureText = pObscureText.value;
-        return this.copyWith(
-          obscureText: obscureText,
-          decoration: (this.decoration ?? const InputDecoration()).copyWith(
-            suffixIcon: Padding(
-              padding: EdgeInsets.only(right: 8.sc),
-              child: IconButton(
-                icon: Icon(
-                  obscureText ? FluentIcons.eye_16_filled : FluentIcons.eye_off_16_filled,
-                ),
-                onPressed: () => pObscureText.update((v) => !v),
-              ),
-            ),
-          ),
-        );
-      },
-    );
+  WTextFormField withObscurityToggle() {
+    return this.copyWith(obscureText: true);
   }
 
   WTextFormField withMultilineProps({

@@ -14,24 +14,60 @@ import '/_common.dart';
 
 TextTheme defaultTextTheme() {
   return TextTheme(
-    displayLarge: TextStyle(fontSize: 112.sc),
-    displayMedium: TextStyle(fontSize: 56.sc),
-    displaySmall: TextStyle(fontSize: 45.sc),
-    headlineLarge: TextStyle(fontSize: 40.sc),
-    headlineMedium: TextStyle(fontSize: 34.sc),
-    headlineSmall: TextStyle(fontSize: 24.sc),
-    titleLarge: TextStyle(fontSize: 22.sc),
-    titleMedium: TextStyle(fontSize: 20.sc),
-    titleSmall: TextStyle(fontSize: 18.sc),
-    bodyLarge: TextStyle(fontSize: 16.sc),
-    bodyMedium: TextStyle(fontSize: 14.sc),
-    bodySmall: TextStyle(fontSize: 12.sc),
+    displayLarge: TextStyle(
+      fontSize: 44.sc,
+      fontWeight: FONT_WEIGHT_BLACK,
+    ),
+    displayMedium: TextStyle(
+      fontSize: 37.sc,
+      fontWeight: FONT_WEIGHT_BLACK,
+    ),
+    displaySmall: TextStyle(
+      fontSize: 27.sc,
+      fontWeight: FONT_WEIGHT_BLACK,
+    ),
+    headlineLarge: TextStyle(
+      fontSize: 40.sc,
+      fontWeight: FONT_WEIGHT_BOLD,
+    ),
+    headlineMedium: TextStyle(
+      fontSize: 34.sc,
+      fontWeight: FONT_WEIGHT_BOLD,
+    ),
+    headlineSmall: TextStyle(
+      fontSize: 25.sc,
+      fontWeight: FONT_WEIGHT_BOLD,
+    ),
+    titleLarge: TextStyle(
+      fontSize: 23.sc,
+      fontWeight: FONT_WEIGHT_BLACK,
+    ),
+    titleMedium: TextStyle(
+      fontSize: 20.sc,
+      fontWeight: FONT_WEIGHT_BLACK,
+    ),
+    titleSmall: TextStyle(
+      fontSize: 17.sc,
+      fontWeight: FONT_WEIGHT_BLACK,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 16.sc,
+      fontWeight: FONT_WEIGHT_REGULAR,
+    ),
+    bodyMedium: TextStyle(
+      fontSize: 14.sc,
+      fontWeight: FONT_WEIGHT_REGULAR,
+    ),
+    bodySmall: TextStyle(
+      fontSize: 12.sc,
+      fontWeight: FONT_WEIGHT_REGULAR,
+    ),
     labelLarge: TextStyle(
-      fontSize: 15.sc,
+      fontSize: 16.sc,
       fontWeight: FONT_WEIGHT_MEDIUM,
     ),
     labelMedium: TextStyle(
-      fontSize: 13.sc,
+      fontSize: 14.sc,
       fontWeight: FONT_WEIGHT_MEDIUM,
     ),
     labelSmall: TextStyle(

@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyHeaderBackButton extends StatelessWidget {
+class WHeaderBackButton extends StatelessWidget {
   //
   //
   //
@@ -22,7 +22,7 @@ class MyHeaderBackButton extends StatelessWidget {
   //
   //
   //
-  const MyHeaderBackButton.WHeaderBackButton({
+  const WHeaderBackButton({
     super.key,
     this.onBackButtonPressed,
   });

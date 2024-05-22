@@ -33,6 +33,15 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
 
   @override
   void initState() {
+    this._initController();
+    super.initState();
+  }
+
+  //
+  //
+  //
+
+  void _initController() {
     final key = this.widget.key;
     final controllerTimeout = this.widget.controllerCacheTimeout;
     if (key != null) {
@@ -55,7 +64,6 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     } else {
       this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
     }
-    super.initState();
   }
 
   //
@@ -72,97 +80,20 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  /// Override this method to define the screen's layout. Be sure to wrap the
-  /// body in the super call.
-  ///
-  /// **Example:**
-  ///
-  /// ```dart
-  /// @override
-  /// Widget layout(BuildContext context, Widget body) {
-  ///   return super.layout(
-  ///     YourLayoutWidget(child: body);
-  ///   );
-  /// }
-  /// ```
-  @mustCallSuper
-  Widget layout(BuildContext context, Widget body) {
-    final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxWidth = constraints.maxWidth;
-        final maxHeight = constraints.maxHeight;
-        final header = this.header(context);
-        final navigationControls = this.widget.configuration?.navigationControlsWidget;
-        final footer = this.footer(context) ?? navigationControls;
-        return SizedBox(
-          width: maxWidth,
-          height: maxHeight,
-          child: Stack(
-            children: [
-              Align(
-                alignment: Alignment.topCenter,
-                child: Container(
-                  width: maxWidth,
-                  height: double.infinity,
-                  color: makeup?.backgroundColor ?? Theme.of(context).colorScheme.surface,
-                  child: this.background(
-                    context,
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: this.scroll(
-                            context,
-                            body,
-                            header: header,
-                            footer: footer,
-                            headerSpace: this.headerSpace,
-                            footerSpace: this.footerSpace,
-                          ) ??
-                          body,
-                    ),
-                  ),
-                ),
-              ),
-              if (header != null)
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: header,
-                ),
-              if (footer != null)
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: footer,
-                ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  //
-  //
-  //
-
-  Widget? scroll(
+  Widget view(
     BuildContext context,
-    Widget body, {
-    required Widget? header,
-    required Widget? footer,
-    required double headerSpace,
-    required double footerSpace,
-  }) {
-    return SingleChildScrollView(
-      keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: EdgeInsets.only(
-          left: 20.sc,
-          right: 20.sc,
-          top: headerSpace,
-          bottom: footerSpace,
+    Widget body,
+    EdgeInsets padding,
+  ) {
+    return Align(
+      alignment: Alignment.topCenter,
+      child: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: padding,
+          child: body,
         ),
-        child: body,
       ),
     );
   }
@@ -171,43 +102,16 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget background(BuildContext context, Widget scroll) => scroll;
-
-  //
-  //
-  //
-
-  Widget wideLayout(BuildContext context, Widget body) {
+  Widget background(BuildContext context) {
+    final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return Container(
-      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
-      child: Center(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return ConstrainedBox(
-              constraints: BoxConstraints(
-                maxWidth: constraints.maxHeight / MIN_MOBILE_ASPECT_RATIO,
-                maxHeight: double.infinity,
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.surface,
-                  borderRadius: BorderRadius.circular(10.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.2),
-                      blurRadius: 5.0,
-                    ),
-                  ],
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: this.layout(context, body),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
+      color: Theme.of(context).colorScheme.surface,
+    );
+  }
+
+  Widget foreground(BuildContext context) {
+    return const IgnorePointer(
+      child: SizedBox.expand(),
     );
   }
 
@@ -227,11 +131,44 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     return this.layout(context, body);
   }
 
-  //
-  //
-  //
+  Widget wideLayout(BuildContext context, Widget body) {
+    return Container(
+      color: Theme.of(context).colorScheme.surfaceContainer,
+      child: Center(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: constraints.maxHeight / MIN_MOBILE_ASPECT_RATIO,
+                maxHeight: double.infinity,
+              ),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14.0),
+                  color: Colors.transparent,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).colorScheme.shadow,
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: WSurface(
+                  borderRadius: BorderRadius.circular(14.0),
+                  color: Colors.transparent,
+                  child: this.layout(context, body),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
 
-  Widget body(BuildContext context);
+  Widget layout(BuildContext context, Widget body) {
+    return body;
+  }
 
   //
   //
@@ -253,15 +190,44 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     return this.body(context);
   }
 
+  @visibleForOverriding
+  Widget body(BuildContext context) {
+    return const SizedBox.shrink();
+  }
+
   //
   //
   //
 
-  Widget? header(BuildContext context) => null;
-  Widget? footer(BuildContext context) => null;
+  Widget top(BuildContext context) {
+    return const SizedBox.shrink();
+  }
 
-  double get headerSpace => 120.sc;
-  double get footerSpace => 120.sc;
+  Widget bottom(BuildContext context) {
+    final navigationControls = this.widget.configuration?.navigationControlsWidget;
+    return navigationControls ?? const SizedBox.shrink();
+  }
+
+  Widget left(BuildContext context) {
+    return const SizedBox.shrink();
+  }
+
+  Widget right(BuildContext context) {
+    return const SizedBox.shrink();
+  }
+
+  //
+  //
+  //
+
+  EdgeInsets viewPadding() {
+    return EdgeInsets.only(
+      top: 120.sc,
+      bottom: 120.sc,
+      left: 20.sc,
+      right: 20.sc,
+    );
+  }
 
   //
   //
@@ -278,17 +244,91 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
       child: () {
         switch (appLayout) {
           case AppLayout.MOBILE:
-            return this.mobileLayout(context, this.mobileBody(context));
+            return this.mobileLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.mobileBody(context),
+              ),
+            );
           case AppLayout.MOBILE_HORIZONTAL:
-            return this.horizontalMobileLayout(context, this.horizontalMobileBody(context));
+            return this.horizontalMobileLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.horizontalMobileBody(context),
+              ),
+            );
           case AppLayout.NARROW:
-            return this.narrowLayout(context, this.narrowBody(context));
+            return this.narrowLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.narrowBody(context),
+              ),
+            );
           case AppLayout.WIDE:
-            return this.wideLayout(context, this.wideBody(context));
+            return this.wideLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.wideBody(context),
+              ),
+            );
           default:
-            return this.layout(context, this.body(context));
+            return this.layout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.body(context),
+              ),
+            );
         }
       }(),
+    );
+  }
+
+  //
+  //
+  //
+
+  Widget _layoutWrapper(BuildContext context, Widget body) {
+    final top = this.top(context);
+    final bottom = this.bottom(context);
+    final left = this.left(context);
+    final right = this.right(context);
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox.expand(
+          child: this.background(context),
+        ),
+        this.view(
+          context,
+          body,
+          this.viewPadding(),
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: top,
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: bottom,
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: left,
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: right,
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: this.foreground(context),
+        ),
+      ],
     );
   }
 }

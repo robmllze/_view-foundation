@@ -118,10 +118,9 @@ class _State extends State<MyEmailResetDialogBody> {
       this.widget.onCancel();
     } catch (e) {
       if (context.mounted) {
-        showMessageToastOverlay(
+        showErrorToastOverlay(
           context,
           message: e,
-          backgroundColor: Theme.of(context).colorScheme.errorContainer,
         );
       }
     }
