@@ -35,6 +35,7 @@ class WDefaultDialogBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WSurface(
+      color: Theme.of(context).colorScheme.surfaceBright,
       borderRadius: BorderRadius.circular(16.sc),
       child: Padding(
         padding: EdgeInsets.all(24.sc),

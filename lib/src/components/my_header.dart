@@ -47,6 +47,7 @@ class MyHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WBlurryContainer(
+      color: Theme.of(context).colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(16.sc),
         bottomRight: Radius.circular(16.sc),

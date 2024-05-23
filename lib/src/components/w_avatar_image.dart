@@ -77,6 +77,7 @@ class MyAvatarImage extends StatelessWidget {
                 alignment: Alignment.center,
                 children: [
                   CircleAvatar(
+                    key: ValueKey(this._downloadUrl),
                     radius: radius,
                     backgroundImage: this._downloadUrl != null
                         ? NetworkImage(
