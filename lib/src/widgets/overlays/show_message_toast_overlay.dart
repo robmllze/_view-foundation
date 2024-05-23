@@ -42,6 +42,7 @@ Future<void> showMessageToastOverlay(
   Color? backgroundColor,
   Duration? duration = const Duration(seconds: 3),
 }) {
+  final $backgroundColor = backgroundColor ?? Theme.of(context).colorScheme.surfaceContainerHighest;
   return showToastOverlay(
     context,
     builder: (context, remove) {
@@ -59,7 +60,9 @@ Future<void> showMessageToastOverlay(
               child: WAnimatedSlide(
                 extent: 0.5,
                 child: WSurface(
-                  color: backgroundColor,
+                  decoration: BoxDecoration(
+                    color: $backgroundColor,
+                  ),
                   padding: EdgeInsets.symmetric(
                     horizontal: 20.sc,
                     vertical: 12.sc,
@@ -74,7 +77,7 @@ Future<void> showMessageToastOverlay(
                       ],
                       Text(
                         message.toString(),
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.wMedium.wItalic,
                         softWrap: true,
                       ),
                     ],

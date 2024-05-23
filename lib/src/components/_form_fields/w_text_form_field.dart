@@ -25,6 +25,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
   final int? minLines;
   final int? maxLines;
   final bool? obscureText;
+  final bool? autoFocus;
   final TextInputAction? textInputAction;
   final bool? autocomplete;
   final void Function(String text)? onFieldSubmitted;
@@ -54,6 +55,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     this.minLines,
     this.maxLines = 1,
     this.obscureText,
+    this.autoFocus,
     this.textInputAction,
     this.autocomplete,
     this.onFieldSubmitted,
@@ -84,6 +86,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     int? minLines,
     int? maxLines,
     bool? obscureText,
+    bool? autoFocus,
     TextInputAction? textInputAction,
     bool? autocomplete,
     void Function(String text)? onFieldSubmitted,
@@ -109,6 +112,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
       minLines: minLines ?? this.minLines,
       maxLines: maxLines ?? this.maxLines,
       obscureText: obscureText ?? this.obscureText,
+      autoFocus: autoFocus ?? this.autoFocus,
       textInputAction: textInputAction ?? this.textInputAction,
       autocomplete: autocomplete ?? this.autocomplete,
       onFieldSubmitted: onFieldSubmitted ?? this.onFieldSubmitted,
@@ -227,7 +231,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
               textInputAction: this.widget.textInputAction,
               onFieldSubmitted: this.widget.onFieldSubmitted,
               // Other.
-              autofocus: true,
+              autofocus: this.widget.autoFocus ?? true,
               onChanged: (text) {
                 this.autosaveDebouncer();
                 this._didUpdate();

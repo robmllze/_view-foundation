@@ -91,13 +91,13 @@ class MyHeader extends StatelessWidget {
                               if (this.title != null && this.title!.isNotEmpty)
                                 Text(
                                   this.title!,
-                                  style: Theme.of(context).textTheme.titleMedium?.wBold,
+                                  style: Theme.of(context).textTheme.titleMedium,
                                 ),
                               if (this.subtitle != null && this.subtitle!.isNotEmpty) ...[
                                 SizedBox(height: 2.sc),
                                 Text(
                                   this.subtitle!,
-                                  style: Theme.of(context).textTheme.bodyMedium?.wMedium,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               ],
                               if (this.description != null && this.description!.isNotEmpty) ...[

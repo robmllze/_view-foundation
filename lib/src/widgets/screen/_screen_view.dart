@@ -124,8 +124,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
 
   EdgeInsets viewPadding() {
     return EdgeInsets.only(
-      top: 120.sc,
-      bottom: 120.sc,
+      top: 140.sc,
+      bottom: 140.sc,
       left: 20.sc,
       right: 20.sc,
     );

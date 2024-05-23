@@ -58,7 +58,7 @@ class _State extends State<WPanel> {
           color: Theme.of(context).colorScheme.surface,
           decoration: BoxDecoration(
             border: Border.all(
-              color: Theme.of(context).colorScheme.surfaceContainer,
+              color: Theme.of(context).colorScheme.surfaceContainerHigh,
               width: 1.sc,
             ),
           ),
@@ -75,7 +75,7 @@ class _State extends State<WPanel> {
                         : null,
                     child: Text(
                       this.widget.title!,
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   if (this.widget.collapsed != null)
@@ -93,6 +93,7 @@ class _State extends State<WPanel> {
               WDivider(size: 20.sc),
               WCollapsable(
                 collapsed: pCollapsed.value,
+                duration: const Duration(milliseconds: 200),
                 child: WColumn(
                   divider: SizedBox(height: 16.sc),
                   children: this.widget.children,
