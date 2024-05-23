@@ -33,20 +33,21 @@ class WSendMessageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return WInkWell(
       onTapDown: this.onTapDown != null
           ? (_) async {
               await this.onTapDown!();
               HapticFeedback.lightImpact();
             }
           : null,
-      child: Container(
+      child: SizedBox(
         width: 48.sc,
         height: 32.sc,
-        alignment: Alignment.center,
-        child: Icon(
-          size: 24.sc,
-          FluentIcons.send_24_filled,
+        child: Center(
+          child: Icon(
+            size: 24.sc,
+            FluentIcons.send_24_filled,
+          ),
         ),
       ),
     );

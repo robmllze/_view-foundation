@@ -59,7 +59,7 @@ class MyBreadCrumbBar extends StatelessWidget {
                 children: [
                   ...?configurationStack?.nonNulls.map((e) => e.path).nonNulls.mapi((path, n, _) {
                     final last = n == configurationStack.nonNulls.length - 1;
-                    return InkWell(
+                    return WInkWell(
                       onTap: !last ? () => this.routeManager.goFromFront(n + 1) : null,
                       child: Text(
                         path,

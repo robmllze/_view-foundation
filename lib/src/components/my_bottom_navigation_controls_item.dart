@@ -65,12 +65,8 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
                 ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
                 : Colors.transparent,
           ),
-          child: InkWell(
-            customBorder: ShapeBorder.lerp(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.sc)),
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.sc)),
-              selected ? 1.0 : 0.0,
-            ),
+          child: WInkWell(
+            selected: selected,
             onTapDown: this.onTapDown != null
                 ? (_) => this.onTapDown!()
                 : screenConfiguration != null

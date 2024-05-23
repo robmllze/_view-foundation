@@ -22,6 +22,8 @@ export 'components/w_default_list_tile.dart';
 export 'components/w_divider.dart';
 export 'components/w_email_reset_dialog_body.dart';
 export 'components/w_header_back_button.dart';
+export 'components/w_inkwell.dart';
+export 'components/w_panel.dart';
 export 'components/w_placeholder.dart';
 export 'components/w_send_message_button.dart';
 export 'components/w_svg_app_icon.dart';
