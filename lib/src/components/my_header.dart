@@ -23,6 +23,7 @@ class MyHeader extends StatelessWidget {
   final List<Widget> leading;
   final List<Widget> trailing;
   final MyBreadCrumbBar? breadCrumbBar;
+  final double? minHeight;
   final void Function()? onBackButtonPressed;
 
   //
@@ -37,6 +38,7 @@ class MyHeader extends StatelessWidget {
     this.leading = const [],
     this.trailing = const [],
     this.breadCrumbBar,
+    this.minHeight,
     required this.onBackButtonPressed,
   });
 
@@ -53,7 +55,7 @@ class MyHeader extends StatelessWidget {
         bottomRight: Radius.circular(16.sc),
       ),
       constraints: BoxConstraints(
-        minHeight: 100.sc,
+        minHeight: minHeight ?? 100.sc,
       ),
       child: IntrinsicHeight(
         child: Column(

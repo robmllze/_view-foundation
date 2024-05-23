@@ -91,57 +91,61 @@ class _State extends State<MyFileGallery> {
           crossAxisAlignment: WrapCrossAlignment.start,
           spacing: spacing,
           runSpacing: spacing,
-          children: List.generate(this._orderedFiles.length, (index) {
-            final file = this._orderedFiles[index];
-            return DragTarget<ModelFileEntry>(
-              onAcceptWithDetails: (details) {
-                final file = details.data;
-                final oldIndex = this._orderedFiles.indexOf(file);
-                final newIndex = index;
-                this._moveFile(oldIndex, newIndex);
-              },
-              builder: (context, candidateData, rejectedData) {
-                return Draggable<ModelFileEntry>(
-                  data: file,
-                  feedback: WAnimatedScale(
-                    begin: 1.0,
-                    end: 0.75,
-                    duration: const Duration(milliseconds: 100),
-                    curve: Curves.easeInOut,
-                    child: Material(
-                      color: Colors.transparent,
-                      elevation: 4.0,
-                      child: SizedBox.square(
-                        dimension: itemSize,
+          children: [
+            if (this._orderedFiles.isEmpty)
+              WPlaceholder(message: 'No files found.||no_files_found'.tr()),
+            ...List.generate(this._orderedFiles.length, (index) {
+              final file = this._orderedFiles[index];
+              return DragTarget<ModelFileEntry>(
+                onAcceptWithDetails: (details) {
+                  final file = details.data;
+                  final oldIndex = this._orderedFiles.indexOf(file);
+                  final newIndex = index;
+                  this._moveFile(oldIndex, newIndex);
+                },
+                builder: (context, candidateData, rejectedData) {
+                  return Draggable<ModelFileEntry>(
+                    data: file,
+                    feedback: WAnimatedScale(
+                      begin: 1.0,
+                      end: 0.75,
+                      duration: const Duration(milliseconds: 100),
+                      curve: Curves.easeInOut,
+                      child: Material(
+                        color: Colors.transparent,
+                        elevation: 4.0,
+                        child: SizedBox.square(
+                          dimension: itemSize,
+                          child: MyFileGalleryFile(
+                            file: file,
+                          ),
+                        ),
+                      ),
+                    ),
+                    childWhenDragging: SizedBox.square(
+                      dimension: itemSize,
+                      child: Opacity(
+                        opacity: 0.5,
                         child: MyFileGalleryFile(
                           file: file,
                         ),
                       ),
                     ),
-                  ),
-                  childWhenDragging: SizedBox.square(
-                    dimension: itemSize,
-                    child: Opacity(
-                      opacity: 0.5,
+                    child: SizedBox.square(
+                      dimension: itemSize,
                       child: MyFileGalleryFile(
                         file: file,
+                        onDownload: this.widget.onDownload,
+                        onDelete: this.widget.onDelete,
+                        onTap: this.widget.onTap,
                       ),
                     ),
-                  ),
-                  child: SizedBox.square(
-                    dimension: itemSize,
-                    child: MyFileGalleryFile(
-                      file: file,
-                      onDownload: this.widget.onDownload,
-                      onDelete: this.widget.onDelete,
-                      onTap: this.widget.onTap,
-                    ),
-                  ),
-                  onDragCompleted: () {},
-                );
-              },
-            );
-          }),
+                    onDragCompleted: () {},
+                  );
+                },
+              );
+            }),
+          ],
         );
       },
     );

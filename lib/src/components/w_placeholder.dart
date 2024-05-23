@@ -53,7 +53,7 @@ class WPlaceholder extends StatelessWidget {
                 size: 32.sc,
               ),
             ),
-            const WDivider(),
+            WDivider(size: 8.sc),
             Text(
               this.message,
               style: Theme.of(context).textTheme.bodyLarge?.wItalic,
