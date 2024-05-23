@@ -51,77 +51,81 @@ class MyHeader extends StatelessWidget {
         bottomLeft: Radius.circular(16.sc),
         bottomRight: Radius.circular(16.sc),
       ),
-      height: 100.sc,
-      child: Column(
-        children: [
-          if (this.breadCrumbBar != null) this.breadCrumbBar!,
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(8.sc),
-              child: SizedBox(
-                width: double.infinity,
-                child: Wrap(
-                  runAlignment: WrapAlignment.center,
-                  alignment: WrapAlignment.spaceBetween,
-                  crossAxisAlignment: WrapCrossAlignment.center,
-                  children: [
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: 4.sc,
-                      runSpacing: 4.sc,
-                      children: [
-                        if (this.onBackButtonPressed != null) ...[
-                          SizedBox(
-                            width: 40.sc,
-                            child: IconButton(
-                              onPressed: onBackButtonPressed,
-                              icon: Icon(
-                                FluentIcons.arrow_left_24_filled,
-                                color: Theme.of(context).colorScheme.primary,
-                                size: 24.sc,
-                              ),
-                            ),
-                          ),
-                        ],
-                        WColumn(
-                          children: [
-                            if (this.title != null && this.title!.isNotEmpty)
-                              Text(
-                                this.title!,
-                                style: Theme.of(context).textTheme.titleMedium?.wBold,
-                              ),
-                            if (this.subtitle != null && this.subtitle!.isNotEmpty) ...[
-                              SizedBox(height: 2.sc),
-                              Text(
-                                this.subtitle!,
-                                style: Theme.of(context).textTheme.bodyMedium?.wMedium,
-                              ),
-                            ],
-                            if (this.description != null && this.description!.isNotEmpty) ...[
-                              SizedBox(height: 6.sc),
-                              Text(
-                                this.description!,
-                                style: Theme.of(context).textTheme.bodyMedium,
-                              ),
-                            ],
-                          ],
-                        ),
-                        if (this.leading.isNotEmpty) ...this.leading,
-                      ],
-                    ),
-                    if (this.trailing.isNotEmpty)
+      constraints: BoxConstraints(
+        minHeight: 100.sc,
+      ),
+      child: IntrinsicHeight(
+        child: Column(
+          children: [
+            if (this.breadCrumbBar != null) this.breadCrumbBar!,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(8.sc),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Wrap(
+                    runAlignment: WrapAlignment.center,
+                    alignment: WrapAlignment.spaceBetween,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
                       Wrap(
                         crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 4.sc,
+                        runSpacing: 4.sc,
                         children: [
-                          ...this.trailing,
+                          if (this.onBackButtonPressed != null) ...[
+                            SizedBox(
+                              width: 40.sc,
+                              child: IconButton(
+                                onPressed: onBackButtonPressed,
+                                icon: Icon(
+                                  FluentIcons.arrow_left_24_filled,
+                                  color: Theme.of(context).colorScheme.primary,
+                                  size: 24.sc,
+                                ),
+                              ),
+                            ),
+                          ],
+                          WColumn(
+                            children: [
+                              if (this.title != null && this.title!.isNotEmpty)
+                                Text(
+                                  this.title!,
+                                  style: Theme.of(context).textTheme.titleMedium?.wBold,
+                                ),
+                              if (this.subtitle != null && this.subtitle!.isNotEmpty) ...[
+                                SizedBox(height: 2.sc),
+                                Text(
+                                  this.subtitle!,
+                                  style: Theme.of(context).textTheme.bodyMedium?.wMedium,
+                                ),
+                              ],
+                              if (this.description != null && this.description!.isNotEmpty) ...[
+                                SizedBox(height: 6.sc),
+                                Text(
+                                  this.description!,
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ],
+                            ],
+                          ),
+                          if (this.leading.isNotEmpty) ...this.leading,
                         ],
                       ),
-                  ],
+                      if (this.trailing.isNotEmpty)
+                        Wrap(
+                          crossAxisAlignment: WrapCrossAlignment.center,
+                          children: [
+                            ...this.trailing,
+                          ],
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

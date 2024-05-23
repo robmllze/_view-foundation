@@ -16,7 +16,6 @@ export 'components/my_file_gallery/my_file_gallery.dart';
 export 'components/my_header.dart';
 export 'components/w_app_icon_progress_indicator.dart';
 export 'components/w_avatar_image.dart';
-export 'components/w_bouncing_icon.dart';
 export 'components/w_confirmation_dialog.dart';
 export 'components/w_default_dialog_body.dart';
 export 'components/w_default_list_tile.dart';

@@ -41,39 +41,59 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  void _initController() {
-    final key = this.widget.key;
-    final controllerTimeout = this.widget.controllerCacheTimeout;
-    if (key != null) {
-      if (_controllerCache[key] == null) {
-        _controllerCache[key] = _ControllerCache(
-          (this.widget.createController(this.widget, this)..initController()) as T3,
-          controllerTimeout != null
-              ? Debouncer(
-                  delay: controllerTimeout,
-                  onWaited: () {
-                    this.c.dispose();
-                    _controllerCache.remove(this.widget.key);
-                  },
-                )
-              : null,
-        );
-      }
-      this.c = _controllerCache[key]?.controller as T3;
-      _controllerCache[key]?.debouncer?.cancel();
-    } else {
-      this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
-    }
-  }
-
-  //
-  //
-  //
-
   @override
-  void dispose() async {
-    _controllerCache[this.widget.key]?.debouncer?.call();
-    super.dispose();
+  Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
+    final calculator = ScreenCalculator(screenSize.width, screenSize.height);
+    final appLayout = AppLayout.fromScreenCalculator(calculator);
+    return SafeArea(
+      top: false,
+      maintainBottomViewPadding: true,
+      child: () {
+        switch (appLayout) {
+          case AppLayout.MOBILE:
+            return this.mobileLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.mobileBody(context),
+              ),
+            );
+          case AppLayout.MOBILE_HORIZONTAL:
+            return this.horizontalMobileLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.horizontalMobileBody(context),
+              ),
+            );
+          case AppLayout.NARROW:
+            return this.narrowLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.narrowBody(context),
+              ),
+            );
+          case AppLayout.WIDE:
+            return this.wideLayout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.wideBody(context),
+              ),
+            );
+          default:
+            return this.layout(
+              context,
+              this._layoutWrapper(
+                context,
+                this.body(context),
+              ),
+            );
+        }
+      }(),
+    );
   }
 
   //
@@ -102,12 +122,28 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
+  EdgeInsets viewPadding() {
+    return EdgeInsets.only(
+      top: 120.sc,
+      bottom: 120.sc,
+      left: 20.sc,
+      right: 20.sc,
+    );
+  }
+
+  //
+  //
+  //
+
   Widget background(BuildContext context) {
-    final makeup = letAs<ScreenMakeup>(this.widget.configuration?.makeup);
     return Container(
       color: Theme.of(context).colorScheme.surface,
     );
   }
+
+  //
+  //
+  //
 
   Widget foreground(BuildContext context) {
     return const IgnorePointer(
@@ -174,6 +210,50 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
+  Widget _layoutWrapper(BuildContext context, Widget body) {
+    final top = this.top(context);
+    final bottom = this.bottom(context);
+    final left = this.left(context);
+    final right = this.right(context);
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox.expand(
+          child: this.background(context),
+        ),
+        this.view(
+          context,
+          body,
+          this.viewPadding(),
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: top,
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: bottom,
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: left,
+        ),
+        Align(
+          alignment: Alignment.centerRight,
+          child: right,
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: this.foreground(context),
+        ),
+      ],
+    );
+  }
+
+  //
+  //
+  //
+
   Widget mobileBody(BuildContext context) {
     return this.narrowBody(context);
   }
@@ -220,13 +300,29 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  EdgeInsets viewPadding() {
-    return EdgeInsets.only(
-      top: 120.sc,
-      bottom: 120.sc,
-      left: 20.sc,
-      right: 20.sc,
-    );
+  void _initController() {
+    final key = this.widget.key;
+    final controllerTimeout = this.widget.controllerCacheTimeout;
+    if (key != null) {
+      if (_controllerCache[key] == null) {
+        _controllerCache[key] = _ControllerCache(
+          (this.widget.createController(this.widget, this)..initController()) as T3,
+          controllerTimeout != null
+              ? Debouncer(
+                  delay: controllerTimeout,
+                  onWaited: () {
+                    this.c.dispose();
+                    _controllerCache.remove(this.widget.key);
+                  },
+                )
+              : null,
+        );
+      }
+      this.c = _controllerCache[key]?.controller as T3;
+      _controllerCache[key]?.debouncer?.cancel();
+    } else {
+      this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
+    }
   }
 
   //
@@ -234,102 +330,9 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
 
   @override
-  Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final calculator = ScreenCalculator(screenSize.width, screenSize.height);
-    final appLayout = AppLayout.fromScreenCalculator(calculator);
-    return SafeArea(
-      top: false,
-      maintainBottomViewPadding: true,
-      child: () {
-        switch (appLayout) {
-          case AppLayout.MOBILE:
-            return this.mobileLayout(
-              context,
-              this._layoutWrapper(
-                context,
-                this.mobileBody(context),
-              ),
-            );
-          case AppLayout.MOBILE_HORIZONTAL:
-            return this.horizontalMobileLayout(
-              context,
-              this._layoutWrapper(
-                context,
-                this.horizontalMobileBody(context),
-              ),
-            );
-          case AppLayout.NARROW:
-            return this.narrowLayout(
-              context,
-              this._layoutWrapper(
-                context,
-                this.narrowBody(context),
-              ),
-            );
-          case AppLayout.WIDE:
-            return this.wideLayout(
-              context,
-              this._layoutWrapper(
-                context,
-                this.wideBody(context),
-              ),
-            );
-          default:
-            return this.layout(
-              context,
-              this._layoutWrapper(
-                context,
-                this.body(context),
-              ),
-            );
-        }
-      }(),
-    );
-  }
-
-  //
-  //
-  //
-
-  Widget _layoutWrapper(BuildContext context, Widget body) {
-    final top = this.top(context);
-    final bottom = this.bottom(context);
-    final left = this.left(context);
-    final right = this.right(context);
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        SizedBox.expand(
-          child: this.background(context),
-        ),
-        this.view(
-          context,
-          body,
-          this.viewPadding(),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: top,
-        ),
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: bottom,
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: left,
-        ),
-        Align(
-          alignment: Alignment.centerRight,
-          child: right,
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: this.foreground(context),
-        ),
-      ],
-    );
+  void dispose() async {
+    _controllerCache[this.widget.key]?.debouncer?.call();
+    super.dispose();
   }
 }
 

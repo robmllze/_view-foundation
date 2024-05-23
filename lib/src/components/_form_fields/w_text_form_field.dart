@@ -301,7 +301,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       ],
       validator: (e) {
         return e != null
-            ? RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').hasMatch(e)
+            ? RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$').hasMatch(e)
                 ? null
                 : errorText
             : null;

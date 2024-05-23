@@ -46,7 +46,7 @@ class WPlaceholder extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SizedBox(height: 64.sc),
-            MyBouncingIcon(
+            WBouncingIcon(
               bounce: this.loading,
               icon: Icon(
                 FluentIcons.animal_dog_24_regular,
