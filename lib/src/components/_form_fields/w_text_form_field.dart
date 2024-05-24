@@ -206,7 +206,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
               decoration: this.pInputDecoration.value.copyWith(
                     filled: true,
                     fillColor: this.pReadOnly.value
-                        ? Theme.of(context).colorScheme.surfaceContainer
+                        ? Theme.of(context).colorScheme.surfaceContainerLowest
                         : Theme.of(context).colorScheme.surface,
                     suffixIcon: this.widget.obscureText != null
                         ? IconButton(
