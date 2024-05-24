@@ -19,10 +19,11 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
 
   final RouteManager routeManager;
   final int index;
-  final Set<ModelScreenConfiguration>? selections;
+  final List<ModelScreenConfiguration>? selections;
   final VoidCallback? onTapDown;
   final IconData icon;
   final IconData? selectedIcon;
+  final Widget? countIndicator;
 
   //
   //
@@ -36,6 +37,7 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
     this.selectedIcon,
     this.selections,
     this.onTapDown,
+    this.countIndicator,
   });
 
   //
@@ -50,43 +52,51 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
       screenConfiguration != null || onTapDown != null,
       'Either screenConfiguration or onTapDown must be provided ${this.index}: ${this.selections?.length}',
     );
-    return PodBuilder(
-      pod: routeManager.pScreenBreadcrumbs,
-      builder: (context, child, screenStack) {
-        final currentPath = screenStack?.lastOrNull?.configuration?.path;
-        final configurationPath = screenConfiguration?.path;
-        final screenPathInSelections = this.selections?.any((e) => e.path == currentPath) ?? false;
-        final selected = (!screenPathInSelections && configurationPath == null) ||
-            (configurationPath == currentPath);
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.sc),
-            color: selected
-                ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
-                : Colors.transparent,
-          ),
-          child: WInkWell(
-            selected: selected,
-            onTapDown: this.onTapDown != null
-                ? (_) => this.onTapDown!()
-                : screenConfiguration != null
-                    ? (_) => routeManager.go(screenConfiguration)
-                    : null,
-            child: Padding(
-              padding: EdgeInsets.all(8.sc),
-              child: Icon(
-                selected ? this.selectedIcon ?? this.icon : this.icon,
-                size: 24.sc,
-                color: LerpBlender(
-                  color1: Theme.of(context).disabledColor,
-                  color2: Theme.of(context).colorScheme.primary,
-                  blendWeight: selected ? 0.75 : 0.25,
-                ).blend(),
+
+    return Stack(
+      alignment: Alignment.topRight,
+      children: [
+        PodBuilder(
+          pod: routeManager.pScreenBreadcrumbs,
+          builder: (context, child, screenStack) {
+            final currentPath = screenStack?.lastOrNull?.configuration?.path;
+            final configurationPath = screenConfiguration?.path;
+            final screenPathInSelections =
+                this.selections?.any((e) => e.path == currentPath) ?? false;
+            final selected = (!screenPathInSelections && configurationPath == null) ||
+                (configurationPath == currentPath);
+            return Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.sc),
+                color: selected
+                    ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
+                    : Colors.transparent,
               ),
-            ),
-          ),
-        );
-      },
+              child: WInkWell(
+                selected: selected,
+                onTapDown: this.onTapDown != null
+                    ? (_) => this.onTapDown!()
+                    : screenConfiguration != null
+                        ? (_) => routeManager.go(screenConfiguration)
+                        : null,
+                child: Padding(
+                  padding: EdgeInsets.all(8.sc),
+                  child: Icon(
+                    selected ? this.selectedIcon ?? this.icon : this.icon,
+                    size: 24.sc,
+                    color: LerpBlender(
+                      color1: Theme.of(context).disabledColor,
+                      color2: Theme.of(context).colorScheme.primary,
+                      blendWeight: selected ? 0.75 : 0.25,
+                    ).blend(),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+        if (this.countIndicator != null) this.countIndicator!,
+      ],
     );
   }
 }
