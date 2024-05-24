@@ -65,6 +65,7 @@ class _State extends State<WPanel> {
           child: WColumn(
             children: [
               WRow(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 divider: const Spacer(),
                 children: [
                   WInkWell(
@@ -95,11 +96,12 @@ class _State extends State<WPanel> {
                 collapsed: pCollapsed.value,
                 duration: const Duration(milliseconds: 200),
                 child: WColumn(
+                  firstIfNotEmpty: SizedBox(height: 16.sc),
+                  lastIfNotEmpty: SizedBox(height: 16.sc),
                   divider: SizedBox(height: 16.sc),
                   children: this.widget.children,
                 ),
               ),
-              SizedBox(height: 16.sc),
             ],
           ),
         );
