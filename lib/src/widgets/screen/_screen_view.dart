@@ -155,17 +155,12 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget mobileLayout(BuildContext context, Widget body) {
-    return this.narrowLayout(context, body);
-  }
+  Widget mobileLayout(BuildContext context, Widget body) => this.narrowLayout(context, body);
 
-  Widget horizontalMobileLayout(BuildContext context, Widget body) {
-    return this.wideLayout(context, body);
-  }
+  Widget horizontalMobileLayout(BuildContext context, Widget body) =>
+      this.wideLayout(context, body);
 
-  Widget narrowLayout(BuildContext context, Widget body) {
-    return this.layout(context, body);
-  }
+  Widget narrowLayout(BuildContext context, Widget body) => this.layout(context, body);
 
   Widget wideLayout(BuildContext context, Widget body) {
     return Container(
@@ -202,9 +197,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     );
   }
 
-  Widget layout(BuildContext context, Widget body) {
-    return body;
-  }
+  Widget layout(BuildContext context, Widget body) => body;
 
   //
   //
@@ -254,47 +247,28 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  Widget mobileBody(BuildContext context) {
-    return this.narrowBody(context);
-  }
+  Widget mobileBody(BuildContext context) => this.narrowBody(context);
 
-  Widget horizontalMobileBody(BuildContext context) {
-    return this.wideBody(context);
-  }
+  Widget horizontalMobileBody(BuildContext context) => this.wideBody(context);
 
-  Widget narrowBody(BuildContext context) {
-    return this.body(context);
-  }
+  Widget narrowBody(BuildContext context) => this.body(context);
 
-  Widget wideBody(BuildContext context) {
-    return this.body(context);
-  }
+  Widget wideBody(BuildContext context) => this.body(context);
 
   @visibleForOverriding
-  Widget body(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+  Widget body(BuildContext context) => const SizedBox.shrink();
 
   //
   //
   //
 
-  Widget top(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+  Widget top(BuildContext context) => const SizedBox.shrink();
 
-  Widget bottom(BuildContext context) {
-    final navigationControls = this.widget.configuration?.navigationControlsWidget;
-    return navigationControls ?? const SizedBox.shrink();
-  }
+  Widget bottom(BuildContext context) => const SizedBox.shrink();
 
-  Widget left(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+  Widget left(BuildContext context) => const SizedBox.shrink();
 
-  Widget right(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+  Widget right(BuildContext context) => const SizedBox.shrink();
 
   //
   //

@@ -43,7 +43,6 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
           isAccessibleOnlyIfLoggedOut: _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
           isRedirectable: _IS_REDIRECTABLE,
         ) {
-    super.navigationControlsWidget = NAVIGATION_CONTROLS_WIDGET;
     super.title = translatedTitle;
     super.makeup = screenMakeup;
   }
@@ -85,9 +84,6 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
 
   /// Whether the corresponding [Screen] is redirectable, i.e., if it can be requested from the browser URL.
   static const IS_REDIRECTABLE = _IS_REDIRECTABLE;
-
-  /// The default navigation controls widget of the corresponding [Screen].
-  static const NAVIGATION_CONTROLS_WIDGET = null;
 
   /// The title of the corresponding [Screen].
   static String get translatedTitle => screenTr('$_DEFAULT_TITLE||title');
@@ -143,8 +139,6 @@ final generatedErrorScreenRoute = GoRoute(
           ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
       isRedirectable: ErrorScreenConfiguration.IS_REDIRECTABLE,
       makeup: ErrorScreenConfiguration.screenMakeup,
-      navigationControlsWidget:
-          ErrorScreenConfiguration.NAVIGATION_CONTROLS_WIDGET,
       title: ErrorScreenConfiguration.translatedTitle,
     );
     final configuration = extraConfiguration ?? urlConfiguration;
