@@ -224,12 +224,21 @@ Future<void> showConfirmationDialog({
     builder: (_, r1) {
       Future<void> $onConfirm(String text) async {
         late void Function() r2;
-        showAppIconOverlay(context, remover: (r) => r2 = r);
+        final c2 = Completer();
+        showAppIconOverlay(
+          context,
+          remover: (r) {
+            r2 = r;
+            c2.complete();
+          },
+        );
         try {
           await dialog.onConfirm!(text);
+          await c2.future;
           r2();
           onSuccess?.call();
         } catch (e) {
+          await c2.future;
           r2();
           if (onError != null) {
             onError(e);

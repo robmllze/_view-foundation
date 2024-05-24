@@ -110,7 +110,7 @@ class _State extends State<MyFileGallery> {
                       begin: 1.0,
                       end: 0.75,
                       duration: const Duration(milliseconds: 100),
-                      curve: Curves.easeInOut,
+                      curve: Curves.linearToEaseOut,
                       child: Material(
                         color: Colors.transparent,
                         elevation: 4.0,

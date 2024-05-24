@@ -288,7 +288,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.name],
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -305,7 +305,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       ],
       validator: (e) {
         return e != null
-            ? RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$').hasMatch(e)
+            ? RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$').hasMatch(e.trim())
                 ? null
                 : errorText
             : null;
@@ -358,7 +358,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       maxLines: maxLines,
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -372,7 +372,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.telephoneNumber],
       validator: (e) {
         return e != null
-            ? RegExp(r'^[0-9]{10}$').hasMatch(e)
+            ? RegExp(r'^[0-9]{10}$').hasMatch(e.trim())
                 ? null
                 : errorText
             : null;
@@ -385,7 +385,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       keyboardType: TextInputType.number,
       validator: (e) {
         return e != null
-            ? RegExp(r'^[0-9]*$').hasMatch(e)
+            ? RegExp(r'^[0-9]*$').hasMatch(e.trim())
                 ? null
                 : errorText
             : null;
@@ -399,7 +399,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.birthday],
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -413,7 +413,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.streetAddressLine1],
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -427,7 +427,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.streetAddressLine2],
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -441,7 +441,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.addressCity],
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -455,7 +455,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.addressState],
       validator: (e) {
         return e != null
-            ? e.isNotEmpty
+            ? e.trim().isNotEmpty
                 ? null
                 : errorText
             : null;
@@ -469,7 +469,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
       autofillHints: const [AutofillHints.postalCode],
       validator: (e) {
         return e != null
-            ? RegExp(r'^[0-9]{6}$').hasMatch(e)
+            ? RegExp(r'^[0-9]{6}$').hasMatch(e.trim())
                 ? null
                 : errorText
             : null;
