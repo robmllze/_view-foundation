@@ -40,7 +40,6 @@ export 'theme/input_decorations.dart';
 export 'types/accessibility/app_locale_type/app_locale_type.dart';
 export 'types/accessibility/app_scale_type/app_scale_type.dart';
 export 'types/accessibility/app_theme_type/app_theme_type.dart';
-export 'widgets/navigation_controls.dart';
 export 'widgets/overlays/show_app_icon_overlay.dart';
 export 'widgets/overlays/show_message_overlay.dart';
 export 'widgets/overlays/show_message_toast_overlay.dart';
