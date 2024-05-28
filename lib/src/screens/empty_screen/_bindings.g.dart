@@ -11,6 +11,8 @@ part of 'empty_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+final _globalKey = GlobalKey<_View>();
+
 /// Serves as the blueprint for the [EmptyScreen] screen.
 /// It outlines the screen's properties and behaviors prior to routing.
 class EmptyScreenConfiguration extends ModelScreenConfiguration {
@@ -145,7 +147,7 @@ final generatedEmptyScreenRoute = GoRoute(
     return NoTransitionPage(
       key: state.pageKey,
       child: EmptyScreen(
-        key: ValueKey(configuration.toUrl()),
+        key: _globalKey,
         configuration: configuration,
       ),
     );
@@ -183,7 +185,7 @@ Screen? makerEmptyScreen(
   }
   if (configuration is EmptyScreenConfiguration) {
     return EmptyScreen(
-      key: ValueKey<String?>(configuration.path),
+      key: _globalKey,
       configuration: configuration,
     );
   }
@@ -193,7 +195,7 @@ Screen? makerEmptyScreen(
       arguments: configuration.arguments,
     );
     return EmptyScreen(
-      key: ValueKey(temp.toUrl()),
+      key: _globalKey,
       configuration: temp,
     );
   }

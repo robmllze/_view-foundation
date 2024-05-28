@@ -11,6 +11,8 @@ part of 'error_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
+final _globalKey = GlobalKey<_View>();
+
 /// Serves as the blueprint for the [ErrorScreen] screen.
 /// It outlines the screen's properties and behaviors prior to routing.
 class ErrorScreenConfiguration extends ModelScreenConfiguration {
@@ -145,7 +147,7 @@ final generatedErrorScreenRoute = GoRoute(
     return NoTransitionPage(
       key: state.pageKey,
       child: ErrorScreen(
-        key: ValueKey(configuration.toUrl()),
+        key: _globalKey,
         configuration: configuration,
       ),
     );
@@ -183,7 +185,7 @@ Screen? makerErrorScreen(
   }
   if (configuration is ErrorScreenConfiguration) {
     return ErrorScreen(
-      key: ValueKey<String?>(configuration.path),
+      key: _globalKey,
       configuration: configuration,
     );
   }
@@ -193,7 +195,7 @@ Screen? makerErrorScreen(
       arguments: configuration.arguments,
     );
     return ErrorScreen(
-      key: ValueKey(temp.toUrl()),
+      key: _globalKey,
       configuration: temp,
     );
   }
