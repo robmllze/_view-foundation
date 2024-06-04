@@ -243,10 +243,12 @@ Future<void> showConfirmationDialog({
           if (onError != null) {
             onError(e);
           } else {
-            showErrorToastOverlay(
-              context,
-              message: e,
-            );
+            if (context.mounted) {
+              showErrorToastOverlay(
+                context,
+                message: e,
+              );
+            }
           }
         }
       }
