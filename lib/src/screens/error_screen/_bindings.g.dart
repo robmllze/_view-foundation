@@ -26,7 +26,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
     return ErrorScreenConfiguration.unsafe(
       arguments: {
         ...?$arguments,
-      },
+      }.nonNulls,
     );
   }
 
@@ -46,7 +46,6 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
           isRedirectable: _IS_REDIRECTABLE,
         ) {
     super.title = translatedTitle;
-    super.makeup = screenMakeup;
   }
 
   //
@@ -89,10 +88,6 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
 
   /// The title of the corresponding [Screen].
   static String get translatedTitle => screenTr('$_DEFAULT_TITLE||title');
-
-  /// The defailt makeup of the corresponding [Screen].
-  // ignore: prefer_const_declarations
-  static final ScreenMakeup? screenMakeup = null;
 
   /// Translates the provided [key] using the screen's translation key.
   static String screenTr(String key, {Map<dynamic, dynamic> args = const {}}) {
@@ -140,7 +135,6 @@ final generatedErrorScreenRoute = GoRoute(
       isAccessibleOnlyIfLoggedOut:
           ErrorScreenConfiguration.IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
       isRedirectable: ErrorScreenConfiguration.IS_REDIRECTABLE,
-      makeup: ErrorScreenConfiguration.screenMakeup,
       title: ErrorScreenConfiguration.translatedTitle,
     );
     final configuration = extraConfiguration ?? urlConfiguration;

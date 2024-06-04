@@ -12,18 +12,9 @@ import '/_common.dart';
 
 part '_screen_controller.dart';
 part '_screen_view.dart';
-part '_screen_makeup.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-const SCREEN_PROPERTIES = {
-  'backgroundColor': 'Color?',
-  'isTranslucent': 'bool?',
-  'titleColor': 'Color?',
-  'transitionDuration': 'Duration?',
-};
-
-@GenerateMakeups(properties: SCREEN_PROPERTIES)
 abstract class Screen extends StatefulWidget {
   //
   //
