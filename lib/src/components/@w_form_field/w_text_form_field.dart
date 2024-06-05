@@ -182,7 +182,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
         if (this.widget.title?.isNotEmpty == true) ...[
           Text(
             this.widget.title!,
-            style: Theme.of(context).textTheme.labelLarge?.wSemiBold,
+            style: Theme.of(context).textTheme.labelMedium?.wSemiBold,
           ),
           SizedBox(height: 6.sc),
         ],
