@@ -43,11 +43,12 @@ class WTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasTitleText = this.titleText?.isNotEmpty == true;
-    final hasTitle = this.title != null;
+    final hasTitleWidget = this.title != null;
+    final hatTitle = hasTitleText || hasTitleWidget;
     return WColumn(
       divider: SizedBox(height: this.spacing ?? 8.sc),
       children: [
-        if (hasTitleText || hasTitle) ...[
+        if (hatTitle) ...[
           DefaultTextStyle(
             style: this.style?.of(context) ??
                 Theme.of(context).textTheme.labelMedium?.wSemiBold ??
