@@ -18,7 +18,6 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
   //
 
   final T? defaultValue;
-  final String? title;
   final bool? readOnly;
   final bool? enabled;
   final String? Function(T? data)? validator;
@@ -33,7 +32,6 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
   const WFormFieldStatefulWidget({
     super.key,
     this.defaultValue,
-    this.title,
     this.readOnly,
     this.enabled,
     this.validator,

@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyEmailResetDialogBody extends StatefulWidget {
+class WEmailResetDialogBody extends StatefulWidget {
   //
   //
   //
@@ -25,7 +25,7 @@ class MyEmailResetDialogBody extends StatefulWidget {
   //
   //
 
-  const MyEmailResetDialogBody({
+  const WEmailResetDialogBody({
     super.key,
     this.initialValue = '',
     required this.onCancel,
@@ -42,7 +42,7 @@ class MyEmailResetDialogBody extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<MyEmailResetDialogBody> {
+class _State extends State<WEmailResetDialogBody> {
   //
   //
   //

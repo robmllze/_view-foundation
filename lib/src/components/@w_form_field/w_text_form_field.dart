@@ -39,7 +39,6 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     // Super.
     super.key,
     super.defaultValue,
-    super.title,
     super.readOnly,
     super.enabled,
     super.validator,
@@ -70,7 +69,6 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     // Super.
     Key? key,
     String? defaultValue,
-    String? title,
     bool? readOnly,
     bool? enabled,
     String? Function(String?)? validator,
@@ -96,7 +94,6 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
       // Super.
       key: key ?? this.key,
       defaultValue: defaultValue ?? this.defaultValue,
-      title: title ?? this.title,
       readOnly: readOnly ?? this.readOnly,
       enabled: enabled ?? this.enabled,
       validator: validator ?? this.validator,
@@ -176,16 +173,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: [
-        if (this.widget.title?.isNotEmpty == true) ...[
-          Text(
-            this.widget.title!,
-            style: Theme.of(context).textTheme.labelMedium?.wSemiBold,
-          ),
-          SizedBox(height: 6.sc),
-        ],
         PodListBuilder(
           podList: [
             this.pInputDecoration,
