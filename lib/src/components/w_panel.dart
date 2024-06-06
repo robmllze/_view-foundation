@@ -87,7 +87,7 @@ class _State extends State<WPanel> {
                             : null,
                         child: DefaultTextStyle(
                           style: this.widget.titleStyle?.of(context) ??
-                              Theme.of(context).textTheme.labelMedium?.wSemiBold ??
+                              Theme.of(context).textTheme.labelLarge?.wSemiBold ??
                               const TextStyle(),
                           child: hasTitleText
                               ? Text(
