@@ -63,7 +63,6 @@ class _State extends State<WPanel> {
       builder: (context, child, pCollapsed) {
         return WSurface(
           borderRadius: BorderRadius.circular(8.sc),
-          padding: EdgeInsets.all(16.sc),
           color: Theme.of(context).colorScheme.surface,
           decoration: BoxDecoration(
             border: Border.all(
@@ -71,55 +70,58 @@ class _State extends State<WPanel> {
               width: 1.sc,
             ),
           ),
-          child: WColumn(
-            divider: WDivider(size: 20.sc),
-            children: [
-              if (hasHeader)
-                WRow(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  divider: const Spacer(),
-                  children: [
-                    if (hasTitleText || hasTitleWidget)
-                      WInkWell(
-                        onTapDown: this.widget.collapsed != null
-                            ? (details) {
-                                pCollapsed.update((e) => !e);
-                              }
-                            : null,
-                        child: DefaultTextStyle(
-                          style: this.widget.titleStyle?.of(context) ??
-                              Theme.of(context).textTheme.labelLarge?.wSemiBold ??
-                              const TextStyle(),
-                          child: hasTitleText
-                              ? Text(
-                                  this.widget.titleText!,
-                                )
-                              : this.widget.title!,
+          child: Padding(
+            padding: EdgeInsets.all(16.sc),
+            child: WColumn(
+              divider: WDivider(size: 20.sc),
+              children: [
+                if (hasHeader)
+                  WRow(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    divider: const Spacer(),
+                    children: [
+                      if (hasTitleText || hasTitleWidget)
+                        WInkWell(
+                          onTapDown: this.widget.collapsed != null
+                              ? (details) {
+                                  pCollapsed.update((e) => !e);
+                                }
+                              : null,
+                          child: DefaultTextStyle(
+                            style: this.widget.titleStyle?.of(context) ??
+                                Theme.of(context).textTheme.labelLarge?.wSemiBold ??
+                                const TextStyle(),
+                            child: hasTitleText
+                                ? Text(
+                                    this.widget.titleText!,
+                                  )
+                                : this.widget.title!,
+                          ),
                         ),
-                      ),
-                    if (this.widget.collapsed != null)
-                      IconButton(
-                        icon: Icon(
-                          pCollapsed.value
-                              ? FluentIcons.panel_bottom_contract_20_regular
-                              : FluentIcons.panel_bottom_expand_20_regular,
-                          size: 24.sc,
+                      if (this.widget.collapsed != null)
+                        IconButton(
+                          icon: Icon(
+                            pCollapsed.value
+                                ? FluentIcons.panel_bottom_contract_20_regular
+                                : FluentIcons.panel_bottom_expand_20_regular,
+                            size: 24.sc,
+                          ),
+                          onPressed: () => pCollapsed.update((e) => !e),
                         ),
-                        onPressed: () => pCollapsed.update((e) => !e),
-                      ),
-                  ],
+                    ],
+                  ),
+                WCollapsable(
+                  collapsed: pCollapsed.value,
+                  duration: const Duration(milliseconds: 200),
+                  child: WColumn(
+                    firstIfNotEmpty: SizedBox(height: 16.sc),
+                    lastIfNotEmpty: SizedBox(height: 16.sc),
+                    divider: SizedBox(height: 16.sc),
+                    children: this.widget.children,
+                  ),
                 ),
-              WCollapsable(
-                collapsed: pCollapsed.value,
-                duration: const Duration(milliseconds: 200),
-                child: WColumn(
-                  firstIfNotEmpty: SizedBox(height: 16.sc),
-                  lastIfNotEmpty: SizedBox(height: 16.sc),
-                  divider: SizedBox(height: 16.sc),
-                  children: this.widget.children,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
