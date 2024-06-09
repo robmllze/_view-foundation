@@ -20,7 +20,7 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
   final RouteManager routeManager;
   final int index;
   final List<ModelScreenConfiguration>? selections;
-  final VoidCallback? onTapDown;
+  final VoidCallback? onTap;
   final IconData icon;
   final IconData? selectedIcon;
   final Widget? countIndicator;
@@ -36,7 +36,7 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
     this.index = -1,
     this.selectedIcon,
     this.selections,
-    this.onTapDown,
+    this.onTap,
     this.countIndicator,
   });
 
@@ -49,7 +49,7 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
     final screenConfiguration =
         this.index >= 0 ? this.selections?.elementAtOrNull(this.index) : null;
     assert(
-      screenConfiguration != null || onTapDown != null,
+      screenConfiguration != null || onTap != null,
       'Either screenConfiguration or onTapDown must be provided ${this.index}: ${this.selections?.length}',
     );
 
@@ -74,10 +74,10 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
               ),
               child: WInkWell(
                 selected: selected,
-                onTapDown: this.onTapDown != null
-                    ? (_) => this.onTapDown!()
+                onTap: this.onTap != null
+                    ? this.onTap!
                     : screenConfiguration != null
-                        ? (_) => routeManager.go(screenConfiguration)
+                        ? () => routeManager.go(screenConfiguration)
                         : null,
                 child: Padding(
                   padding: EdgeInsets.all(8.sc),
