@@ -73,7 +73,7 @@ class _State extends State<WPanel> {
           child: Padding(
             padding: EdgeInsets.all(16.sc),
             child: WColumn(
-              divider: WDivider(size: 20.sc),
+              divider: WDivider(size: 24.sc),
               children: [
                 if (hasHeader)
                   WRow(
@@ -89,7 +89,7 @@ class _State extends State<WPanel> {
                               : null,
                           child: DefaultTextStyle(
                             style: this.widget.titleStyle?.of(context) ??
-                                Theme.of(context).textTheme.labelLarge?.wSemiBold ??
+                                Theme.of(context).textTheme.titleSmall ??
                                 const TextStyle(),
                             child: hasTitleText
                                 ? Text(
