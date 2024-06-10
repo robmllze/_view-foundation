@@ -21,11 +21,11 @@ class EmptyScreenConfiguration extends ModelScreenConfiguration {
   //
 
   factory EmptyScreenConfiguration({
-    Map<dynamic, dynamic>? $arguments,
+    Map<dynamic, dynamic>? $args,
   }) {
     return EmptyScreenConfiguration.unsafe(
-      arguments: {
-        ...?$arguments,
+      args: {
+        ...?$args,
       }.nonNulls,
     );
   }
@@ -35,10 +35,10 @@ class EmptyScreenConfiguration extends ModelScreenConfiguration {
   //
 
   EmptyScreenConfiguration.unsafe({
-    Map<dynamic, dynamic>? arguments,
+    Map<dynamic, dynamic>? args,
   }) : super.b(
           path: _PATH,
-          arguments: arguments ?? {},
+          args: args ?? {},
           isAccessibleOnlyIfLoggedInAndVerified:
               _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
           isAccessibleOnlyIfLoggedIn: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
@@ -109,7 +109,7 @@ abstract class _ControllerBroker<T1 extends EmptyScreen, T2 extends _View>
   /// The [ModelScreenConfiguration] that corresponds to `this` controller.
   late final configuration = super.internalConfiguration ??
       EmptyScreenConfiguration.unsafe(
-        arguments: screen.configuration?.arguments,
+        args: screen.configuration?.args,
       );
 
   _ControllerBroker(
@@ -186,7 +186,7 @@ Screen? makerEmptyScreen(
   if (RegExp(r'^(' + _PATH + r')([?/].*)?$')
       .hasMatch(Uri.decodeComponent(configuration.path ?? ''))) {
     final temp = EmptyScreenConfiguration.unsafe(
-      arguments: configuration.arguments,
+      args: configuration.args,
     );
     return EmptyScreen(
       key: _globalKey,

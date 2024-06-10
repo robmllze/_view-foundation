@@ -213,7 +213,7 @@ abstract class _RouteManager {
   //
 
   void go(ModelScreenConfiguration configuration) {
-    final queryParameters = configuration.arguments
+    final queryParameters = configuration.args
             ?.map(
               (k, v) => MapEntry(
                 k is String ? k : null,

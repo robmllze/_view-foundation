@@ -21,11 +21,11 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   //
 
   factory ErrorScreenConfiguration({
-    Map<dynamic, dynamic>? $arguments,
+    Map<dynamic, dynamic>? $args,
   }) {
     return ErrorScreenConfiguration.unsafe(
-      arguments: {
-        ...?$arguments,
+      args: {
+        ...?$args,
       }.nonNulls,
     );
   }
@@ -35,10 +35,10 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   //
 
   ErrorScreenConfiguration.unsafe({
-    Map<dynamic, dynamic>? arguments,
+    Map<dynamic, dynamic>? args,
   }) : super.b(
           path: _PATH,
-          arguments: arguments ?? {},
+          args: args ?? {},
           isAccessibleOnlyIfLoggedInAndVerified:
               _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN_AND_VERIFIED,
           isAccessibleOnlyIfLoggedIn: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
@@ -109,7 +109,7 @@ abstract class _ControllerBroker<T1 extends ErrorScreen, T2 extends _View>
   /// The [ModelScreenConfiguration] that corresponds to `this` controller.
   late final configuration = super.internalConfiguration ??
       ErrorScreenConfiguration.unsafe(
-        arguments: screen.configuration?.arguments,
+        args: screen.configuration?.args,
       );
 
   _ControllerBroker(
@@ -186,7 +186,7 @@ Screen? makerErrorScreen(
   if (RegExp(r'^(' + _PATH + r')([?/].*)?$')
       .hasMatch(Uri.decodeComponent(configuration.path ?? ''))) {
     final temp = ErrorScreenConfiguration.unsafe(
-      arguments: configuration.arguments,
+      args: configuration.args,
     );
     return ErrorScreen(
       key: _globalKey,
