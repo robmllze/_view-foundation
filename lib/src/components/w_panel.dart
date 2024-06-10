@@ -73,7 +73,7 @@ class _State extends State<WPanel> {
           child: Padding(
             padding: EdgeInsets.all(16.sc),
             child: WColumn(
-              divider: WDivider(size: 24.sc),
+              divider: WDivider(size: 20.sc),
               children: [
                 if (hasHeader)
                   WRow(
@@ -114,9 +114,9 @@ class _State extends State<WPanel> {
                   collapsed: pCollapsed.value,
                   duration: const Duration(milliseconds: 200),
                   child: WColumn(
-                    firstIfNotEmpty: SizedBox(height: 16.sc),
-                    lastIfNotEmpty: SizedBox(height: 16.sc),
-                    divider: SizedBox(height: 16.sc),
+                    firstIfNotEmpty: SizedBox(height: 12.sc),
+                    lastIfNotEmpty: SizedBox(height: 12.sc),
+                    divider: SizedBox(height: 32.sc),
                     children: this.widget.children,
                   ),
                 ),
