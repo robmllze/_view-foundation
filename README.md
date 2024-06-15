@@ -1,6 +1,6 @@
 # About
 
-The View layer is a component of the [foundation](https://github.com/robmllze/foundation) template used to build Flutter projects.
+This is the View Layer that's part of the [foundation](https://github.com/robmllze/foundation) template.
 
 ## Notes
 

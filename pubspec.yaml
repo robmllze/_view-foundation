@@ -30,7 +30,7 @@ dependencies:
   xyz_config: ^0.29.0
   xyz_gen_annotations: ^0.47.0
   xyz_pod: ^0.34.0
-  xyz_utils: ^0.56.0
+  xyz_utils: ^0.57.1
 
   xyz_flutter_plus:
     git:
