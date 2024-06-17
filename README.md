@@ -1,6 +1,8 @@
-# About
+# View Module
 
-This is the View Layer that's part of the [foundation](https://github.com/robmllze/foundation) template.
+## About
+
+The [Foundation](https://github.com/robmllze/foundation) template is divided into several modules. This helps separate concerns and makes it easier to manage the codebase.
 
 ## Notes
 

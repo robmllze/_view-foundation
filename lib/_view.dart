@@ -11,5 +11,3 @@
 library;
 
 export 'src/_all_src.g.dart';
-
-export 'package:xyz_flutter_plus/xyz_flutter_plus.dart';
