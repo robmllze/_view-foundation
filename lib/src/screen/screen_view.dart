@@ -8,12 +8,14 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-part of 'screen.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration,
-    T3 extends ScreenController<T2>> extends State<T1> {
+abstract class ScreenView<
+    TScreen extends Screen,
+    TModelScreenConfiguration extends ModelScreenConfiguration,
+    TController extends ScreenController<TModelScreenConfiguration>> extends State<TScreen> {
   //
   //
   //
@@ -24,8 +26,8 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
   //
   //
 
-  late T3 c;
-  T3 get screenController => this.c;
+  late TController c;
+  TController get screenController => this.c;
 
   //
   //
@@ -280,7 +282,7 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
     if (key != null) {
       if (_controllerCache[key] == null) {
         _controllerCache[key] = _ControllerCache(
-          (this.widget.createController(this.widget, this)..initController()) as T3,
+          (this.widget.createController(this.widget, this)..initController()) as TController,
           controllerTimeout != null
               ? Debouncer(
                   delay: controllerTimeout,
@@ -292,10 +294,10 @@ abstract class ScreenView<T1 extends Screen, T2 extends ModelScreenConfiguration
               : null,
         );
       }
-      this.c = _controllerCache[key]?.controller as T3;
+      this.c = _controllerCache[key]?.controller as TController;
       _controllerCache[key]?.debouncer?.cancel();
     } else {
-      this.c = (this.widget.createController(this.widget, this)..initController()) as T3;
+      this.c = (this.widget.createController(this.widget, this)..initController()) as TController;
     }
   }
 

@@ -14,7 +14,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class RouteManager extends _RouteManager {
+final class RouteManager extends _RouteManager {
   //
   //
   //
@@ -161,7 +161,7 @@ class RouteManager extends _RouteManager {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class _RouteManager {
+abstract base class _RouteManager {
   //
   //
   //

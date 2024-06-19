@@ -8,18 +8,18 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-part of 'screen.dart';
+import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class ScreenController<T extends ModelScreenConfiguration> {
+class ScreenController<TModelScreenConfiguration extends ModelScreenConfiguration> {
   //
   //
   //
 
   final Screen? superScreen;
   final ScreenView? superState;
-  final T? internalConfiguration;
+  final TModelScreenConfiguration? internalConfiguration;
 
   //
   //

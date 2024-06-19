@@ -7,6 +7,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export '@app_types/app_locale_type/app_locale_type.dart';
-export '@app_types/app_scale_type/app_scale_type.dart';
-export '@app_types/app_theme_type/app_theme_type.dart';
+export 'app_types/app_locale_type/app_locale_type.dart';
+export 'app_types/app_scale_type/app_scale_type.dart';
+export 'app_types/app_theme_type/app_theme_type.dart';

@@ -10,12 +10,9 @@
 
 import '/_common.dart';
 
-part '_screen_controller.dart';
-part '_screen_view.dart';
-
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class Screen extends StatefulWidget {
+abstract class Screen<TModelScreenConfiguration extends Model> extends StatefulWidget {
   //
   //
   //
