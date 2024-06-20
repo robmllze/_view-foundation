@@ -31,7 +31,11 @@ dependencies:
   xyz_gen_annotations: ^0.47.0
   xyz_pod: ^0.35.0
   xyz_utils: ^0.57.1
-  xyz_flutter_plus: ^0.52.0
+
+  xyz_flutter_plus:
+    git:
+      url: https://github.com/robmllze/xyz_flutter_plus
+      ref: main
 
   cupertino_icons: any
   equatable: any

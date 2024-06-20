@@ -82,7 +82,7 @@ class _State extends State<WPanel> {
                       if (hasTitleText || hasTitleWidget)
                         WInkWell(
                           onTapDown: this.widget.collapsed != null
-                              ? (details) {
+                              ? () {
                                   pCollapsed.update((e) => !e);
                                 }
                               : null,

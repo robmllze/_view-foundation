@@ -8,8 +8,6 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import 'package:flutter/services.dart';
-
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
@@ -34,12 +32,7 @@ class WSendMessageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WInkWell(
-      onTapDown: this.onTapDown != null
-          ? (_) async {
-              await this.onTapDown!();
-              HapticFeedback.lightImpact();
-            }
-          : null,
+      onTapDown: this.onTapDown,
       child: SizedBox(
         width: 48.sc,
         height: 32.sc,
