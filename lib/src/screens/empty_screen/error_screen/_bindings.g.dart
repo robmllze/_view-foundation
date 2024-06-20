@@ -98,7 +98,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Extend this class to create a controller for the [ErrorScreen] screen.
-abstract class _ControllerBroker<T1 extends ErrorScreen, T2 extends _View>
+abstract base class _ControllerBroker<T1 extends ErrorScreen, T2 extends _View>
     extends ScreenController<ErrorScreenConfiguration> {
   /// The [Screen] that corresponds to `this` controller.
   late final screen = super.superScreen as T1;

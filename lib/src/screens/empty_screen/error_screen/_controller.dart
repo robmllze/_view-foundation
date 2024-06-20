@@ -12,9 +12,6 @@ part of 'error_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _View extends TErrorScreenView {
-  @override
-  Widget body(BuildContext context) {
-    return const SizedBox.shrink();
-  }
+final class ErrorScreenController extends TErrorScreenController {
+  ErrorScreenController(super.screen, super.state);
 }

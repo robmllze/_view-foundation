@@ -49,7 +49,7 @@ class MyFileGalleryFile extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          MyClippedContainer(
+          WClippedContainer(
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.surface,
               borderRadius: BorderRadius.circular(8.sc),
@@ -60,7 +60,7 @@ class MyFileGalleryFile extends StatelessWidget {
                 final downloadUrl = file.downloadUrl;
                 if (downloadUrl != null) {
                   if (file.isFlutterImageExtension()) {
-                    return MyClippedContainer(
+                    return WClippedContainer(
                       child: FittedBox(
                         fit: BoxFit.cover,
                         child: Image.network(

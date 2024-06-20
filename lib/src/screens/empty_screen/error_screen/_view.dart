@@ -8,36 +8,13 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import '/_common.dart';
+part of 'error_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-abstract class Screen<TModelScreenConfiguration extends Model> extends StatefulWidget {
-  //
-  //
-  //
-
-  final ModelScreenConfiguration? configuration;
-  final Duration? controllerCacheTimeout;
-
-  //
-  //
-  //
-
-  const Screen({
-    super.key,
-    this.configuration,
-    this.controllerCacheTimeout = Duration.zero,
-  });
-
-  //
-  //
-  //
-
-  ScreenController createController(
-    Screen screen,
-    ScreenView state,
-  ) {
-    return ScreenController(screen, state);
+final class _View extends TErrorScreenView {
+  @override
+  Widget body(BuildContext context) {
+    return const SizedBox.shrink();
   }
 }

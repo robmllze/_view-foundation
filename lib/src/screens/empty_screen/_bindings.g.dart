@@ -98,7 +98,7 @@ class EmptyScreenConfiguration extends ModelScreenConfiguration {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 /// Extend this class to create a controller for the [EmptyScreen] screen.
-abstract class _ControllerBroker<T1 extends EmptyScreen, T2 extends _View>
+abstract base class _ControllerBroker<T1 extends EmptyScreen, T2 extends _View>
     extends ScreenController<EmptyScreenConfiguration> {
   /// The [Screen] that corresponds to `this` controller.
   late final screen = super.superScreen as T1;

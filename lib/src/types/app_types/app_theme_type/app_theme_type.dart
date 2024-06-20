@@ -109,7 +109,7 @@ enum AppThemeType with AppThemeEnumMixin {
             onSecondary: Colors.black,
             error: Colors.red.shade200,
             onError: Colors.white,
-            errorContainer: const LerpBlender().blend(
+            errorContainer: const LerpColorBlender().blend(
               Colors.red.shade900,
               Colors.grey.shade900,
               0.5,

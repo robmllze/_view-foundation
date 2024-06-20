@@ -84,7 +84,7 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
                   child: Icon(
                     selected ? this.selectedIcon ?? this.icon : this.icon,
                     size: 24.sc,
-                    color: LerpBlender(
+                    color: LerpColorBlender(
                       color1: Theme.of(context).disabledColor,
                       color2: Theme.of(context).colorScheme.primary,
                       blendWeight: selected ? 0.75 : 0.25,

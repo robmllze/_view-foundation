@@ -46,7 +46,7 @@ Color generateNewDisplayColor() {
 }
 
 Color blendDisplayColorWithTheme(Color color, ThemeData themeData) {
-  return LerpBlender(
+  return LerpColorBlender(
     color1: color,
     color2: themeData.colorScheme.surface,
     blendWeight: 0.5,

@@ -12,6 +12,6 @@ part of 'empty_screen.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class EmptyScreenController extends TEmptyScreenController {
+final class EmptyScreenController extends TEmptyScreenController {
   EmptyScreenController(super.screen, super.state);
 }

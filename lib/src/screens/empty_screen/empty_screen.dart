@@ -20,7 +20,7 @@ part '_view.dart';
   defaultTitle: 'Empty',
   isRedirectable: true,
 )
-class EmptyScreen extends Screen {
+final class EmptyScreen extends Screen {
   //
   //
   //
