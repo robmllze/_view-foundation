@@ -159,7 +159,7 @@ final class RouteManager extends _RouteManager {
   //
   //
 
-  void goBackTo(ModelScreenConfiguration untilConfiguration) {
+  Future<void> goBackTo(ModelScreenConfiguration untilConfiguration) async {
     final chunk = super.pScreenBreadcrumbs.value.toList();
     final screenBreadcrumbs = super.pScreenBreadcrumbs.value.toList().reversed;
     for (final breadcrumb in screenBreadcrumbs) {
@@ -168,10 +168,11 @@ final class RouteManager extends _RouteManager {
       }
       chunk.removeLast();
     }
-    super._pScreenBreadcrumbs.set(chunk);
-    final to = chunk.last;
-    this.go(to);
-    this._pScreenBreadcrumbs.update((e) => e..removeLast());
+    await super._pScreenBreadcrumbs.set(chunk);
+    final to = chunk.lastOrNull;
+    if (to != null) {
+      this.go(to);
+    }
   }
 }
 
