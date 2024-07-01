@@ -38,6 +38,12 @@ final class RouteManager extends _RouteManager {
   //
   //
 
+  final _navigatorKey = GlobalKey<NavigatorState>();
+
+  //
+  //
+  //
+
   late final _router = GoRouter(
     observers: [this._pushRouteObserver()],
     errorPageBuilder: (context, state) {
@@ -45,22 +51,28 @@ final class RouteManager extends _RouteManager {
     },
     initialLocation: super.defaultConfiguration.path,
     routes: [
-      GoRoute(
-        path: '/',
-        pageBuilder: (context, state) {
-          return super.commonPageBuilder(context, state, EmptyScreenConfiguration.PATH);
+      ShellRoute(
+        builder: (context, state, child) {
+          return child;
         },
+        navigatorKey: this._navigatorKey,
         routes: [
-          ...super.generatedScreenRoutes.map(
-            (route) {
-              final path = route.path;
-              return GoRoute(
-                path: path,
-                pageBuilder: (context, state) {
-                  return this.commonPageBuilder(context, state, path);
+          GoRoute(
+            path: '/',
+            builder: (context, state) => const EmptyScreen(),
+            routes: [
+              ...super.generatedScreenRoutes.map(
+                (route) {
+                  final path = route.path;
+                  return GoRoute(
+                    path: path,
+                    pageBuilder: (context, state) {
+                      return this.commonPageBuilder(context, state, path);
+                    },
+                  );
                 },
-              );
-            },
+              ),
+            ],
           ),
         ],
       ),
