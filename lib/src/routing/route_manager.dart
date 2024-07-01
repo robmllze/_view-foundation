@@ -57,8 +57,11 @@ final class RouteManager extends _RouteManager {
       ShellRoute(
         builder: (context, state, child) {
           final extra = state.extra;
-          if (extra is ModelScreenConfiguration) {
-            this._pScreenBreadcrumbs.update((e) => e..add(extra));
+          if (extra is ModelScreenConfiguration &&
+              this._pScreenBreadcrumbs.value.lastOrNull != extra) {
+            this._pScreenBreadcrumbs.update((e) {
+              return (e..add(extra)).reversed.take(4).toList().reversed.toList();
+            });
           }
           return child;
         },
@@ -109,12 +112,12 @@ final class RouteManager extends _RouteManager {
   //
   //
 
-  void goFromFront(int index) {
+  Future<void> goFromFront(int index) async {
     final chunk = super.pScreenBreadcrumbs.value.toList();
     final i = index;
     if (i >= 0 && i < chunk.length) {
       chunk.removeRange(i, chunk.length);
-      this._pScreenBreadcrumbs.set(chunk);
+      await this._pScreenBreadcrumbs.set(chunk);
       final to = chunk.last;
       this.go(to);
     }
@@ -124,12 +127,12 @@ final class RouteManager extends _RouteManager {
   //
   //
 
-  void goFromBack(int index) {
+  Future<void> goFromBack(int index) async {
     final chunk = super.pScreenBreadcrumbs.value.toList();
     final i = chunk.length - index;
     if (i >= 0 && i < chunk.length) {
       chunk.removeRange(i, chunk.length);
-      super._pScreenBreadcrumbs.set(chunk);
+      await this._pScreenBreadcrumbs.set(chunk);
       final to = chunk.last;
       this.go(to);
     }

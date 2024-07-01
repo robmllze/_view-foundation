@@ -31,7 +31,6 @@ export 'overlays/show_message_overlay.dart';
 export 'overlays/show_message_toast_overlay.dart';
 export 'overlays/show_overlay.dart';
 export 'overlays/show_toast_overlay.dart';
-export 'routing/push_route_observer.dart';
 export 'routing/route_manager.dart';
 export 'screens/empty_screen/empty_screen.dart';
 export 'screens/empty_screen/error_screen/error_screen.dart';
