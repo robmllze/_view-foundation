@@ -45,7 +45,6 @@ final class RouteManager extends _RouteManager {
   //
 
   late final _router = GoRouter(
-    observers: [this._pushRouteObserver()],
     errorPageBuilder: (context, state) {
       return super.commonPageBuilder(
         context,
@@ -57,6 +56,10 @@ final class RouteManager extends _RouteManager {
     routes: [
       ShellRoute(
         builder: (context, state, child) {
+          final extra = state.extra;
+          if (extra is ModelScreenConfiguration) {
+            this._pScreenBreadcrumbs.update((e) => e..add(extra));
+          }
           return child;
         },
         navigatorKey: this._navigatorKey,
@@ -91,16 +94,6 @@ final class RouteManager extends _RouteManager {
   //
   //
 
-  PushRouteObserver _pushRouteObserver() {
-    return PushRouteObserver(
-      pScreenBreadcrumbs: super.pScreenBreadcrumbs,
-    );
-  }
-
-  //
-  //
-  //
-
   @override
   void go(ModelScreenConfiguration configuration) {
     ModelScreenConfiguration targetConfiguration;
@@ -117,12 +110,12 @@ final class RouteManager extends _RouteManager {
   //
 
   void goFromFront(int index) {
-    final buffer = super.pScreenBreadcrumbs.value.toList();
+    final chunk = super.pScreenBreadcrumbs.value.toList();
     final i = index;
-    if (i >= 0 && i < buffer.length) {
-      buffer.removeRange(i, buffer.length);
-      super.pScreenBreadcrumbs.set(Queue.from(buffer));
-      final to = buffer.last.configuration!;
+    if (i >= 0 && i < chunk.length) {
+      chunk.removeRange(i, chunk.length);
+      this._pScreenBreadcrumbs.set(chunk);
+      final to = chunk.last;
       this.go(to);
     }
   }
@@ -132,12 +125,12 @@ final class RouteManager extends _RouteManager {
   //
 
   void goFromBack(int index) {
-    final buffer = super.pScreenBreadcrumbs.value.toList();
-    final i = buffer.length - index;
-    if (i >= 0 && i < buffer.length) {
-      buffer.removeRange(i, buffer.length);
-      super.pScreenBreadcrumbs.set(Queue.from(buffer));
-      final to = buffer.last.configuration!;
+    final chunk = super.pScreenBreadcrumbs.value.toList();
+    final i = chunk.length - index;
+    if (i >= 0 && i < chunk.length) {
+      chunk.removeRange(i, chunk.length);
+      super._pScreenBreadcrumbs.set(chunk);
+      final to = chunk.last;
       this.go(to);
     }
   }
@@ -149,8 +142,8 @@ final class RouteManager extends _RouteManager {
   Future<void> goBack() async {
     final screenBreadcrumbs = super.pScreenBreadcrumbs.value;
     if (screenBreadcrumbs.length > 1) {
-      await super.pScreenBreadcrumbs.update((e) => e..removeLast());
-      final lastConfiguration = screenBreadcrumbs.last.configuration;
+      await this._pScreenBreadcrumbs.update((e) => e..removeLast());
+      final lastConfiguration = screenBreadcrumbs.lastOrNull;
       if (lastConfiguration != null) {
         this.go(lastConfiguration);
         return;
@@ -164,18 +157,18 @@ final class RouteManager extends _RouteManager {
   //
 
   void goBackTo(ModelScreenConfiguration untilConfiguration) {
-    final buffer = super.pScreenBreadcrumbs.value.toList();
+    final chunk = super.pScreenBreadcrumbs.value.toList();
     final screenBreadcrumbs = super.pScreenBreadcrumbs.value.toList().reversed;
     for (final breadcrumb in screenBreadcrumbs) {
-      if (breadcrumb.configuration == untilConfiguration) {
+      if (breadcrumb == untilConfiguration) {
         break;
       }
-      buffer.removeLast();
+      chunk.removeLast();
     }
-    super.pScreenBreadcrumbs.set(Queue.from(buffer));
-    final to = buffer.last.configuration!;
+    super._pScreenBreadcrumbs.set(chunk);
+    final to = chunk.last;
     this.go(to);
-    super.pScreenBreadcrumbs.update((e) => e..removeLast());
+    this._pScreenBreadcrumbs.update((e) => e..removeLast());
   }
 }
 
@@ -211,7 +204,8 @@ abstract base class _RouteManager {
   //
   //
 
-  final pScreenBreadcrumbs = Pod<Queue<Screen>>(Queue());
+  final _pScreenBreadcrumbs = Pod<List<ModelScreenConfiguration>>([], disposable: false);
+  PodListenable<List<ModelScreenConfiguration>> get pScreenBreadcrumbs => _pScreenBreadcrumbs;
 
   //
   //
@@ -312,7 +306,6 @@ abstract base class _RouteManager {
       } else {
         final newConfiguration = this.defaultConfiguration;
         Future.microtask(() {
-          this.pScreenBreadcrumbs.value = Queue.of([]);
           this.go(newConfiguration);
         });
       }
@@ -370,13 +363,5 @@ abstract base class _RouteManager {
 
   void _setHtmlTitle(String newTitle) {
     if (kIsWeb) {}
-  }
-
-  //
-  //
-  //
-
-  void dispose() {
-    this.pScreenBreadcrumbs.dispose();
   }
 }

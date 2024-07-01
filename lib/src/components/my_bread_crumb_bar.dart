@@ -50,15 +50,14 @@ class MyBreadCrumbBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.sc),
         child: PodBuilder(
           pod: this.routeManager.pScreenBreadcrumbs,
-          builder: (context, child, screenStack) {
-            final configurationStack = screenStack?.map((e) => e.configuration);
+          builder: (context, child, screenBreadcrumbs) {
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               reverse: true,
               child: Row(
                 children: [
-                  ...?configurationStack?.nonNulls.map((e) => e.path).nonNulls.mapi((path, n, _) {
-                    final last = n == configurationStack.nonNulls.length - 1;
+                  ...?screenBreadcrumbs?.nonNulls.map((e) => e.path).nonNulls.mapi((path, n, _) {
+                    final last = n == screenBreadcrumbs.nonNulls.length - 1;
                     return WInkWell(
                       onTap: !last ? () => this.routeManager.goFromFront(n + 1) : null,
                       child: Text(

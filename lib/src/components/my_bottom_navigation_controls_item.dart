@@ -58,8 +58,8 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
       children: [
         PodBuilder(
           pod: routeManager.pScreenBreadcrumbs,
-          builder: (context, child, screenStack) {
-            final currentPath = screenStack?.lastOrNull?.configuration?.path;
+          builder: (context, child, screenBreadcrumbs) {
+            final currentPath = screenBreadcrumbs?.lastOrNull?.path;
             final configurationPath = screenConfiguration?.path;
             final screenPathInSelections =
                 this.selections?.any((e) => e.path == currentPath) ?? false;
