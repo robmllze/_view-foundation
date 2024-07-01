@@ -47,7 +47,11 @@ final class RouteManager extends _RouteManager {
   late final _router = GoRouter(
     observers: [this._pushRouteObserver()],
     errorPageBuilder: (context, state) {
-      return super.commonPageBuilder(context, state, ErrorScreenConfiguration.PATH);
+      return super.commonPageBuilder(
+        context,
+        state,
+        ErrorScreenConfiguration.PATH,
+      );
     },
     initialLocation: super.defaultConfiguration.path,
     routes: [
@@ -67,7 +71,11 @@ final class RouteManager extends _RouteManager {
                   return GoRoute(
                     path: path,
                     pageBuilder: (context, state) {
-                      return this.commonPageBuilder(context, state, path);
+                      return this.commonPageBuilder(
+                        context,
+                        state,
+                        path,
+                      );
                     },
                   );
                 },
