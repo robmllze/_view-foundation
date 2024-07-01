@@ -41,7 +41,7 @@ class PushRouteObserver extends NavigatorObserver {
     final (newScreen, oldScreen) = this._routesToScreen(route, previousRoute);
     if (newScreen != null) {
       this.pScreenBreadcrumbs?.update((e) => _getLast4((e..addLast(newScreen))));
-      Here().debugLog('Pushed: ${newScreen.configuration?.path}');
+      debugLog('Pushed: ${newScreen.configuration?.path}');
     }
     this.onPush?.call(
           newScreen,
