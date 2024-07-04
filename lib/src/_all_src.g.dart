@@ -22,7 +22,6 @@ export 'components/w_form_field/w_text_list_form_field.dart';
 export 'components/w_header_back_button.dart';
 export 'components/w_panel.dart';
 export 'components/w_placeholder.dart';
-export 'components/w_send_message_button.dart';
 export 'components/w_status_tile.dart';
 export 'components/w_svg_app_icon.dart';
 export 'constants.dart';
