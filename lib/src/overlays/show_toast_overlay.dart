@@ -30,7 +30,9 @@ Future<void> showToastOverlay(
           child: FutureBuilder(
             future: () async {
               return await builder(context, () {
-                overlayEntry.remove();
+                if (overlayEntry.mounted) {
+                  overlayEntry.remove();
+                }
                 completer.complete();
               });
             }(),

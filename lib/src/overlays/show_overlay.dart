@@ -24,7 +24,9 @@ Future<void> showOverlay(
   late final OverlayEntry overlayEntry;
 
   void complete() {
-    overlayEntry.remove();
+    if (overlayEntry.mounted) {
+      overlayEntry.remove();
+    }
     completer.complete();
   }
 
