@@ -27,7 +27,9 @@ Future<void> showOverlay(
     if (overlayEntry.mounted) {
       overlayEntry.remove();
     }
-    completer.complete();
+    if (!completer.isCompleted) {
+      completer.complete();
+    }
   }
 
   overlayEntry = OverlayEntry(

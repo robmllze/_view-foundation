@@ -33,7 +33,9 @@ Future<void> showToastOverlay(
                 if (overlayEntry.mounted) {
                   overlayEntry.remove();
                 }
-                completer.complete();
+                if (!completer.isCompleted) {
+                  completer.complete();
+                }
               });
             }(),
             builder: (context, snapshot) {

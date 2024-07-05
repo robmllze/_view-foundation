@@ -229,7 +229,9 @@ Future<void> showConfirmationDialog({
           context,
           remover: (r) {
             r2 = r;
-            c2.complete();
+            if (!c2.isCompleted) {
+              c2.complete();
+            }
           },
         );
         try {
