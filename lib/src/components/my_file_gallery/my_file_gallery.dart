@@ -56,8 +56,8 @@ class _State extends State<MyFileGallery> {
   late final _orderedFiles = List.of(this.widget.files)
     ..sort((a, b) {
       final now = DateTime.now();
-      final da = a.createdAt ?? now;
-      final db = b.createdAt ?? now;
+      final da = a.createdReg?.at ?? now;
+      final db = b.createdReg?.at ?? now;
       final c = da.compareTo(db);
       return c;
     });
