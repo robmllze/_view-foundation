@@ -19,7 +19,7 @@ extension DefaultDisplayColorOnPublicModelExtension on PublicModel {
 
   Color get defaultDisplayColor {
     return this.displayColor ??
-        (this.id != null ? mapTextToColor(this.displayNameSearchable!) : Colors.white);
+        (this.id != null ? mapTextToColor(this.displayName!.queryableValue!) : Colors.white);
   }
 
   //

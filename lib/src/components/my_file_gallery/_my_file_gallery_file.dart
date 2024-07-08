@@ -70,7 +70,7 @@ class MyFileGalleryFile extends StatelessWidget {
                       ),
                     );
                   } else {
-                    final a = (file.displayName ?? file.name ?? file.id);
+                    final a = (file.displayName?.value ?? file.name ?? file.id);
                     final b = String.fromCharCodes(a!.codeUnits.take(12));
                     final c = a.length > b.length ? '$b...' : a;
                     return Center(
