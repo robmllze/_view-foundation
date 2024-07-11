@@ -52,6 +52,11 @@ final class RouteManager extends _RouteManager {
         ErrorScreenConfiguration.PATH,
       );
     },
+    redirect: (context, state) async {
+      await ScreenView.captureScreen();
+      debugLog('Redirecting ${state.fullPath}');
+      return null;
+    },
     initialLocation: super.defaultConfiguration.path,
     routes: [
       ShellRoute(

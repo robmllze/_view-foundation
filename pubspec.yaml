@@ -33,8 +33,11 @@ dependencies:
   xyz_utils: ^0.62.0
 
   xyz_flutter_plus:
-    git:
-      url: https://github.com/robmllze/xyz_flutter_plus
+    path: ../../xyz_flutter_plus
+
+  # xyz_flutter_plus:
+  #   git:
+  #     url: https://github.com/robmllze/xyz_flutter_plus
 
   cupertino_icons: any
   equatable: any
