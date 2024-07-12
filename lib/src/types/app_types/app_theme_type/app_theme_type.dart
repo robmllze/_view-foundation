@@ -110,12 +110,7 @@ enum AppThemeType with AppThemeEnumMixin {
             ),
           ),
           filledButtonTheme: FilledButtonThemeData(
-            style: buttonStyle.merge(
-              FilledButton.styleFrom(
-                backgroundColor: colorScheme.primary,
-                disabledBackgroundColor: colorScheme.primary.withOpacity(0.75),
-              ),
-            ),
+            style: buttonStyle,
           ),
           iconButtonTheme: IconButtonThemeData(style: iconButtonStyle),
           outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
@@ -157,12 +152,7 @@ enum AppThemeType with AppThemeEnumMixin {
             ),
           ),
           filledButtonTheme: FilledButtonThemeData(
-            style: buttonStyle.merge(
-              FilledButton.styleFrom(
-                backgroundColor: darkColorScheme.primary,
-                disabledBackgroundColor: colorScheme.primary.withOpacity(0.75),
-              ),
-            ),
+            style: buttonStyle,
           ),
           iconButtonTheme: IconButtonThemeData(style: iconButtonStyle),
           outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
