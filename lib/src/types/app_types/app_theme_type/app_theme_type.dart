@@ -75,19 +75,19 @@ enum AppThemeType with AppThemeEnumMixin {
     );
     final buttonStyle = ButtonStyle(
       minimumSize: WidgetStateProperty.all(Size(48.sc, 48.sc)),
-      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 24.sc, vertical: 16.sc)),
+      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 16.sc, vertical: 8.sc)),
       iconSize: WidgetStateProperty.all(24.sc),
       textStyle: WidgetStateProperty.resolveWith<TextStyle>(
         (styles) {
           if (styles.contains(WidgetState.disabled)) {
-            return textTheme.bodyLarge!.wBlack.copyWith(decoration: TextDecoration.lineThrough);
+            return textTheme.bodyLarge!.copyWith(decoration: TextDecoration.lineThrough);
           }
-          return textTheme.bodyLarge!.wBlack;
+          return textTheme.bodyLarge!;
         },
       ),
     );
     final iconButtonStyle = buttonStyle.copyWith(
-      padding: WidgetStateProperty.all(EdgeInsets.all(12.sc)),
+      padding: WidgetStateProperty.all(EdgeInsets.all(8.sc)),
     );
     switch (this) {
       case AppThemeType.LIGHT:
