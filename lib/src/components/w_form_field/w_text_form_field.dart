@@ -200,9 +200,9 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
                         ? IconButton(
                             icon: Icon(
                               this.pObscureText.value == true
-                                  ? FluentIcons.eye_16_filled
-                                  : FluentIcons.eye_off_16_filled,
-                              size: 16.sc,
+                                  ? FluentIcons.eye_24_filled
+                                  : FluentIcons.eye_off_24_filled,
+                              size: 24.sc,
                             ),
                             onPressed: () {
                               this.pObscureText.update((e) => !(e ?? false));

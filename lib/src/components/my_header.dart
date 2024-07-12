@@ -77,15 +77,12 @@ class MyHeader extends StatelessWidget {
                         runSpacing: 4.sc,
                         children: [
                           if (this.onBackButtonPressed != null) ...[
-                            SizedBox(
-                              width: 40.sc,
-                              child: IconButton(
-                                onPressed: onBackButtonPressed,
-                                icon: Icon(
-                                  FluentIcons.arrow_left_24_filled,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  size: 24.sc,
-                                ),
+                            IconButton(
+                              onPressed: onBackButtonPressed,
+                              icon: Icon(
+                                FluentIcons.arrow_left_24_filled,
+                                color: Theme.of(context).colorScheme.primary,
+                                size: 24.sc,
                               ),
                             ),
                           ],

@@ -36,7 +36,7 @@ enum AppThemeType with AppThemeEnumMixin {
       iconSize: WidgetStateProperty.all(24.sc),
     );
     final iconButtonStyle = buttonStyle.copyWith(
-      padding: WidgetStateProperty.all(EdgeInsets.all(8.sc)),
+      padding: WidgetStateProperty.all(EdgeInsets.all(12.sc)),
     );
     switch (this) {
       case AppThemeType.LIGHT:

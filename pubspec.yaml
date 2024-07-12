@@ -34,7 +34,7 @@ dependencies:
 
   xyz_flutter_plus:
     path: ../../xyz_flutter_plus
-
+  # xyz_flutter_plus: ^0.54.0
   # xyz_flutter_plus:
   #   git:
   #     url: https://github.com/robmllze/xyz_flutter_plus

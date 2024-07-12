@@ -53,6 +53,7 @@ final class RouteManager extends _RouteManager {
       );
     },
     redirect: (context, state) async {
+      // TODO:... need to determine if we should capture or not...
       await ScreenView.captureScreen();
       debugLog('Redirecting ${state.fullPath}');
       return null;

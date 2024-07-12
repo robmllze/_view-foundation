@@ -65,32 +65,20 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
                 this.selections?.any((e) => e.path == currentPath) ?? false;
             final selected = (!screenPathInSelections && configurationPath == null) ||
                 (configurationPath == currentPath);
-            return Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.sc),
-                color: selected
-                    ? Theme.of(context).colorScheme.onSurface.withOpacity(0.1)
-                    : Colors.transparent,
-              ),
-              child: WInkWell(
-                selected: selected,
-                onTap: this.onTap != null
-                    ? this.onTap!
-                    : screenConfiguration != null
-                        ? () => routeManager.go(screenConfiguration)
-                        : null,
-                child: Padding(
-                  padding: EdgeInsets.all(8.sc),
-                  child: Icon(
-                    selected ? this.selectedIcon ?? this.icon : this.icon,
-                    size: 24.sc,
-                    color: LerpColorBlender(
-                      color1: Theme.of(context).disabledColor,
-                      color2: Theme.of(context).colorScheme.primary,
-                      blendWeight: selected ? 0.75 : 0.25,
-                    ).blend(),
-                  ),
-                ),
+            return IconButton(
+              onPressed: this.onTap != null
+                  ? this.onTap!
+                  : screenConfiguration != null
+                      ? () => routeManager.go(screenConfiguration)
+                      : null,
+              icon: Icon(
+                selected ? this.selectedIcon ?? this.icon : this.icon,
+                size: 24.sc,
+                color: LerpColorBlender(
+                  color1: Theme.of(context).disabledColor,
+                  color2: Theme.of(context).colorScheme.primary,
+                  blendWeight: selected ? 0.75 : 0.25,
+                ).blend(),
               ),
             );
           },
