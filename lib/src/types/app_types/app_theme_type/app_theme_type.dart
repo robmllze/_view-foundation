@@ -29,11 +29,62 @@ enum AppThemeType with AppThemeEnumMixin {
   @override
   ThemeData get themeData {
     final textTheme = defaultTextTheme();
+    final colorScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: Colors.black,
+      onPrimary: Colors.white,
+      secondary: Colors.blue,
+      onSecondary: Colors.white,
+      error: Colors.red.shade900,
+      onError: Colors.white,
+      errorContainer: Colors.red.shade50,
+      surface: const Color.fromARGB(255, 4, 4, 4).inverted,
+      surfaceBright: const Color.fromARGB(255, 0, 0, 0).inverted,
+      surfaceContainerHighest: const Color.fromARGB(255, 64, 64, 64).inverted,
+      surfaceContainerHigh: const Color.fromARGB(255, 56, 56, 56).inverted,
+      surfaceContainer: const Color.fromARGB(255, 48, 48, 48).inverted,
+      surfaceContainerLow: const Color.fromARGB(255, 32, 32, 32).inverted,
+      surfaceContainerLowest: const Color.fromARGB(255, 16, 16, 16).inverted,
+      surfaceDim: Colors.black26,
+      onSurface: const Color.fromARGB(255, 4, 4, 4),
+      shadow: Colors.black12,
+    );
+    final darkColorScheme = ColorScheme(
+      brightness: Brightness.dark,
+      primary: Colors.white,
+      onPrimary: Colors.black,
+      secondary: Colors.lightBlue,
+      onSecondary: Colors.black,
+      error: Colors.red.shade200,
+      onError: Colors.white,
+      errorContainer: const LerpColorBlender().blend(
+        Colors.red.shade900,
+        Colors.grey.shade900,
+        0.5,
+      ),
+      surface: const Color.fromARGB(255, 4, 4, 4),
+      surfaceBright: const Color.fromARGB(255, 0, 0, 0),
+      surfaceContainerHighest: const Color.fromARGB(255, 64, 64, 64),
+      surfaceContainerHigh: const Color.fromARGB(255, 56, 56, 56),
+      surfaceContainer: const Color.fromARGB(255, 48, 48, 48),
+      surfaceContainerLow: const Color.fromARGB(255, 32, 32, 32),
+      surfaceContainerLowest: const Color.fromARGB(255, 16, 16, 16),
+      surfaceDim: Colors.black38,
+      onSurface: const Color.fromARGB(255, 4, 4, 4).inverted,
+      shadow: Colors.black26,
+    );
     final buttonStyle = ButtonStyle(
-      textStyle: WidgetStateProperty.all(textTheme.bodyMedium),
-      minimumSize: WidgetStateProperty.all(Size(40.sc, 40.sc)),
-      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 16.sc, vertical: 8.sc)),
+      minimumSize: WidgetStateProperty.all(Size(48.sc, 48.sc)),
+      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 24.sc, vertical: 16.sc)),
       iconSize: WidgetStateProperty.all(24.sc),
+      textStyle: WidgetStateProperty.resolveWith<TextStyle>(
+        (styles) {
+          if (styles.contains(WidgetState.disabled)) {
+            return textTheme.bodyLarge!.wBlack.copyWith(decoration: TextDecoration.lineThrough);
+          }
+          return textTheme.bodyLarge!.wBlack;
+        },
+      ),
     );
     final iconButtonStyle = buttonStyle.copyWith(
       padding: WidgetStateProperty.all(EdgeInsets.all(12.sc)),
@@ -49,28 +100,23 @@ enum AppThemeType with AppThemeEnumMixin {
         );
         return ThemeData(
           brightness: Brightness.light,
-          colorScheme: ColorScheme(
-            brightness: Brightness.light,
-            primary: Colors.black,
-            onPrimary: Colors.white,
-            secondary: Colors.blue,
-            onSecondary: Colors.white,
-            error: Colors.red.shade900,
-            onError: Colors.white,
-            errorContainer: Colors.red.shade50,
-            surface: const Color.fromARGB(255, 4, 4, 4).inverted,
-            surfaceBright: const Color.fromARGB(255, 0, 0, 0).inverted,
-            surfaceContainerHighest: const Color.fromARGB(255, 64, 64, 64).inverted,
-            surfaceContainerHigh: const Color.fromARGB(255, 56, 56, 56).inverted,
-            surfaceContainer: const Color.fromARGB(255, 48, 48, 48).inverted,
-            surfaceContainerLow: const Color.fromARGB(255, 32, 32, 32).inverted,
-            surfaceContainerLowest: const Color.fromARGB(255, 16, 16, 16).inverted,
-            surfaceDim: Colors.black26,
-            onSurface: const Color.fromARGB(255, 4, 4, 4),
-            shadow: Colors.black12,
+          colorScheme: colorScheme,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: buttonStyle.merge(
+              ElevatedButton.styleFrom(
+                backgroundColor: colorScheme.surfaceContainer,
+                disabledBackgroundColor: colorScheme.surfaceContainer.withOpacity(0.75),
+              ),
+            ),
           ),
-          elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
-          filledButtonTheme: FilledButtonThemeData(style: buttonStyle),
+          filledButtonTheme: FilledButtonThemeData(
+            style: buttonStyle.merge(
+              FilledButton.styleFrom(
+                backgroundColor: colorScheme.primary,
+                disabledBackgroundColor: colorScheme.primary.withOpacity(0.75),
+              ),
+            ),
+          ),
           iconButtonTheme: IconButtonThemeData(style: iconButtonStyle),
           outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
           segmentedButtonTheme: SegmentedButtonThemeData(style: buttonStyle),
@@ -101,32 +147,23 @@ enum AppThemeType with AppThemeEnumMixin {
         );
         return ThemeData(
           brightness: Brightness.dark,
-          colorScheme: ColorScheme(
-            brightness: Brightness.dark,
-            primary: Colors.white,
-            onPrimary: Colors.black,
-            secondary: Colors.lightBlue,
-            onSecondary: Colors.black,
-            error: Colors.red.shade200,
-            onError: Colors.white,
-            errorContainer: const LerpColorBlender().blend(
-              Colors.red.shade900,
-              Colors.grey.shade900,
-              0.5,
+          colorScheme: darkColorScheme,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: buttonStyle.merge(
+              ElevatedButton.styleFrom(
+                backgroundColor: darkColorScheme.surfaceContainer,
+                disabledBackgroundColor: colorScheme.surfaceContainer.withOpacity(0.75),
+              ),
             ),
-            surface: const Color.fromARGB(255, 4, 4, 4),
-            surfaceBright: const Color.fromARGB(255, 0, 0, 0),
-            surfaceContainerHighest: const Color.fromARGB(255, 64, 64, 64),
-            surfaceContainerHigh: const Color.fromARGB(255, 56, 56, 56),
-            surfaceContainer: const Color.fromARGB(255, 48, 48, 48),
-            surfaceContainerLow: const Color.fromARGB(255, 32, 32, 32),
-            surfaceContainerLowest: const Color.fromARGB(255, 16, 16, 16),
-            surfaceDim: Colors.black38,
-            onSurface: const Color.fromARGB(255, 4, 4, 4).inverted,
-            shadow: Colors.black26,
           ),
-          elevatedButtonTheme: ElevatedButtonThemeData(style: buttonStyle),
-          filledButtonTheme: FilledButtonThemeData(style: buttonStyle),
+          filledButtonTheme: FilledButtonThemeData(
+            style: buttonStyle.merge(
+              FilledButton.styleFrom(
+                backgroundColor: darkColorScheme.primary,
+                disabledBackgroundColor: colorScheme.primary.withOpacity(0.75),
+              ),
+            ),
+          ),
           iconButtonTheme: IconButtonThemeData(style: iconButtonStyle),
           outlinedButtonTheme: OutlinedButtonThemeData(style: buttonStyle),
           segmentedButtonTheme: SegmentedButtonThemeData(style: buttonStyle),

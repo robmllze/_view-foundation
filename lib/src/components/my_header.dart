@@ -25,6 +25,8 @@ class MyHeader extends StatelessWidget {
   final MyBreadCrumbBar? breadCrumbBar;
   final double? minHeight;
   final void Function()? onBackButtonPressed;
+  final double? opacity;
+  final double? sigma;
 
   //
   //
@@ -40,6 +42,8 @@ class MyHeader extends StatelessWidget {
     this.breadCrumbBar,
     this.minHeight,
     required this.onBackButtonPressed,
+    this.opacity,
+    this.sigma,
   });
 
   //
@@ -48,7 +52,11 @@ class MyHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final opacity1 = this.opacity ?? 0.75;
+    final sigma1 = this.sigma ?? 8.0;
     return WBlurryContainer(
+      opacity: opacity1,
+      sigma: sigma1,
       color: Theme.of(context).colorScheme.surfaceContainerLow,
       borderRadius: BorderRadius.only(
         bottomLeft: Radius.circular(16.sc),
