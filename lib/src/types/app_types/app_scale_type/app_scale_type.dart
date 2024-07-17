@@ -14,7 +14,7 @@ part '_app_scale_type.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@GenerateTypeUtils()
+//@GenerateTypeUtils() // TODO: put back when available
 enum AppScaleType with AppScaleEnumMixin {
   //
   //

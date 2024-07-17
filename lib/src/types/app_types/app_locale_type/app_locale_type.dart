@@ -16,7 +16,7 @@ part '_app_locale_type.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@GenerateTypeUtils()
+//@GenerateTypeUtils() // TODO: put back when available
 enum AppLocaleType with AppLocaleEnumMixin {
   //
   //

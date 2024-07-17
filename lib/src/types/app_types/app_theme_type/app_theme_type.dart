@@ -14,7 +14,7 @@ part '_app_theme_type.g.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-@GenerateTypeUtils()
+//@GenerateTypeUtils() // TODO: put back when available
 enum AppThemeType with AppThemeEnumMixin {
   //
   //
