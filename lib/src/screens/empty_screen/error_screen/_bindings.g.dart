@@ -23,7 +23,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   factory ErrorScreenConfiguration({
     Map<dynamic, dynamic>? $args,
   }) {
-    return ErrorScreenConfiguration.unsafe(
+    return ErrorScreenConfiguration.c2(
       args: {
         ...?$args,
       }.nonNulls,
@@ -34,9 +34,10 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
   //
   //
 
-  ErrorScreenConfiguration.unsafe({
+  ErrorScreenConfiguration.c2({
     Map<dynamic, dynamic>? args,
-  }) : super.b(
+  }) : super.c2(
+          title: translatedTitle,
           path: _PATH,
           args: args ?? {},
           isAccessibleOnlyIfLoggedInAndVerified:
@@ -44,9 +45,7 @@ class ErrorScreenConfiguration extends ModelScreenConfiguration {
           isAccessibleOnlyIfLoggedIn: _IS_ACCESSIBLE_ONLY_IF_LOGGED_IN,
           isAccessibleOnlyIfLoggedOut: _IS_ACCESSIBLE_ONLY_IF_LOGGED_OUT,
           isRedirectable: _IS_REDIRECTABLE,
-        ) {
-    super.title = translatedTitle;
-  }
+        );
 
   //
   //
@@ -108,7 +107,7 @@ abstract base class _ControllerBroker<T1 extends ErrorScreen, T2 extends _View>
 
   /// The [ModelScreenConfiguration] that corresponds to `this` controller.
   late final configuration = super.internalConfiguration ??
-      ErrorScreenConfiguration.unsafe(
+      ErrorScreenConfiguration.c2(
         args: screen.configuration?.args,
       );
 
@@ -185,7 +184,7 @@ Screen? makerErrorScreen(
   }
   if (RegExp(r'^(' + _PATH + r')([?/].*)?$')
       .hasMatch(Uri.decodeComponent(configuration.path ?? ''))) {
-    final temp = ErrorScreenConfiguration.unsafe(
+    final temp = ErrorScreenConfiguration.c2(
       args: configuration.args,
     );
     return ErrorScreen(
