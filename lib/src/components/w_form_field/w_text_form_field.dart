@@ -219,7 +219,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
               textInputAction: this.widget.textInputAction,
               onFieldSubmitted: this.widget.onFieldSubmitted,
               // Other.
-              autofocus: this.widget.autoFocus ?? true,
+              autofocus: this.widget.autoFocus ?? false,
               onChanged: (text) {
                 this.autosaveDebouncer();
                 this._didUpdate();
