@@ -69,7 +69,7 @@ class MStatusTile<TEnum extends Enum> extends StatelessWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-enum WStatusTileBoolean {
+enum MStatusTileBoolean {
   //
   //
   //
@@ -88,19 +88,19 @@ enum WStatusTileBoolean {
   //
   //
 
-  const WStatusTileBoolean(this.value);
+  const MStatusTileBoolean(this.value);
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 extension ToWStatusTileBooleanOnBoolExtension on bool? {
-  WStatusTileBoolean get toWStatusTileBoolean {
+  MStatusTileBoolean get toWStatusTileBoolean {
     if (this == true) {
-      return WStatusTileBoolean.TRUE;
+      return MStatusTileBoolean.TRUE;
     } else if (this == false) {
-      return WStatusTileBoolean.FALSE;
+      return MStatusTileBoolean.FALSE;
     } else {
-      return WStatusTileBoolean.NULL;
+      return MStatusTileBoolean.NULL;
     }
   }
 }
