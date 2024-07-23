@@ -8,19 +8,19 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import '_my_file_gallery_file.dart';
+import '_m_file_gallery_file.dart';
 
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyFileGallery extends StatefulWidget {
+class MFileGallery extends StatefulWidget {
   //
   //
   //
 
   final List<ModelFileEntry> files;
-  final void Function(List<ModelFileEntry>)? onReorderCompleted;
+  final void Function(List<ModelFileEntry> files)? onReorderCompleted;
   final void Function(ModelFileEntry? file)? onDownload;
   final void Function(ModelFileEntry? file)? onDelete;
   final void Function(ModelFileEntry? file)? onTap;
@@ -29,7 +29,7 @@ class MyFileGallery extends StatefulWidget {
   //
   //
 
-  const MyFileGallery({
+  const MFileGallery({
     super.key,
     this.files = const [],
     this.onReorderCompleted,
@@ -48,7 +48,7 @@ class MyFileGallery extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<MyFileGallery> {
+class _State extends State<MFileGallery> {
   //
   //
   //
@@ -116,7 +116,7 @@ class _State extends State<MyFileGallery> {
                         elevation: 4.0,
                         child: SizedBox.square(
                           dimension: itemSize,
-                          child: MyFileGalleryFile(
+                          child: MFileGalleryFile(
                             file: file,
                           ),
                         ),
@@ -126,14 +126,14 @@ class _State extends State<MyFileGallery> {
                       dimension: itemSize,
                       child: Opacity(
                         opacity: 0.5,
-                        child: MyFileGalleryFile(
+                        child: MFileGalleryFile(
                           file: file,
                         ),
                       ),
                     ),
                     child: SizedBox.square(
                       dimension: itemSize,
-                      child: MyFileGalleryFile(
+                      child: MFileGalleryFile(
                         file: file,
                         onDownload: this.widget.onDownload,
                         onDelete: this.widget.onDelete,

@@ -8,13 +8,14 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '/_common.dart';
+import 'package:xyz_flutter_plus/xyz_flutter_plus.dart' show NumToScExtension;
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MySvgAppIcon extends StatelessWidget {
+class WSvgAppIcon extends StatelessWidget {
   //
   //
   //
@@ -29,7 +30,7 @@ class MySvgAppIcon extends StatelessWidget {
   //
   //
 
-  const MySvgAppIcon({
+  const WSvgAppIcon({
     super.key,
     this.assetName = 'assets/images/app_icon/app_icon.svg',
     this.package,

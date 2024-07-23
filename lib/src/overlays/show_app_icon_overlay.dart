@@ -22,7 +22,7 @@ Future<void> showAppIconOverlay(
     builder: (context, remove) {
       remover?.call(remove);
       return const Center(
-        child: MyAppIconProgressIndicator(),
+        child: WAppIconProgressIndicator(),
       );
     },
   );

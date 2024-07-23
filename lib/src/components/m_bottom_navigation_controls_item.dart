@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyBottomNavigationControlsItem extends StatelessWidget {
+class MBottomNavigationControlsItem extends StatelessWidget {
   //
   //
   //
@@ -29,7 +29,7 @@ class MyBottomNavigationControlsItem extends StatelessWidget {
   //
   //
 
-  const MyBottomNavigationControlsItem({
+  const MBottomNavigationControlsItem({
     super.key,
     required this.routeManager,
     required this.icon,

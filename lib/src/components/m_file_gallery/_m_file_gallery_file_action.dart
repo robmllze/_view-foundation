@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyFileGalleryFileAction extends StatelessWidget {
+class MFileGalleryFileAction extends StatelessWidget {
   //
   //
   //
@@ -26,7 +26,7 @@ class MyFileGalleryFileAction extends StatelessWidget {
   //
   //
 
-  const MyFileGalleryFileAction({
+  const MFileGalleryFileAction({
     super.key,
     required this.alignment,
     this.file,

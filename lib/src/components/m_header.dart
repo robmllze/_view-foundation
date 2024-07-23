@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyHeader extends StatelessWidget {
+class MHeader extends StatelessWidget {
   //
   //
   //
@@ -22,7 +22,7 @@ class MyHeader extends StatelessWidget {
   final String? description;
   final List<Widget> leading;
   final List<Widget> trailing;
-  final MyBreadCrumbBar? breadCrumbBar;
+  final MBreadCrumbBar? breadCrumbBar;
   final double? minHeight;
   final void Function()? onBackButtonPressed;
   final double? opacity;
@@ -32,7 +32,7 @@ class MyHeader extends StatelessWidget {
   //
   //
 
-  const MyHeader({
+  const MHeader({
     super.key,
     this.title,
     this.subtitle,

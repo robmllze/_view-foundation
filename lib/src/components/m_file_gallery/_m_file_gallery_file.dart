@@ -8,13 +8,13 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-import '_my_file_gallery_file_action.dart';
+import '_m_file_gallery_file_action.dart';
 
 import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyFileGalleryFile extends StatelessWidget {
+class MFileGalleryFile extends StatelessWidget {
   //
   //
   //
@@ -29,7 +29,7 @@ class MyFileGalleryFile extends StatelessWidget {
   //
   //
 
-  const MyFileGalleryFile({
+  const MFileGalleryFile({
     super.key,
     this.onDelete,
     this.onDownload,
@@ -90,14 +90,14 @@ class MyFileGalleryFile extends StatelessWidget {
             }(),
           ),
           if (this.onDownload != null)
-            MyFileGalleryFileAction(
+            MFileGalleryFileAction(
               alignment: Alignment.bottomLeft,
               file: this.file,
               icon: FluentIcons.arrow_download_24_filled,
               onTap: this.onDownload,
             ),
           if (this.onDelete != null)
-            MyFileGalleryFileAction(
+            MFileGalleryFileAction(
               alignment: Alignment.bottomRight,
               file: this.file,
               icon: FluentIcons.delete_24_regular,

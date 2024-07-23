@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyBreadCrumbBar extends StatelessWidget {
+class MBreadCrumbBar extends StatelessWidget {
   //
   //
   //
@@ -23,7 +23,7 @@ class MyBreadCrumbBar extends StatelessWidget {
   //
   //
 
-  const MyBreadCrumbBar({
+  const MBreadCrumbBar({
     super.key,
     required this.routeManager,
   });

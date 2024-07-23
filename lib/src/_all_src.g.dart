@@ -7,19 +7,18 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
-export 'components/my_bottom_navigation_controls_item.dart';
-export 'components/my_bread_crumb_bar.dart';
-export 'components/my_file_gallery/my_file_gallery.dart';
-export 'components/my_header.dart';
+export 'components/m_bottom_navigation_controls_item.dart';
+export 'components/m_bread_crumb_bar.dart';
+export 'components/m_file_gallery/m_file_gallery.dart';
+export 'components/m_header.dart';
 export 'components/w_app_icon_progress_indicator.dart';
 export 'components/m_avatar_image.dart';
 export 'components/m_confirmation_dialog.dart';
 export 'components/m_default_dialog_body.dart';
-export 'components/w_email_reset_dialog_body.dart';
+export 'components/m_email_reset_dialog_body.dart';
 export 'components/w_form_field/w_form_field_stateful_widget.dart';
 export 'components/w_form_field/w_text_form_field.dart';
 export 'components/w_form_field/w_text_list_form_field.dart';
-export 'components/w_header_back_button.dart';
 export 'components/m_panel.dart';
 export 'components/m_placeholder.dart';
 export 'components/m_status_tile.dart';

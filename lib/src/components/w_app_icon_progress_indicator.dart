@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyAppIconProgressIndicator extends StatelessWidget {
+class WAppIconProgressIndicator extends StatelessWidget {
   //
   //
   //
@@ -24,7 +24,7 @@ class MyAppIconProgressIndicator extends StatelessWidget {
   //
   //
 
-  const MyAppIconProgressIndicator({
+  const WAppIconProgressIndicator({
     super.key,
     this.assetName = 'assets/images/app_icon/app_icon.svg',
     this.package,
@@ -43,7 +43,7 @@ class MyAppIconProgressIndicator extends StatelessWidget {
           color: Colors.white,
           shape: BoxShape.circle,
         ),
-        child: MySvgAppIcon(
+        child: WSvgAppIcon(
           assetName: this.assetName,
           package: this.package,
           size: 40.sc,
