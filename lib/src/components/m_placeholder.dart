@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WPlaceholder extends StatelessWidget {
+class MPlaceholder extends StatelessWidget {
   //
   //
   //
@@ -25,7 +25,7 @@ class WPlaceholder extends StatelessWidget {
   //
   //
 
-  const WPlaceholder({
+  const MPlaceholder({
     super.key,
     this.message = 'No items found.',
     this.loading = false,
@@ -53,7 +53,7 @@ class WPlaceholder extends StatelessWidget {
                 size: 32.sc,
               ),
             ),
-            WDivider(size: 8.sc),
+            MDivider(size: 8.sc),
             Text(
               this.message,
               style: Theme.of(context).textTheme.bodyLarge?.wItalic,

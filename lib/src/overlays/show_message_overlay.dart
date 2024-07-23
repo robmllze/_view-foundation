@@ -32,7 +32,7 @@ Future<void> showMessageOverlay(
         mainAxisSize: MainAxisSize.min,
         children: [
           IntrinsicWidth(
-            child: WSurface(
+            child: MSurface(
               child: Padding(
                 padding: EdgeInsets.all(32.sc),
                 child: WColumn(
@@ -51,7 +51,7 @@ Future<void> showMessageOverlay(
                           ],
                         ],
                       ),
-                      const WDivider(),
+                      const MDivider(),
                     ],
                     if (leading != null) leading,
                     if (message != null)

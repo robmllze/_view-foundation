@@ -59,7 +59,7 @@ Future<void> showMessageToastOverlay(
             IntrinsicWidth(
               child: WAnimatedSlide(
                 extent: 0.5,
-                child: WSurface(
+                child: MSurface(
                   decoration: BoxDecoration(
                     color: $backgroundColor,
                   ),

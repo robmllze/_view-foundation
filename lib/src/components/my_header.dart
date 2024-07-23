@@ -54,7 +54,7 @@ class MyHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final opacity1 = this.opacity ?? 0.75;
     final sigma1 = this.sigma ?? 8.0;
-    return WBlurryContainer(
+    return MBlurryContainer(
       opacity: opacity1,
       sigma: sigma1,
       color: Theme.of(context).colorScheme.surfaceContainerLow,

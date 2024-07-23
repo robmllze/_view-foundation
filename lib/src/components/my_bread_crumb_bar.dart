@@ -58,7 +58,7 @@ class MyBreadCrumbBar extends StatelessWidget {
                 children: [
                   ...?screenBreadcrumbs?.nonNulls.map((e) => e.path).nonNulls.mapi((path, n, _) {
                     final last = n == screenBreadcrumbs.nonNulls.length - 1;
-                    return WInkWell(
+                    return MInkWell(
                       onTap: !last ? () => this.routeManager.goFromFront(n + 1) : null,
                       child: Text(
                         path,

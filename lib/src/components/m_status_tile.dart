@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WStatusTile<TEnum extends Enum> extends StatelessWidget {
+class MStatusTile<TEnum extends Enum> extends StatelessWidget {
   //
   //
   //
@@ -26,7 +26,7 @@ class WStatusTile<TEnum extends Enum> extends StatelessWidget {
   //
   //
 
-  const WStatusTile({
+  const MStatusTile({
     super.key,
     required this.status,
     this.icons = const {},
@@ -40,7 +40,7 @@ class WStatusTile<TEnum extends Enum> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WSurface(
+    return MSurface(
       borderRadius: BorderRadius.circular(8.sc),
       color: Theme.of(context).colorScheme.surface,
       decoration: decorations[status] ??

@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WConfirmationDialog extends StatefulWidget {
+class MConfirmationDialog extends StatefulWidget {
   //
   //
   //
@@ -32,7 +32,7 @@ class WConfirmationDialog extends StatefulWidget {
   //
   //
 
-  const WConfirmationDialog({
+  const MConfirmationDialog({
     super.key,
     this.title,
     this.message,
@@ -50,7 +50,7 @@ class WConfirmationDialog extends StatefulWidget {
   //
   //
 
-  WConfirmationDialog copyWith({
+  MConfirmationDialog copyWith({
     String? title,
     String? body,
     String? confirmText,
@@ -62,7 +62,7 @@ class WConfirmationDialog extends StatefulWidget {
     WTextFormField? textField,
     Widget? child,
   }) {
-    return WConfirmationDialog(
+    return MConfirmationDialog(
       title: title ?? this.title,
       message: body ?? this.message,
       confirmText: confirmText ?? this.confirmText,
@@ -81,12 +81,12 @@ class WConfirmationDialog extends StatefulWidget {
   //
 
   @override
-  WConfirmationDialogState createState() => WConfirmationDialogState();
+  MConfirmationDialogState createState() => MConfirmationDialogState();
 }
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WConfirmationDialogState extends State<WConfirmationDialog> {
+class MConfirmationDialogState extends State<MConfirmationDialog> {
   //
   //
   //
@@ -142,7 +142,7 @@ class WConfirmationDialogState extends State<WConfirmationDialog> {
       child: Stack(
         alignment: Alignment.topRight,
         children: [
-          WDefaultDialogBody(
+          MDefaultDialogBody(
             child: IntrinsicWidth(
               child: WColumn(
                 divider: SizedBox(height: 12.sc),
@@ -154,7 +154,7 @@ class WConfirmationDialogState extends State<WConfirmationDialog> {
                       this.widget.title!,
                       style: Theme.of(context).textTheme.titleMedium?.wBold,
                     ),
-                    const WDivider(),
+                    const MDivider(),
                   ],
                   if (this.widget.message != null)
                     Text(
@@ -215,7 +215,7 @@ class WConfirmationDialogState extends State<WConfirmationDialog> {
 
 Future<void> showConfirmationDialog({
   required BuildContext context,
-  required WConfirmationDialog dialog,
+  required MConfirmationDialog dialog,
   void Function()? onSuccess,
   void Function(Object? e)? onError,
 }) async {

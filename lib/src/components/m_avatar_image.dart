@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MyAvatarImage extends StatelessWidget {
+class MAvatarImage extends StatelessWidget {
   //
   //
   //
@@ -27,7 +27,7 @@ class MyAvatarImage extends StatelessWidget {
   //
   //
 
-  const MyAvatarImage({
+  const MAvatarImage({
     super.key,
     required this.file,
     this.label,
@@ -70,7 +70,7 @@ class MyAvatarImage extends StatelessWidget {
             ? SizedBox.square(
                 dimension: this.size,
                 child: const Center(
-                  child: WCircularProgressIndicator(),
+                  child: MCircularProgressIndicator(),
                 ),
               )
             : Stack(
@@ -94,9 +94,9 @@ class MyAvatarImage extends StatelessWidget {
                         : null,
                   ),
                   if (this.label != null)
-                    WTag(
+                    MTag(
                       text: this.label!,
-                      makeup: WTagMakeup(
+                      makeup: MTagMakeup(
                         backgroundColor: Theme.of(context).colorScheme.surface.withOpacity(0.5),
                         textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: Theme.of(context).colorScheme.onSurface,

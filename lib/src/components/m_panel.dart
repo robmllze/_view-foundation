@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WPanel extends StatefulWidget {
+class MPanel extends StatefulWidget {
   //
   //
   //
@@ -27,7 +27,7 @@ class WPanel extends StatefulWidget {
   //
   //
 
-  const WPanel({
+  const MPanel({
     super.key,
     this.titleText,
     this.title,
@@ -46,7 +46,7 @@ class WPanel extends StatefulWidget {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class _State extends State<WPanel> {
+class _State extends State<MPanel> {
   //
   //
   //
@@ -60,7 +60,7 @@ class _State extends State<WPanel> {
     return PodWidget(
       initialValue: this.widget.collapsed ?? false,
       builder: (context, child, pCollapsed) {
-        return WSurface(
+        return MSurface(
           borderRadius: BorderRadius.circular(8.sc),
           color: Theme.of(context).colorScheme.surface,
           decoration: BoxDecoration(
@@ -72,7 +72,7 @@ class _State extends State<WPanel> {
           child: Padding(
             padding: EdgeInsets.all(16.sc),
             child: WColumn(
-              divider: WDivider(size: 20.sc),
+              divider: MDivider(size: 20.sc),
               children: [
                 if (hasHeader)
                   WRow(
@@ -80,7 +80,7 @@ class _State extends State<WPanel> {
                     divider: const Spacer(),
                     children: [
                       if (hasTitleText || hasTitleWidget)
-                        WInkWell(
+                        MInkWell(
                           onTapDown: this.widget.collapsed != null
                               ? () {
                                   pCollapsed.update((e) => !e);

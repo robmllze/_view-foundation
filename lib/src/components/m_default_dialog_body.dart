@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WDefaultDialogBody extends StatelessWidget {
+class MDefaultDialogBody extends StatelessWidget {
   //
   //
   //
@@ -23,7 +23,7 @@ class WDefaultDialogBody extends StatelessWidget {
   //
   //
 
-  const WDefaultDialogBody({
+  const MDefaultDialogBody({
     super.key,
     required this.child,
   });
@@ -34,7 +34,7 @@ class WDefaultDialogBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WSurface(
+    return MSurface(
       color: Theme.of(context).colorScheme.surfaceBright,
       borderRadius: BorderRadius.circular(16.sc),
       child: Padding(

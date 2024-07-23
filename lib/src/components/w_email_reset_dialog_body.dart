@@ -57,7 +57,7 @@ class _State extends State<WEmailResetDialogBody> {
 
   @override
   Widget build(BuildContext context) {
-    return WDefaultDialogBody(
+    return MDefaultDialogBody(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

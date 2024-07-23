@@ -93,7 +93,7 @@ class _State extends State<MyFileGallery> {
           runSpacing: spacing,
           children: [
             if (this._orderedFiles.isEmpty)
-              WPlaceholder(message: 'No files found.||no_files_found'.tr()),
+              MPlaceholder(message: 'No files found.||no_files_found'.tr()),
             ...List.generate(this._orderedFiles.length, (index) {
               final file = this._orderedFiles[index];
               return DragTarget<ModelFileEntry>(
