@@ -8,6 +8,7 @@
 // ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
 //.title~
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 import '/_common.dart';
@@ -53,8 +54,7 @@ final class RouteManager extends _RouteManager {
       );
     },
     redirect: (context, state) async {
-      // TODO:... need to determine if we should capture or not...
-      await ScreenView.captureScreen();
+      await ScreenView.captureScreen(context);
       debugLog('Redirecting ${state.fullPath}');
       return null;
     },
@@ -350,11 +350,24 @@ abstract base class _RouteManager {
   //
 
   Screen? _getScreenFromPage(Page? page) {
-    if (page is NoTransitionPage) {
-      final screen = page.child;
-      if (screen is Screen) {
-        return screen;
+    Widget? screen;
+    if (page is CustomTransitionPage) {
+      screen = page.child;
+    } else if (page is MaterialPage) {
+      screen = page.child;
+    } else if (page is CupertinoPage) {
+      screen = page.child;
+    } else {
+      try {
+        screen = (page as dynamic).child;
+      } catch (_) {
+        debugLogError('Error: "page" has no property "child"');
       }
+    }
+    if (screen is Screen) {
+      return screen;
+    } else {
+      debugLogError('Error: "screen" is not of type "Screen"');
     }
     return null;
   }
@@ -363,7 +376,7 @@ abstract base class _RouteManager {
   //
   //
 
-  NoTransitionPage<dynamic> _emptyPage() {
+  Page _emptyPage() {
     return const NoTransitionPage(child: SizedBox.shrink());
   }
 
