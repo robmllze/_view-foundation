@@ -27,7 +27,7 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
   final bool? obscureText;
   final bool? autoFocus;
   final TextInputAction? textInputAction;
-  final bool? autocomplete;
+  final bool? autoComplete;
   final void Function(String text)? onFieldSubmitted;
   final void Function(TextEditingController controller, String? errorText)? onUpdated;
 
@@ -56,7 +56,7 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
     this.obscureText,
     this.autoFocus,
     this.textInputAction,
-    this.autocomplete,
+    this.autoComplete,
     this.onFieldSubmitted,
     this.onUpdated,
   });
@@ -111,7 +111,7 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
       obscureText: obscureText ?? this.obscureText,
       autoFocus: autoFocus ?? this.autoFocus,
       textInputAction: textInputAction ?? this.textInputAction,
-      autocomplete: autocomplete ?? this.autocomplete,
+      autoComplete: autocomplete ?? this.autoComplete,
       onFieldSubmitted: onFieldSubmitted ?? this.onFieldSubmitted,
       onUpdated: onUpdated ?? this.onUpdated,
     );
@@ -192,24 +192,27 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, MTextFor
               // This.
               controller: this.controllerOrDefault,
               decoration: this.pInputDecoration.value.copyWith(
-                    filled: true,
-                    fillColor: this.pReadOnly.value
-                        ? Theme.of(context).colorScheme.surfaceContainerLowest
-                        : Theme.of(context).colorScheme.surface,
-                    suffixIcon: this.widget.obscureText != null
-                        ? IconButton(
-                            icon: Icon(
-                              this.pObscureText.value == true
-                                  ? FluentIcons.eye_24_filled
-                                  : FluentIcons.eye_off_24_filled,
-                              size: 24.sc,
-                            ),
-                            onPressed: () {
-                              this.pObscureText.update((e) => !(e ?? false));
-                            },
-                          )
-                        : null,
-                  ),
+                  filled: true,
+                  fillColor: this.pInputDecoration.value.fillColor ??
+                      (this.pReadOnly.value
+                          ? Theme.of(context).colorScheme.surfaceContainerLowest
+                          : Theme.of(context).colorScheme.surface),
+                  suffixIcon: this.pInputDecoration.value.suffixIcon ??
+                      () {
+                        return this.widget.obscureText != null
+                            ? IconButton(
+                                icon: Icon(
+                                  this.pObscureText.value == true
+                                      ? FluentIcons.eye_24_filled
+                                      : FluentIcons.eye_off_24_filled,
+                                  size: 24.sc,
+                                ),
+                                onPressed: () {
+                                  this.pObscureText.update((e) => !(e ?? false));
+                                },
+                              )
+                            : null;
+                      }()),
               focusNode: this.focusNodeOrDefault,
               keyboardType: this.widget.keyboardType,
               autofillHints: this.widget.autofillHints,

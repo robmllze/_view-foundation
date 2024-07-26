@@ -23,7 +23,6 @@ export 'components/m_panel.dart';
 export 'components/m_placeholder.dart';
 export 'components/m_status_tile.dart';
 export 'components/w_svg_app_icon.dart';
-export 'components/m_search_bar.dart';
 export 'constants.dart';
 export 'overlays/show_app_icon_overlay.dart';
 export 'overlays/show_message_overlay.dart';

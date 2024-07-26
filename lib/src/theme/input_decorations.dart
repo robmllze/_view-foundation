@@ -24,6 +24,7 @@ class MessageBoxInputDecoration extends InputDecoration {
 class SearchBarInputDecoration extends InputDecoration {
   SearchBarInputDecoration()
       : super(
+          isDense: true,
           fillColor: Colors.transparent,
           contentPadding: EdgeInsets.symmetric(vertical: 12.sc),
           focusedBorder: const NoOutlineInputBorder(),
