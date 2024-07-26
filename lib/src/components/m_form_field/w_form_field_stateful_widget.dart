@@ -22,8 +22,8 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
   final bool? enabled;
   final String? Function(T? data)? validator;
   final AutovalidateMode? autovalidateMode;
-  final Future<void> Function(T data)? onAutoSave;
-  final Duration? autosaveDelay;
+  final Future<void> Function(T data)? onAutoSubmit;
+  final Duration? autoSubmitDelay;
 
   //
   //
@@ -36,8 +36,8 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
     this.enabled,
     this.validator,
     this.autovalidateMode,
-    this.onAutoSave,
-    this.autosaveDelay,
+    this.onAutoSubmit,
+    this.autoSubmitDelay,
   });
 
   //
@@ -56,23 +56,23 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
   //
   //
 
-  final pIsAutosaving = Pod<bool>(false);
+  final pIsAutoSubmitting = Pod<bool>(false);
 
   //
   //
   //
 
-  late final autosaveDebouncer = Debouncer(
-    delay: this.widget.autosaveDelay ?? const Duration(milliseconds: 1500),
+  late final autoSubmitDebouncer = Debouncer(
+    delay: this.widget.autoSubmitDelay ?? const Duration(milliseconds: 1500),
     onCall: () async {
-      await this.pIsAutosaving.set(true);
+      await this.pIsAutoSubmitting.set(true);
     },
     onWaited: () async {
       final valid = this.validate();
       if (valid == null || valid) {
-        await this.widget.onAutoSave?.call(this.getSnapshot());
+        await this.widget.onAutoSubmit?.call(this.getSnapshot());
       }
-      await this.pIsAutosaving.set(false);
+      await this.pIsAutoSubmitting.set(false);
     },
   );
 
@@ -110,8 +110,8 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
   @override
   void dispose() {
     () async {
-      await this.autosaveDebouncer.finalize();
-      this.pIsAutosaving.dispose();
+      await this.autoSubmitDebouncer.finalize();
+      this.pIsAutoSubmitting.dispose();
     }();
     super.dispose();
   }

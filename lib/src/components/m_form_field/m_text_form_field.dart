@@ -12,7 +12,7 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WTextFormField extends WFormFieldStatefulWidget<String> {
+class MTextFormField extends WFormFieldStatefulWidget<String> {
   //
   //
   //
@@ -35,7 +35,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
   //
   //
 
-  const WTextFormField({
+  const MTextFormField({
     // Super.
     super.key,
     super.defaultValue,
@@ -43,8 +43,8 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     super.enabled,
     super.validator,
     super.autovalidateMode = AutovalidateMode.disabled,
-    super.onAutoSave,
-    super.autosaveDelay,
+    super.onAutoSubmit,
+    super.autoSubmitDelay,
     // This.
     this.controller,
     this.decoration,
@@ -65,7 +65,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
   //
   //
 
-  WTextFormField copyWith({
+  MTextFormField copyWith({
     // Super.
     Key? key,
     String? defaultValue,
@@ -73,8 +73,8 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     bool? enabled,
     String? Function(String?)? validator,
     AutovalidateMode? autovalidateMode,
-    Future<void> Function(String)? onAutoSave,
-    Duration? autosaveDelay,
+    Future<void> Function(String)? onAutoSubmit,
+    Duration? autoSubmitDelay,
     // This.
     TextEditingController? controller,
     InputDecoration? decoration,
@@ -90,7 +90,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
     void Function(String text)? onFieldSubmitted,
     final void Function(TextEditingController controller, String? errorText)? onUpdated,
   }) {
-    return WTextFormField(
+    return MTextFormField(
       // Super.
       key: key ?? this.key,
       defaultValue: defaultValue ?? this.defaultValue,
@@ -98,8 +98,8 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
       enabled: enabled ?? this.enabled,
       validator: validator ?? this.validator,
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
-      onAutoSave: onAutoSave ?? this.onAutoSave,
-      autosaveDelay: autosaveDelay ?? this.autosaveDelay,
+      onAutoSubmit: onAutoSubmit ?? this.onAutoSubmit,
+      autoSubmitDelay: autoSubmitDelay ?? this.autoSubmitDelay,
       // This.
       controller: controller ?? this.controller,
       decoration: decoration ?? this.decoration,
@@ -127,7 +127,7 @@ class WTextFormField extends WFormFieldStatefulWidget<String> {
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFormField> {
+class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, MTextFormField> {
   //
   //
   //
@@ -188,7 +188,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
               enabled: this.widget.enabled ?? true,
               validator: this.validatorOrDefault,
               autovalidateMode: this.widget.autovalidateMode,
-              onSaved: (e) => this.autosaveDebouncer(),
+              onSaved: (e) => this.autoSubmitDebouncer(),
               // This.
               controller: this.controllerOrDefault,
               decoration: this.pInputDecoration.value.copyWith(
@@ -221,7 +221,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
               // Other.
               autofocus: this.widget.autoFocus ?? false,
               onChanged: (text) {
-                this.autosaveDebouncer();
+                this.autoSubmitDebouncer();
                 this._didUpdate();
               },
               cursorWidth: 2.sc,
@@ -265,12 +265,12 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, WTextFor
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-extension WTextFormFieldVariationsExtension on WTextFormField {
+extension WTextFormFieldVariationsExtension on MTextFormField {
   //
   //
   //
 
-  WTextFormField withNameProps({String errorText = '***'}) {
+  MTextFormField withNameProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.name,
       autofillHints: const [AutofillHints.name],
@@ -284,7 +284,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withEmailProps({String errorText = '***'}) {
+  MTextFormField withEmailProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.emailAddress,
       autofillHints: const [
@@ -301,7 +301,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withNewEmailProps({String errorText = '***'}) {
+  MTextFormField withNewEmailProps({String errorText = '***'}) {
     return this.withEmailProps(errorText: errorText).copyWith(
       autofillHints: const [
         AutofillHints.email,
@@ -310,7 +310,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withPasswordProps({String errorText = '***'}) {
+  MTextFormField withPasswordProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.visiblePassword,
       autofillHints: const [AutofillHints.password],
@@ -325,17 +325,17 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withNewPasswordProps({String errorText = '***'}) {
+  MTextFormField withNewPasswordProps({String errorText = '***'}) {
     return this.withPasswordProps(errorText: errorText).copyWith(
       autofillHints: const [AutofillHints.newPassword],
     );
   }
 
-  WTextFormField withObscurityToggle() {
+  MTextFormField withObscurityToggle() {
     return this.copyWith(obscureText: true);
   }
 
-  WTextFormField withMultilineProps({
+  MTextFormField withMultilineProps({
     int? minLines = 3,
     int? maxLines = 5,
     String errorText = '***',
@@ -354,7 +354,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withPhoneNumberProps({String errorText = '***'}) {
+  MTextFormField withPhoneNumberProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.phone,
       autofillHints: const [AutofillHints.telephoneNumber],
@@ -368,7 +368,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withNumberProps({String errorText = '***'}) {
+  MTextFormField withNumberProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.number,
       validator: (e) {
@@ -381,7 +381,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withBirthdayProps({String errorText = '***'}) {
+  MTextFormField withBirthdayProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.datetime,
       autofillHints: const [AutofillHints.birthday],
@@ -395,7 +395,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withAddressLine1Props({String errorText = '***'}) {
+  MTextFormField withAddressLine1Props({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.streetAddress,
       autofillHints: const [AutofillHints.streetAddressLine1],
@@ -409,7 +409,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withAddressLine2Props({String errorText = '***'}) {
+  MTextFormField withAddressLine2Props({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.streetAddress,
       autofillHints: const [AutofillHints.streetAddressLine2],
@@ -423,7 +423,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withAddressCityProps({String errorText = '***'}) {
+  MTextFormField withAddressCityProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.text,
       autofillHints: const [AutofillHints.addressCity],
@@ -437,7 +437,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withAddressStateProps({String errorText = '***'}) {
+  MTextFormField withAddressStateProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.text,
       autofillHints: const [AutofillHints.addressState],
@@ -451,7 +451,7 @@ extension WTextFormFieldVariationsExtension on WTextFormField {
     );
   }
 
-  WTextFormField withAddressPostalCodeProps({String errorText = '***'}) {
+  MTextFormField withAddressPostalCodeProps({String errorText = '***'}) {
     return this.copyWith(
       keyboardType: TextInputType.number,
       autofillHints: const [AutofillHints.postalCode],

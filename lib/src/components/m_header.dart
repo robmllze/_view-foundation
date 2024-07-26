@@ -22,7 +22,8 @@ class MHeader extends StatelessWidget {
   final String? description;
   final List<Widget> leading;
   final List<Widget> trailing;
-  final MBreadCrumbBar? breadCrumbBar;
+  final List<Widget> top;
+  final List<Widget> bottom;
   final double? minHeight;
   final void Function()? onBackButtonPressed;
   final double? opacity;
@@ -39,7 +40,8 @@ class MHeader extends StatelessWidget {
     this.description,
     this.leading = const [],
     this.trailing = const [],
-    this.breadCrumbBar,
+    this.top = const [],
+    this.bottom = const [],
     this.minHeight,
     required this.onBackButtonPressed,
     this.opacity,
@@ -68,7 +70,7 @@ class MHeader extends StatelessWidget {
       child: IntrinsicHeight(
         child: Column(
           children: [
-            if (this.breadCrumbBar != null) this.breadCrumbBar!,
+            ...this.top,
             Expanded(
               child: Padding(
                 padding: EdgeInsets.all(8.sc),
@@ -132,6 +134,7 @@ class MHeader extends StatelessWidget {
                 ),
               ),
             ),
+            ...this.bottom,
           ],
         ),
       ),

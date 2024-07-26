@@ -12,21 +12,34 @@ import '/_common.dart';
 
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
-class MessageBoxInputDecoration extends InputDecoration {
-  MessageBoxInputDecoration()
-      : super(
-          contentPadding: EdgeInsets.symmetric(vertical: 12.sc),
-          focusedBorder: const NoOutlineInputBorder(),
-          enabledBorder: const NoOutlineInputBorder(),
-        );
-}
+class MSearchBar extends StatelessWidget {
+  //
+  //
+  //
 
-class SearchBarInputDecoration extends InputDecoration {
-  SearchBarInputDecoration()
-      : super(
-          fillColor: Colors.transparent,
-          contentPadding: EdgeInsets.symmetric(vertical: 12.sc),
-          focusedBorder: const NoOutlineInputBorder(),
-          enabledBorder: const NoOutlineInputBorder(),
-        );
+  final Pod<String> pSearchQuery;
+
+  //
+  //
+  //
+
+  const MSearchBar({
+    super.key,
+    required this.pSearchQuery,
+  });
+
+  //
+  //
+  //
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(8.sc),
+      child: MTextFormField(
+        decoration: SearchBarInputDecoration(),
+        onAutoSubmit: (text) => this.pSearchQuery.set(text),
+      ),
+    );
+  }
 }

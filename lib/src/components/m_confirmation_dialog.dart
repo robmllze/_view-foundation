@@ -25,7 +25,7 @@ class MConfirmationDialog extends StatefulWidget {
   final void Function()? onDeny;
   final ButtonStyle? confirmButtonStyle;
   final ButtonStyle? denyButtonStyle;
-  final WTextFormField? textField;
+  final MTextFormField? textField;
   final Widget? child;
 
   //
@@ -59,7 +59,7 @@ class MConfirmationDialog extends StatefulWidget {
     void Function()? onDeny,
     ButtonStyle? confirmButtonStyle,
     ButtonStyle? denyButtonStyle,
-    WTextFormField? textField,
+    MTextFormField? textField,
     Widget? child,
   }) {
     return MConfirmationDialog(
@@ -92,7 +92,7 @@ class MConfirmationDialogState extends State<MConfirmationDialog> {
   //
 
   late final GlobalKey<WTextFormFieldState> textFieldGlobalKey;
-  late final WTextFormField? _textField;
+  late final MTextFormField? _textField;
   late final Pod<bool> pCanConfirm;
 
   //
