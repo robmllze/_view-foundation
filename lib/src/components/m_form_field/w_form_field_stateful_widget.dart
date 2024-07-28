@@ -22,7 +22,7 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
   final bool? enabled;
   final String? Function(T? data)? validator;
   final AutovalidateMode? autovalidateMode;
-  final Future<void> Function(T data)? onAutoSubmit;
+  final Future<dynamic> Function(T data)? onAutoSubmit;
   final Duration? autoSubmitDelay;
 
   //
@@ -51,12 +51,13 @@ abstract class WFormFieldStatefulWidget<T> extends StatefulWidget {
 // ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 
 abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidget<T>>
-    extends State<W> {
+    extends BindWithMixinState<W> {
   //
   //
   //
 
   final pIsAutoSubmitting = Pod<bool>(false);
+  late final pAutoSubmitResult = Pod<dynamic>(null).bindParent(this);
 
   //
   //
@@ -70,7 +71,8 @@ abstract class WFormFieldStatefulWidgetState<T, W extends WFormFieldStatefulWidg
     onWaited: () async {
       final valid = this.validate();
       if (valid == null || valid) {
-        await this.widget.onAutoSubmit?.call(this.getSnapshot());
+        final results = await this.widget.onAutoSubmit?.call(this.getSnapshot());
+        this.pAutoSubmitResult.set(results);
       }
       await this.pIsAutoSubmitting.set(false);
     },

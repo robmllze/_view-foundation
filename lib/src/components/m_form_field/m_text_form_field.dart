@@ -30,6 +30,8 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
   final bool? autoComplete;
   final void Function(String text)? onFieldSubmitted;
   final void Function(TextEditingController controller, String? errorText)? onUpdated;
+  final Iterable<Widget>? Function(BuildContext context, Pod<dynamic> autoSubmitResult)?
+      autoSubmitMenuBuilder;
 
   //
   //
@@ -59,6 +61,7 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
     this.autoComplete,
     this.onFieldSubmitted,
     this.onUpdated,
+    this.autoSubmitMenuBuilder,
   });
 
   //
@@ -73,7 +76,7 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
     bool? enabled,
     String? Function(String?)? validator,
     AutovalidateMode? autovalidateMode,
-    Future<void> Function(String)? onAutoSubmit,
+    Future<List<String>> Function(String)? onAutoSubmit,
     Duration? autoSubmitDelay,
     // This.
     TextEditingController? controller,
@@ -88,7 +91,9 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
     TextInputAction? textInputAction,
     bool? autocomplete,
     void Function(String text)? onFieldSubmitted,
-    final void Function(TextEditingController controller, String? errorText)? onUpdated,
+    void Function(TextEditingController controller, String? errorText)? onUpdated,
+    final Iterable<Widget>? Function(BuildContext context, Pod<dynamic> autoSubmitResult)?
+        autoSubmitMenuBuilder,
   }) {
     return MTextFormField(
       // Super.
@@ -114,6 +119,7 @@ class MTextFormField extends WFormFieldStatefulWidget<String> {
       autoComplete: autocomplete ?? this.autoComplete,
       onFieldSubmitted: onFieldSubmitted ?? this.onFieldSubmitted,
       onUpdated: onUpdated ?? this.onUpdated,
+      autoSubmitMenuBuilder: autoSubmitMenuBuilder ?? this.autoSubmitMenuBuilder,
     );
   }
 
@@ -153,6 +159,7 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, MTextFor
       this.controllerOrDefault.text = this.widget.defaultValue!;
     }
     this._didUpdate();
+
     super.initState();
   }
 
@@ -172,16 +179,17 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, MTextFor
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        PodListBuilder(
-          podList: [
-            this.pInputDecoration,
-            this.pObscureText,
-            this.pReadOnly,
-          ],
-          builder: (context, child, values) {
-            return TextFormField(
+    return PodListBuilder(
+      podList: [
+        this.pInputDecoration,
+        this.pObscureText,
+        this.pReadOnly,
+      ],
+      builder: (context, child, values) {
+        return WColumn(
+          divider: SizedBox(height: 8.sc),
+          children: [
+            TextFormField(
               // Super.
               key: this.formFieldStateKey,
               readOnly: this.pReadOnly.value,
@@ -192,27 +200,28 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, MTextFor
               // This.
               controller: this.controllerOrDefault,
               decoration: this.pInputDecoration.value.copyWith(
-                  filled: true,
-                  fillColor: this.pInputDecoration.value.fillColor ??
-                      (this.pReadOnly.value
-                          ? Theme.of(context).colorScheme.surfaceContainerLowest
-                          : Theme.of(context).colorScheme.surface),
-                  suffixIcon: this.pInputDecoration.value.suffixIcon ??
-                      () {
-                        return this.widget.obscureText != null
-                            ? IconButton(
-                                icon: Icon(
-                                  this.pObscureText.value == true
-                                      ? FluentIcons.eye_24_filled
-                                      : FluentIcons.eye_off_24_filled,
-                                  size: 24.sc,
-                                ),
-                                onPressed: () {
-                                  this.pObscureText.update((e) => !(e ?? false));
-                                },
-                              )
-                            : null;
-                      }()),
+                    filled: true,
+                    fillColor: this.pInputDecoration.value.fillColor ??
+                        (this.pReadOnly.value
+                            ? Theme.of(context).colorScheme.surfaceContainerLowest
+                            : Theme.of(context).colorScheme.surface),
+                    suffixIcon: this.pInputDecoration.value.suffixIcon ??
+                        () {
+                          return this.widget.obscureText != null
+                              ? IconButton(
+                                  icon: Icon(
+                                    this.pObscureText.value == true
+                                        ? FluentIcons.eye_24_filled
+                                        : FluentIcons.eye_off_24_filled,
+                                    size: 24.sc,
+                                  ),
+                                  onPressed: () {
+                                    this.pObscureText.update((e) => !(e ?? false));
+                                  },
+                                )
+                              : null;
+                        }(),
+                  ),
               focusNode: this.focusNodeOrDefault,
               keyboardType: this.widget.keyboardType,
               autofillHints: this.widget.autofillHints,
@@ -229,10 +238,38 @@ class WTextFormFieldState extends WFormFieldStatefulWidgetState<String, MTextFor
               },
               cursorWidth: 2.sc,
               scrollPadding: EdgeInsets.all(20.sc),
-            );
-          },
-        ),
-      ],
+            ),
+            if (this.widget.autoSubmitMenuBuilder != null)
+              PodBuilder(
+                pod: this.pAutoSubmitResult,
+                builder: (context, child, _) {
+                  final children =
+                      this.widget.autoSubmitMenuBuilder!(context, this.pAutoSubmitResult);
+                  return Visibility(
+                    visible: children != null && children.isNotEmpty,
+                    child: MOverlay(
+                      key: UniqueKey(),
+                      child: MSurface(
+                        borderRadius: BorderRadius.circular(8.sc),
+                        padding: EdgeInsets.all(24.sc),
+                        color: Theme.of(context).colorScheme.surfaceContainerLowest,
+                        child: ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: 300.sc),
+                          child: SingleChildScrollView(
+                            child: WColumn(
+                              divider: SizedBox(height: 24.sc),
+                              children: [...?children],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+          ],
+        );
+      },
     );
   }
 
@@ -347,13 +384,14 @@ extension WTextFormFieldVariationsExtension on MTextFormField {
       keyboardType: TextInputType.multiline,
       minLines: minLines,
       maxLines: maxLines,
-      validator: (e) {
-        return e != null
-            ? e.trim().isNotEmpty
-                ? null
-                : errorText
-            : null;
-      },
+      validator: this.validator ??
+          (e) {
+            return e != null
+                ? e.trim().isNotEmpty
+                    ? null
+                    : errorText
+                : null;
+          },
     );
   }
 
@@ -466,5 +504,45 @@ extension WTextFormFieldVariationsExtension on MTextFormField {
             : null;
       },
     );
+  }
+}
+
+class FocusHider extends StatefulWidget {
+  final Widget child;
+  final FocusNode focusNode;
+
+  const FocusHider({
+    Key? key,
+    required this.child,
+    required this.focusNode,
+  }) : super(key: key);
+
+  @override
+  _FocusHiderState createState() => _FocusHiderState();
+}
+
+class _FocusHiderState extends State<FocusHider> {
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    focusNode = widget.focusNode;
+    focusNode.addListener(_handleFocusChange);
+  }
+
+  @override
+  void dispose() {
+    focusNode.removeListener(_handleFocusChange);
+    super.dispose();
+  }
+
+  void _handleFocusChange() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return focusNode.hasFocus ? widget.child : SizedBox.shrink();
   }
 }
