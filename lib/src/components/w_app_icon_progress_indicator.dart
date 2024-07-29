@@ -37,7 +37,7 @@ class WAppIconProgressIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WSpinner(
-      rpm: 45,
+      rpm: 30,
       child: Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -46,7 +46,7 @@ class WAppIconProgressIndicator extends StatelessWidget {
         child: WSvgAppIcon(
           assetName: this.assetName,
           package: this.package,
-          size: 40.sc,
+          size: 60.sc,
         ),
       ),
     );
